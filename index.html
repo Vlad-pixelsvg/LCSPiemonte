@@ -3,254 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Piemonte | Cooperative, Fondazioni, Orientamento e Formazione</title>
+    <title>Database Enti Piemonte | Archivio Completo</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #2c3e50;
-            --coop-accent: #3498db;
-            --fond-accent: #8e44ad;
-            --orient-accent: #f39c12;
-            --bg: #f4f7f9;
+            --bg-body: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --color-coop: #475569;
+            --color-fond: #4f46e5;
+            --color-orient: #0891b2;
+            --color-accademia: #800020;
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            padding: 0;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
         }
 
-        header {
+        .custom-header {
             background: white;
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 3rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1rem;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 1020;
         }
 
-        .search-container {
-            max-width: 600px;
-            margin: 15px auto 0;
+        /* Stile Card Avviso Pubblico */
+        .info-alert {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #3b82f6;
         }
 
-        #searchInput {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        #searchInput:focus { border-color: var(--coop-accent); }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto 80px;
-            padding: 0 20px;
-        }
-
-        h2.section-title {
-            font-size: 22px;
-            padding-bottom: 10px;
-            margin: 50px 0 25px;
-            border-bottom: 3px solid;
-            text-transform: uppercase;
-        }
-
-        .coop-section h2 { border-color: var(--coop-accent); color: var(--coop-accent); }
-        .fond-section h2 { border-color: var(--fond-accent); color: var(--fond-accent); }
-        .orient-section h2 { border-color: var(--orient-accent); color: var(--orient-accent); }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
+        .custom-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            height: 100%;
             background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid #ddd;
-            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .coop-section .card { border-left-color: var(--coop-accent); }
-        .fond-section .card { border-left-color: var(--fond-accent); }
-        .orient-section .card { border-left-color: var(--orient-accent); }
+        .custom-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+        }
 
-        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .coop-section .custom-card::before { background: var(--color-coop); }
+        .fond-section .custom-card::before { background: var(--color-fond); }
+        .orient-section .custom-card::before { background: var(--color-orient); }
+        .acc-section .custom-card::before { background: var(--color-accademia); }
 
-        .card h3 { margin: 0 0 15px 0; font-size: 1.1rem; min-height: 2.4rem; display: flex; align-items: center; }
-        .card h3 a { text-decoration: none; color: var(--primary); transition: color 0.2s; }
-        .card h3 a:hover { color: #000; text-decoration: underline; }
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
 
-        .info-group { margin-bottom: 12px; font-size: 0.9rem; }
-        .label { display: block; font-weight: bold; color: #888; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 2px; }
-        .content { color: #444; word-break: break-word; line-height: 1.4; }
+        .entity-link {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+            font-weight: 700;
+        }
+        
+        .coop-section .entity-link:hover { color: var(--color-coop); }
+        .fond-section .entity-link:hover { color: var(--color-fond); }
+        .orient-section .entity-link:hover { color: var(--color-orient); }
+        .acc-section .entity-link:hover { color: var(--color-accademia); }
 
-        .hidden { display: none !important; }
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin: 3rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+            margin-left: 15px;
+        }
+
+        .badge-prov {
+            background: #f1f5f9;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--text-light);
+            border: 1px solid #e2e8f0;
+            font-weight: 700;
+        }
+
+        .label-small {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .content-small {
+            font-size: 0.9rem;
+            color: #334155;
+            word-break: break-word;
+        }
+
+        .feedback-section {
+            background: #1e293b;
+            color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 5rem 0;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Database Enti Piemonte</h1>
-    <div class="search-container">
-        <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Cerca ente, indirizzo, email o referente...">
+<header class="custom-header">
+    <div class="container text-center">
+        <h1 class="fw-bold">Database Enti Piemonte</h1>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <input type="text" id="searchInput" class="form-control form-control-lg shadow-sm" onkeyup="filterCards()" placeholder="Cerca per nome, email o città...">
+            </div>
+        </div>
     </div>
 </header>
 
 <div class="container">
     
-    <!-- SEZIONE COOPERATIVE -->
-    <section class="coop-section">
-        <h2 class="section-title">Cooperative</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <h3><a href="#" target="_blank">Solidarietà e lavoro</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@solidarietaelavoro.it</div></div>
-                <div class="info-group"><span class="label">Referenti</span><div class="content">Massaia, Schirripa</div></div>
-            </div>
+    <!-- NOTA INFORMATIVA CONCORSI -->
+    <div class="info-alert shadow-sm">
+        <div class="d-flex align-items-center mb-2">
+            <span class="me-2">ℹ️</span>
+            <h5 class="fw-bold mb-0" style="color: #1e40af;">Nota su Biblioteche Civiche e Universitarie</h5>
+        </div>
+        <p class="mb-0" style="color: #1e40af; font-size: 0.95rem;">
+            Per lavorare nelle <strong>Biblioteche Civiche</strong> (Comunali) e <strong>Universitarie</strong> è necessario partecipare a concorsi pubblici. 
+            Si consiglia di monitorare costantemente il portale <strong><a href="https://www.inpa.gov.it/" target="_blank">INPA</a></strong>, i siti ufficiali dei <strong>Comuni</strong> o degli <strong>Atenei</strong>. 
+            <em>Nota:</em> non è esclusa la possibilità di collaborazioni o l'esternalizzazione di alcuni servizi bibliotecari tramite le cooperative elencate in questo database.
+        </p>
+    </div>
 
-            <div class="card">
-                <h3><a href="#" target="_blank">Coopculture</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">venezia@coopculture.it</div></div>
-                <div class="info-group"><span class="label">Altre Info</span><div class="content">torino@coopculture.it</div></div>
-            </div>
+    <div id="noResults" class="text-center py-5 d-none">
+        <h4 class="text-muted">Nessun risultato trovato.</h4>
+    </div>
 
-            <div class="card">
-                <h3><a href="#" target="_blank">CaeB</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">caeb@caeb.it</div></div>
-                <div class="info-group"><span class="label">Personale</span><div class="content">Tiziana Remus (tiziana.remus@caeb.it)</div></div>
+    <!-- SEZIONE: COOPERATIVE -->
+    <section class="coop-section" id="coopSection">
+        <h2 class="section-title">Cooperative Sociali</h2>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.solidarietaelavoro.it" target="_blank" class="entity-link">Solidarietà e lavoro</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@solidarietaelavoro.it</div></div>
+                    <div class="mt-2"><span class="label-small">Referenti</span><div class="content-small">Massaia, Schirripa</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="#" target="_blank">CULTURALPE</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@culturalpe.it</div></div>
-                <div class="info-group"><span class="label">Referente</span><div class="content">Favro</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.coopculture.it" target="_blank" class="entity-link">Coopculture</a></h5>
+                        <span class="badge-prov">TO/VE</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">venezia@coopculture.it</div></div>
+                    <div class="mt-2"><span class="label-small">Altre Info</span><div class="content-small">torino@coopculture.it</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="#" target="_blank">BIBLION</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@e-biblion.it</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.caeb.it" target="_blank" class="entity-link">CaeB</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">caeb@caeb.it</div></div>
+                    <div class="mt-2"><span class="label-small">Personale</span><div class="content-small">Tiziana Remus</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="#" target="_blank">INNOVATIVE MULTISERVICE</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">personale@innovativemultiservice.com</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.culturalpe.it" target="_blank" class="entity-link">CULTURALPE</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@culturalpe.it</div></div>
+                    <div class="mt-2"><span class="label-small">Referente</span><div class="content-small">Favro</div></div>
+                </div>
             </div>
-
-
-            <div class="card">
-                <h3><a href="#" target="_blank">MIRAFIORI COOPERATIVA SOCIALE</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativamirafiori.com</div></div>
-                <div class="info-group"><span class="label">Note</span><div class="content">Non ha biblioteche in appalto</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.e-biblion.it" target="_blank" class="entity-link">BIBLION</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@e-biblion.it</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="#" target="_blank">ARCA ALESSANDRIA COOPERATIVA</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativaarca.com</div></div>
-                <div class="info-group"><span class="label">Referente</span><div class="content">Alessandra Rivera </div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://innovativemultiservice.com" target="_blank" class="entity-link">INNOVATIVE MULTISERVICE</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">personale@innovativemultiservice.com</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="#" target="_blank">ORSO SOCIETÀ COOP</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativaorso.it</div></div>
-                <div class="info-group"><span class="label">Ufficio RU</span><div class="content">(Marta Quadrelli, Angelo Sismondi)</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.cooperativamirafiori.com" target="_blank" class="entity-link">MIRAFIORI SOC. COOP.</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@cooperativamirafiori.com</div></div>
+                </div>
             </div>
-			
-			 <div class="card">
-                <h3><a href="#" target="_blank">ITUR</a></h3>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@itur.it</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.cooperativaarca.it" target="_blank" class="entity-link">ARCA ALESSANDRIA</a></h5>
+                        <span class="badge-prov">AL</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@cooperativaarca.com</div></div>
+                </div>
             </div>
-
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.cooperativaorso.it" target="_blank" class="entity-link">ORSO SOC. COOP</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@cooperativaorso.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.itur.it" target="_blank" class="entity-link">ITUR</a></h5>
+                        <span class="badge-prov">CN</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@itur.it</div></div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- SEZIONE FONDAZIONI -->
-    <section class="fond-section">
+    <!-- SEZIONE: FONDAZIONI -->
+    <section class="fond-section" id="fondSection">
         <h2 class="section-title">Fondazioni</h2>
-        <div class="grid">
-            <div class="card">
-                <h3><a href="#" target="_blank">FONDAZIONE ECM, BIBLIOTECA ARCHIMEDE</a></h3>
-                <div class="info-group"><span class="label">Email Amm.</span><div class="content">servizi.amministrativi@fondazione-ecm.it</div></div>
-                <div class="info-group"><span class="label">Referenti</span><div class="content">Busso, La Colla</div></div>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.fondazionetorinomusei.it" target="_blank" class="entity-link">Fondazione Torino Musei</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 4436801</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">segreteria@fondazionetorinomusei.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.fondazioneaccorsi-ometto.it" target="_blank" class="entity-link">Fondazione Accorsi - Ometto</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 837688</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@fondazioneaccorsi-ometto.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.fondazionemerz.org" target="_blank" class="entity-link">Fondazione Merz</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 19719437</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@fondazionemerz.org</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.fondazioneeinaudi.it" target="_blank" class="entity-link">Fondazione Luigi Einaudi</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 835656</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">segreteria@fondazioneeinaudi.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.fondazionetancredidibarolo.com" target="_blank" class="entity-link">Fondazione Tancredi di Barolo</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 19784944</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@fondazionetancredidibarolo.com</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.colonnetti.it" target="_blank" class="entity-link">Fondazione G. Colonnetti</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 8126847</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">fondazione.colonnetti@gmail.com</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.gramscitorino.it" target="_blank" class="entity-link">Fondazione Gramsci</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 8395402</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">segreteria@gramscitorino.it</div></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SEZIONE ORIENTAMENTO E FORMAZIONE -->
-    <section class="orient-section">
+    <!-- SEZIONE: ACCADEMIE -->
+    <section class="acc-section" id="accSection">
+        <h2 class="section-title">Accademie</h2>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.albertina.academy" target="_blank" class="entity-link">Accademia Albertina di Belle Arti</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 889020</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">protocollo@albertina.academy</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.accademiadellescienze.it" target="_blank" class="entity-link">Accademia delle Scienze di Torino</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 5620047</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@accademiadellescienze.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.accademiadiagricoltura.it" target="_blank" class="entity-link">Accademia di Agricoltura di Torino</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 8123286</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@accademiadiagricoltura.it</div></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.accademiadomedicina.unito.it" target="_blank" class="entity-link">Accademia di Medicina di Torino</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Telefono</span><div class="content-small">011 8174811</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">accademia.medicina@unito.it</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE: ORIENTAMENTO E FORMAZIONE -->
+    <section class="orient-section" id="orientSection">
         <h2 class="section-title">Orientamento e Formazione</h2>
-        <div class="grid">
-            
-            <div class="card">
-                <h3><a href="mailto:info@cittadeimestieri.it" target="_blank">Città dei Mestieri e delle Professioni</a></h3>
-                <div class="info-group"><span class="label">Sede</span><div class="content">Via Spalato 63/D, Torino</div></div>
-                <div class="info-group"><span class="label">Telefono</span><div class="content">011 3853400</div></div>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@cittadeimestieri.it</div></div>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.cittadeimestieri.it" target="_blank" class="entity-link">Città dei Mestieri</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@cittadeimestieri.it</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="mailto:info@casadicarita.org" target="_blank">Fondazione Casa di Carità Arti e Mestieri</a></h3>
-                <div class="info-group"><span class="label">Sede</span><div class="content">Corso Benedetto Brin 26, Torino</div></div>
-                <div class="info-group"><span class="label">Telefono</span><div class="content">011 2212611</div></div>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@casadicarita.org</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.casadicarita.org" target="_blank" class="entity-link">Casa di Carità</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Sede</span><div class="content-small">Corso Benedetto Brin 26, Torino</div></div>
+                    <div class="mt-2"><span class="label-small">Email</span><div class="content-small">info@casadicarita.org</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="mailto:performa@immaginazioneelavoro.it" target="_blank">Immaginazione e Lavoro</a></h3>
-                <div class="info-group"><span class="label">Sede</span><div class="content">Via Claudio Luigi Berthollet 11, Torino</div></div>
-                <div class="info-group"><span class="label">Telefono</span><div class="content">011 5620017</div></div>
-                <div class="info-group"><span class="label">Email</span><div class="content">performa@immaginazioneelavoro.it</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.immaginazioneelavoro.it" target="_blank" class="entity-link">Immaginazione e Lavoro</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">performa@immaginazioneelavoro.it</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="mailto:info@enaip.piemonte.it" target="_blank">Enaip Piemonte</a></h3>
-                <div class="info-group"><span class="label">Sede</span><div class="content">Via del Ridotto 5, Torino</div></div>
-                <div class="info-group"><span class="label">Telefono</span><div class="content">011 2179700</div></div>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@enaip.piemonte.it</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.enaip.piemonte.it" target="_blank" class="entity-link">Enaip Piemonte</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@enaip.piemonte.it</div></div>
+                </div>
             </div>
-
-            <div class="card">
-                <h3><a href="mailto:info@casadellavoro.it" target="_blank">Casa del Lavoro</a></h3>
-                <div class="info-group"><span class="label">Sede</span><div class="content">Via Gaspare Saccarelli 18, Torino</div></div>
-                <div class="info-group"><span class="label">Telefono</span><div class="content">011 0867265</div></div>
-                <div class="info-group"><span class="label">Email</span><div class="content">info@casadellavoro.it</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.casadellavoro.it" target="_blank" class="entity-link">Casa del Lavoro</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Email</span><div class="content-small">info@casadellavoro.it</div></div>
+                </div>
             </div>
-			<div class="card">
-                <h3><a href="#" target="_blank">GIGROUP</a></h3>
-                <div class="info-group"><span class="label">Contatto</span><div class="content">-</div></div>
+            <div class="col-12 col-md-6 col-lg-4 entity-card">
+                <div class="custom-card p-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="mb-0"><a href="https://www.gigroup.it" target="_blank" class="entity-link">GIGROUP</a></h5>
+                        <span class="badge-prov">TO</span>
+                    </div>
+                    <div class="mt-3"><span class="label-small">Sito Web</span><div class="content-small">Accedi dal titolo</div></div>
+                </div>
             </div>
-
         </div>
     </section>
+
+    <!-- FOOTER / SEGNALAZIONI -->
+    <div class="feedback-section text-center">
+        <h3 class="fw-bold text-white">Manca qualcosa?</h3>
+        <p class="text-white-50">Aiutaci a migliorare il database.</p>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <input type="text" id="coopName" class="form-control mb-3" placeholder="Nome dell'ente da aggiungere...">
+                <button class="btn btn-primary btn-lg px-5 fw-bold shadow" onclick="sendEmail()">Invia Segnalazione</button>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 <script>
     function filterCards() {
         const input = document.getElementById('searchInput').value.toLowerCase();
-        const cards = document.getElementsByClassName('card');
+        const cards = document.querySelectorAll('.entity-card');
+        let count = 0;
 
-        for (let i = 0; i < cards.length; i++) {
-            const cardText = cards[i].innerText.toLowerCase();
-            if (cardText.includes(input)) {
-                cards[i].classList.remove('hidden');
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            if(text.includes(input)) {
+                card.classList.remove('d-none');
+                count++;
             } else {
-                cards[i].classList.add('hidden');
+                card.classList.add('d-none');
             }
-        }
+        });
+
+        document.getElementById('noResults').classList.toggle('d-none', count > 0);
+        
+        document.querySelectorAll('section').forEach(sec => {
+            const visible = sec.querySelectorAll('.entity-card:not(.d-none)').length > 0;
+            sec.classList.toggle('d-none', !visible);
+        });
+    }
+
+    function sendEmail() {
+        const name = document.getElementById('coopName').value;
+        if(!name) return alert("Inserisci un nome!");
+        window.location.href = `mailto:gabriel.corcodel04@gmail.com?subject=Segnalazione Database&body=Segnalo l'aggiunta di: ${encodeURIComponent(name)}`;
     }
 </script>
 
