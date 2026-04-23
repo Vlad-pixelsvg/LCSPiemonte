@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Piemonte | Cooperative, Fondazioni, Orientamento e Formazione</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --coop-accent: #3498db;
+            --fond-accent: #8e44ad;
+            --orient-accent: #f39c12;
+            --bg: #f4f7f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #searchInput:focus { border-color: var(--coop-accent); }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto 80px;
+            padding: 0 20px;
+        }
+
+        h2.section-title {
+            font-size: 22px;
+            padding-bottom: 10px;
+            margin: 50px 0 25px;
+            border-bottom: 3px solid;
+            text-transform: uppercase;
+        }
+
+        .coop-section h2 { border-color: var(--coop-accent); color: var(--coop-accent); }
+        .fond-section h2 { border-color: var(--fond-accent); color: var(--fond-accent); }
+        .orient-section h2 { border-color: var(--orient-accent); color: var(--orient-accent); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #ddd;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .coop-section .card { border-left-color: var(--coop-accent); }
+        .fond-section .card { border-left-color: var(--fond-accent); }
+        .orient-section .card { border-left-color: var(--orient-accent); }
+
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .card h3 { margin: 0 0 15px 0; font-size: 1.1rem; min-height: 2.4rem; display: flex; align-items: center; }
+        .card h3 a { text-decoration: none; color: var(--primary); transition: color 0.2s; }
+        .card h3 a:hover { color: #000; text-decoration: underline; }
+
+        .info-group { margin-bottom: 12px; font-size: 0.9rem; }
+        .label { display: block; font-weight: bold; color: #888; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 2px; }
+        .content { color: #444; word-break: break-word; line-height: 1.4; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Database Enti Piemonte</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Cerca ente, indirizzo, email o referente...">
+    </div>
+</header>
+
+<div class="container">
+    
+    <!-- SEZIONE COOPERATIVE -->
+    <section class="coop-section">
+        <h2 class="section-title">Cooperative</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <h3><a href="#" target="_blank">Solidarietà e lavoro</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@solidarietaelavoro.it</div></div>
+                <div class="info-group"><span class="label">Referenti</span><div class="content">Massaia, Schirripa</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">Coopculture</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">venezia@coopculture.it</div></div>
+                <div class="info-group"><span class="label">Altre Info</span><div class="content">torino@coopculture.it</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">CaeB</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">caeb@caeb.it</div></div>
+                <div class="info-group"><span class="label">Personale</span><div class="content">Tiziana Remus (tiziana.remus@caeb.it)</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">CULTURALPE</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@culturalpe.it</div></div>
+                <div class="info-group"><span class="label">Referente</span><div class="content">Favro</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">BIBLION</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@e-biblion.it</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">INNOVATIVE MULTISERVICE</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">personale@innovativemultiservice.com</div></div>
+            </div>
+
+
+            <div class="card">
+                <h3><a href="#" target="_blank">MIRAFIORI COOPERATIVA SOCIALE</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativamirafiori.com</div></div>
+                <div class="info-group"><span class="label">Note</span><div class="content">Non ha biblioteche in appalto</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">ARCA ALESSANDRIA COOPERATIVA</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativaarca.com</div></div>
+                <div class="info-group"><span class="label">Referente</span><div class="content">Alessandra Rivera (3356858053)</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="#" target="_blank">ORSO SOCIETÀ COOP</a></h3>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@cooperativaorso.it</div></div>
+                <div class="info-group"><span class="label">Ufficio RU</span><div class="content">0113853400 (Marta Quadrelli, Angelo Sismondi)</div></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEZIONE FONDAZIONI -->
+    <section class="fond-section">
+        <h2 class="section-title">Fondazioni</h2>
+        <div class="grid">
+            <div class="card">
+                <h3><a href="#" target="_blank">FONDAZIONE ECM, BIBLIOTECA ARCHIMEDE</a></h3>
+                <div class="info-group"><span class="label">Email Amm.</span><div class="content">servizi.amministrativi@fondazione-ecm.it</div></div>
+                <div class="info-group"><span class="label">Referenti</span><div class="content">Busso, La Colla</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE ORIENTAMENTO E FORMAZIONE -->
+    <section class="orient-section">
+        <h2 class="section-title">Orientamento e Formazione</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <h3><a href="mailto:info@cittadeimestieri.it" target="_blank">Città dei Mestieri e delle Professioni</a></h3>
+                <div class="info-group"><span class="label">Sede</span><div class="content">Via Spalato 63/D, Torino</div></div>
+                <div class="info-group"><span class="label">Telefono</span><div class="content">011 3853400</div></div>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@cittadeimestieri.it</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="mailto:info@casadicarita.org" target="_blank">Fondazione Casa di Carità Arti e Mestieri</a></h3>
+                <div class="info-group"><span class="label">Sede</span><div class="content">Corso Benedetto Brin 26, Torino</div></div>
+                <div class="info-group"><span class="label">Telefono</span><div class="content">011 2212611</div></div>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@casadicarita.org</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="mailto:performa@immaginazioneelavoro.it" target="_blank">Immaginazione e Lavoro</a></h3>
+                <div class="info-group"><span class="label">Sede</span><div class="content">Via Claudio Luigi Berthollet 11, Torino</div></div>
+                <div class="info-group"><span class="label">Telefono</span><div class="content">011 5620017</div></div>
+                <div class="info-group"><span class="label">Email</span><div class="content">performa@immaginazioneelavoro.it</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="mailto:info@enaip.piemonte.it" target="_blank">Enaip Piemonte</a></h3>
+                <div class="info-group"><span class="label">Sede</span><div class="content">Via del Ridotto 5, Torino</div></div>
+                <div class="info-group"><span class="label">Telefono</span><div class="content">011 2179700</div></div>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@enaip.piemonte.it</div></div>
+            </div>
+
+            <div class="card">
+                <h3><a href="mailto:info@casadellavoro.it" target="_blank">Casa del Lavoro</a></h3>
+                <div class="info-group"><span class="label">Sede</span><div class="content">Via Gaspare Saccarelli 18, Torino</div></div>
+                <div class="info-group"><span class="label">Telefono</span><div class="content">011 0867265</div></div>
+                <div class="info-group"><span class="label">Email</span><div class="content">info@casadellavoro.it</div></div>
+            </div>
+			<div class="card">
+                <h3><a href="#" target="_blank">GIGROUP</a></h3>
+                <div class="info-group"><span class="label">Contatto</span><div class="content">-</div></div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    function filterCards() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.getElementsByClassName('card');
+
+        for (let i = 0; i < cards.length; i++) {
+            const cardText = cards[i].innerText.toLowerCase();
+            if (cardText.includes(input)) {
+                cards[i].classList.remove('hidden');
+            } else {
+                cards[i].classList.add('hidden');
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
