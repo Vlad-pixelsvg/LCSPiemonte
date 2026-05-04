@@ -9,128 +9,390 @@
     
    <style>
     :root {
-        --bg-pure: #FFFFFF;
-        --bg-soft: #F8F7F5;
-        --text-main: #1A1A1A;
-        --text-muted: #555555;
-        --coop-color: #E67E22;
-        --fond-color: #2C3E50;
-        --acad-color: #8D1919;
-        --orient-color: #0891b2;
-        --font-serif: 'Cormorant Garamond', serif;
-        --font-sans: 'Inter', sans-serif;
-        --radius: 12px;
-        --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    }
+    --bg-pure: #FBFBFD; /* Sfondo tipico Apple */
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --text-main: #1D1D1F; /* Nero Apple */
+    --text-muted: #86868B; /* Grigio Apple */
+    --accent: #0071E3; /* Blu istituzionale */
+    --radius: 18px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-    body { background-color: var(--bg-pure); font-family: var(--font-sans); color: var(--text-main); line-height: 1.5; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
 
-    /* HEADER & HERO */
-    header { padding: 60px 0 60px; text-align: center; background: var(--bg-soft); border-bottom: 1px solid #EAEAEA; }
-    
-    .hero-content-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        margin-bottom: 15px;
-    }
+body { 
+    background-color: var(--bg-pure); 
+    font-family: var(--font-sans); 
+    color: var(--text-main); 
+    -webkit-font-smoothing: antialiased;
+}
 
-    .hero-logo {
-        height: 100px;
-        width: auto;
-        filter: brightness(0.9);
-    }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-    .hero-title { 
-        font-family: var(--font-serif); 
-        font-size: 3.5rem; 
-        color: var(--fond-color); 
-        margin-bottom: 0; 
-        line-height: 1;
-    }
+/* HEADER & HERO - Più arioso */
+header { padding: 100px 0 60px; text-align: center; }
 
-    .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; }
+.hero-title { 
+    font-family: var(--font-sans); /* Passiamo al Sans per un look più moderno */
+    font-weight: 700;
+    font-size: 3.5rem; 
+    letter-spacing: -0.03em;
+    color: var(--text-main); 
+    margin-bottom: 10px;
+}
 
-    .search-wrapper { max-width: 600px; margin: 0 auto; position: relative; }
-    #hero-search { width: 100%; padding: 18px 20px 18px 55px; border-radius: 50px; border: 1px solid #DDD; box-shadow: var(--shadow); outline: none; font-size: 1rem; }
-    .search-wrapper::before { content: "🔍"; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+.hero-subtitle { 
+    font-size: 1.4rem; 
+    font-weight: 400;
+    color: var(--text-muted); 
+    margin-bottom: 50px; 
+}
 
-    /* NAV */
-    nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #EEE; }
-    nav ul { display: flex; justify-content: center; list-style: none; gap: 30px; }
-    nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+/* SEARCH BAR - Minimalista e fluttuante */
+.search-wrapper { max-width: 500px; margin: 0 auto; }
+#hero-search { 
+    width: 100%; 
+    padding: 16px 24px 16px 50px; 
+    border-radius: 12px; 
+    border: 1px solid #D2D2D7; 
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+#hero-search:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0,113,227,0.1);
+    outline: none;
+}
 
-    /* SEZIONI */
-    section { padding: 80px 0; border-bottom: 1px solid #F0F0F0; }
-    .section-title { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 10px; }
-    .section-divider { width: 50px; height: 3px; background: var(--fond-color); margin-bottom: 40px; }
+/* NAVBAR - Blur effetto vetro */
+nav { 
+    background: rgba(251, 251, 253, 0.8); 
+    backdrop-filter: saturate(180%) blur(20px); 
+    padding: 18px 0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid rgba(0,0,0,0.05); 
+}
+nav ul { display: flex; justify-content: center; list-style: none; gap: 40px; }
+nav a { 
+    text-decoration: none; 
+    color: var(--text-main); 
+    font-weight: 500; 
+    font-size: 0.85rem; 
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+nav a:hover { opacity: 1; color: var(--accent); }
 
-    /* GRID & CARDS */
-    .grid-entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-    .card { background: white; border-radius: var(--radius); padding: 25px; position: relative; box-shadow: var(--shadow); transition: transform 0.3s; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-5px); }
-    .card::before { content: ""; position: absolute; left: 0; top: 25px; bottom: 25px; width: 4px; border-radius: 0 4px 4px 0; }
-    
-    .card.coop::before { background: var(--coop-color); }
-    .card.fondazione::before { background: var(--fond-color); }
-    .card.orient::before { background: var(--orient-color); }
+/* GRID & CARDS - L'anima del redesign */
+section { padding: 100px 0; }
+.section-title { 
+    font-size: 2.2rem; 
+    font-weight: 700; 
+    letter-spacing: -0.02em;
+    margin-bottom: 40px; 
+}
 
-    /* NUOVI STILI: BADGE E PILLOLE */
-    .badge-container { 
-        display: flex; 
-        gap: 6px; 
-        margin-bottom: 12px; 
-        flex-wrap: wrap; 
-    }
+.grid-entities { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
+    gap: 30px; 
+}
 
-    .pill { 
-        font-size: 0.65rem; 
-        padding: 3px 10px; 
-        border-radius: 50px; 
-        text-transform: uppercase; 
-        font-weight: 700; 
-        letter-spacing: 0.5px; 
-        border: 1px solid transparent; 
-    }
+.card { 
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius); 
+    padding: 32px; 
+    display: flex; 
+    flex-direction: column; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+}
 
-    /* COLORI CATEGORIE */
-    .pill-biblio { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
-    .pill-arch { background: #fef3c7; color: #92400e; border-color: #fde68a; }
-    .pill-museo { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
-    .pill-ricerca { background: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
-    .pill-doc { background: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+.card:hover { 
+    transform: translateY(-8px); 
+    background: #FFFFFF;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    border-color: rgba(0,0,0,0.1);
+}
 
-    /* FOCUS DESCRITTIVO */
-    .focus-text { 
-        font-size: 0.85rem; 
-        line-height: 1.4; 
-        color: var(--text-muted); 
-        margin-bottom: 15px; 
-        border-left: 2px solid #EEE; 
-        padding-left: 10px; 
-        font-style: italic; 
-    }
+/* Rimuoviamo il bordo colorato a sinistra per dare aria */
+.card::before { display: none; }
 
-    .badge-prov { position: absolute; top: 20px; right: 20px; background: #f1f5f9; padding: 4px 8px; font-size: 0.65rem; font-weight: 700; border-radius: 4px; color: var(--text-muted); }
-    .ente-nome { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; padding-right: 45px; }
-    .info-label { font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: #999; margin-top: 10px; }
-    .info-content { font-size: 0.85rem; color: var(--text-muted); }
-    .btn-site { margin-top: auto; padding-top: 20px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid #DDD; align-self: flex-start; }
+.ente-nome { 
+    font-size: 1.3rem; 
+    font-weight: 600; 
+    margin-bottom: 16px; 
+    line-height: 1.2;
+}
 
-    /* ACCADEMIE */
-    .accademia-item { display: flex; background: white; border-radius: var(--radius); margin-bottom: 20px; overflow: hidden; box-shadow: var(--shadow); }
-    .acc-letter { width: 80px; background: var(--acad-color); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-serif); font-size: 2.5rem; }
-    .acc-body { padding: 25px; flex: 1; }
+/* PILLS - Colori pastello desaturati */
+.badge-container { display: flex; gap: 8px; margin-bottom: 20px; }
+.pill { 
+    font-size: 0.7rem; 
+    padding: 4px 12px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    letter-spacing: 0.02em;
+    background: #F5F5F7; /* Sfondo neutro per tutte */
+    color: var(--text-muted);
+}
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-        .hero-content-wrapper { flex-direction: column; gap: 15px; }
-        .hero-title { font-size: 2.5rem; }
-        .hero-logo { height: 70px; }
-    }
+/* Focus per le categorie specifiche con colori leggerissimi */
+.pill-museo { background: #E3F2FD; color: #1976D2; }
+.pill-arch { background: #FFF3E0; color: #E65100; }
+.pill-biblio { background: #F3E5F5; color: #7B1FA2; }
+
+/* INFO SECTION - Metadati tecnici eleganti */
+.info-label { 
+    font-size: 0.65rem; 
+    text-transform: uppercase; 
+    font-weight: 700; 
+    color: #BDBDBD; 
+    margin-top: 15px; 
+    letter-spacing: 0.08em;
+}
+
+.info-content { 
+    font-size: 0.9rem; 
+    color: var(--text-main); 
+    margin-top: 2px;
+}
+
+.focus-text { 
+    font-size: 0.85rem; 
+    color: var(--text:root {
+    --bg-page: #FBFBFD;
+    --bg-card: #FFFFFF;
+    --text-main: #1D1D1F;
+    --text-muted: #6E6E73;
+    --accent: #0066CC;
+    --border-light: rgba(0, 0, 0, 0.08);
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+body { 
+    background-color: var(--bg-page); 
+    font-family: var(--font-sans); 
+    color: var(--text-main); 
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+/* --- 1. HEADER HERO (Pura e Scenografica) --- */
+header { 
+    padding: 140px 0 100px; 
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.hero-content-wrapper { margin-bottom: 20px; }
+
+.hero-title { 
+    font-size: 4rem; 
+    font-weight: 800; 
+    letter-spacing: -0.04em; 
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.hero-subtitle { 
+    font-size: 1.25rem; 
+    color: var(--text-muted); 
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
+
+/* Ricerca integrata nella Hero */
+.search-wrapper { max-width: 550px; margin: 0 auto; position: relative; }
+#hero-search { 
+    width: 100%; 
+    padding: 20px 24px 20px 55px; 
+    border-radius: 14px; 
+    border: 1px solid var(--border-light); 
+    background: var(--bg-page);
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#hero-search:focus {
+    background: #FFF;
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    outline: none;
+}
+.search-wrapper::before { 
+    content: "🔍"; position: absolute; left: 22px; top: 50%; 
+    transform: translateY(-50%); opacity: 0.5; font-size: 1.1rem;
+}
+
+/* --- 2. NAV BAR (Indipendente e Fluttuante) --- */
+nav { 
+    background: rgba(255, 255, 255, 0.75); 
+    backdrop-filter: saturate(180%) blur(20px); 
+    padding: 16px 0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 40px;
+}
+nav ul { display: flex; justify-content: center; list-style: none; gap: 45px; }
+nav a { 
+    text-decoration: none; 
+    color: var(--text-main); 
+    font-weight: 500; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    transition: all 0.2s;
+}
+nav a:hover { opacity: 1; color: var(--accent); }
+
+/* --- 3. SEZIONI E GRID --- */
+section { padding: 80px 0; }
+.section-title { 
+    font-size: 2.2rem; 
+    font-weight: 700; 
+    letter-spacing: -0.02em; 
+    margin-bottom: 40px;
+}
+
+.grid-entities { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+    gap: 32px; 
+}
+
+/* --- 4. CARD REDESIGN (Aria e Tipografia) --- */
+.card { 
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 20px; 
+    padding: 35px; 
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover { 
+    transform: translateY(-6px); 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0,0,0,0.15);
+}
+
+/* Rimuoviamo la linea laterale per uno stile più aperto */
+.card::before { display: none; }
+
+.ente-nome { 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    line-height: 1.25;
+    margin-bottom: 12px; 
+    padding-right: 40px;
+}
+
+.badge-prov { 
+    position: absolute; top: 35px; right: 35px; 
+    font-size: 0.65rem; font-weight: 800; 
+    color: var(--text-muted); background: #F2F2F7;
+    padding: 5px 10px; border-radius: 6px;
+}
+
+/* Pills sottili e minimali */
+.badge-container { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+.pill { 
+    font-size: 0.65rem; padding: 4px 10px; border-radius: 6px; 
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em;
+    background: #F2F2F7; color: #515154;
+}
+.pill-museo { background: #EBF5FF; color: #007AFF; }
+.pill-biblio { background: #F5F3FF; color: #7C3AED; }
+
+/* Info text senza etichette invasive */
+.info-label { 
+    font-size: 0.65rem; font-weight: 700; color: #A1A1A6; 
+    text-transform: uppercase; letter-spacing: 0.05em; margin-top: 18px;
+}
+.info-content { font-size: 0.95rem; color: var(--text-main); margin-top: 3px; }
+
+.focus-text { 
+    font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;
+    margin: 15px 0; padding-left: 15px; border-left: 1.5px solid #E5E5E7;
+}
+
+.btn-site { 
+    margin-top: auto; padding-top: 25px; 
+    text-decoration: none; color: var(--accent); 
+    font-weight: 600; font-size: 0.9rem;
+}
+
+/* --- 5. ACCADEMIE (Stile Lista Editoriale) --- */
+.accademia-item { 
+    display: flex; background: var(--bg-card); border-radius: 20px; 
+    margin-bottom: 24px; border: 1px solid var(--border-light); overflow: hidden; 
+}
+.acc-letter { 
+    width: 100px; background: #F2F2F7; color: var(--text-main);
+    display: flex; align-items: center; justify-content: center; 
+    font-family: var(--font-serif); font-size: 3rem; font-weight: 600;
+}
+.acc-body { padding: 35px; flex: 1; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.8rem; }
+    nav ul { gap: 20px; }
+    nav a { font-size: 0.7rem; }
+}-muted); 
+    line-height: 1.6;
+    margin: 15px 0;
+    padding: 0;
+    border: none;
+    font-style: normal;
+}
+
+.btn-site { 
+    margin-top: auto; 
+    padding-top: 25px; 
+    color: var(--accent); 
+    font-weight: 600; 
+    font-size: 0.85rem; 
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.btn-site:hover { text-decoration: underline; }
+
+/* Badge provincia discreto */
+.badge-prov { 
+    position: absolute; 
+    top: 32px; 
+    right: 32px; 
+    font-size: 0.7rem; 
+    font-weight: 700; 
+    color: var(--text-muted);
+    background: #F5F5F7;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* FOOTER */
+footer { padding: 80px 0; border-top: 1px solid #D2D2D7; background: #F5F5F7; }
 </style>
 </head>
 <body>
