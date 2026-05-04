@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CulturaLavoro Piemonte | Database Completo</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-pure: #FFFFFF;
+            --bg-soft: #F8F7F5;
+            --text-main: #1A1A1A;
+            --text-muted: #555555;
+            --coop-color: #E67E22;
+            --fond-color: #2C3E50;
+            --acad-color: #8D1919;
+            --orient-color: #0891b2;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Inter', sans-serif;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: var(--bg-pure); font-family: var(--font-sans); color: var(--text-main); line-height: 1.5; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+
+        header { padding: 80px 0 60px; text-align: center; background: var(--bg-soft); border-bottom: 1px solid #EAEAEA; }
+        .hero-title { font-family: var(--font-serif); font-size: 3.5rem; color: var(--fond-color); margin-bottom: 15px; }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px; }
+
+        .search-wrapper { max-width: 600px; margin: 0 auto; position: relative; }
+        #hero-search { width: 100%; padding: 18px 20px 18px 55px; border-radius: 50px; border: 1px solid #DDD; box-shadow: var(--shadow); outline: none; font-size: 1rem; }
+        .search-wrapper::before { content: "🔍"; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+
+        nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #EEE; }
+        nav ul { display: flex; justify-content: center; list-style: none; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        section { padding: 80px 0; border-bottom: 1px solid #F0F0F0; }
+        .section-title { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 10px; }
+        .section-divider { width: 50px; height: 3px; background: var(--fond-color); margin-bottom: 40px; }
+
+        .grid-entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: var(--radius); padding: 25px; position: relative; box-shadow: var(--shadow); transition: transform 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); }
+        .card::before { content: ""; position: absolute; left: 0; top: 25px; bottom: 25px; width: 4px; border-radius: 0 4px 4px 0; }
+        
+        .card.coop::before { background: var(--coop-color); }
+        .card.fondazione::before { background: var(--fond-color); }
+        .card.orient::before { background: var(--orient-color); }
+
+        .badge-prov { position: absolute; top: 20px; right: 20px; background: #f1f5f9; padding: 4px 8px; font-size: 0.65rem; font-weight: 700; border-radius: 4px; color: var(--text-muted); }
+        .ente-nome { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; padding-right: 45px; }
+        .info-label { font-size: 0.65rem; text-transform: uppercase; font-weight: 700; color: #999; margin-top: 10px; }
+        .info-content { font-size: 0.85rem; color: var(--text-muted); }
+        .btn-site { margin-top: auto; padding-top: 20px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid #DDD; align-self: flex-start; }
+
+        .accademia-item { display: flex; background: white; border-radius: var(--radius); margin-bottom: 20px; overflow: hidden; box-shadow: var(--shadow); }
+        .acc-letter { width: 80px; background: var(--acad-color); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-serif); font-size: 2.5rem; }
+        .acc-body { padding: 25px; flex: 1; }
+
+        .info-alert { background: #f0f7ff; border-left: 4px solid #0066cc; padding: 20px; border-radius: 8px; margin: 40px 0; font-size: 0.9rem; }
+    .asset-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.tag-biblio { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.tag-archive { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+	</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1 class="hero-title">CulturaLavoro Piemonte</h1>
+        <p class="hero-subtitle">Archivio completo degli enti culturali e sociali della Regione</p>
+        <div class="search-wrapper">
+            <input type="text" id="hero-search" onkeyup="filterData()" placeholder="Cerca enti, email o province (TO, AL, CN)...">
+        </div>
+    </div>
+</header>
+
+<nav>
+    <ul>
+		<li><a href="index.html">Home</a></li>
+        <li><a href="#cooperative">Cooperative</a></li>
+        <li><a href="#fondazioni">Fondazioni</a></li>
+        <li><a href="#accademie">Accademie</a></li>
+        <li><a href="#orientamento">Orientamento</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    
+
+    <!-- SEZIONE COOPERATIVE -->
+    <section id="cooperative">
+        <h2 class="section-title">Cooperative Sociali</h2>
+        <div class="section-divider"></div>
+        <div class="grid-entities">
+            <article class="card coop" data-search="solidarietà e lavoro torino to massaia schirripa">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Solidarietà e lavoro</h3>
+                <div class="info-label">Email</div><div class="info-content">info@solidarietaelavoro.it</div>
+                <div class="info-label">Referenti</div><div class="info-content">Massaia, Schirripa</div>
+                <a href="https://www.solidarietaelavoro.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="coopculture torino venezia to ve">
+                <span class="badge-prov">TO/VE</span>
+                <h3 class="ente-nome">Coopculture</h3>
+                <div class="info-label">Email</div><div class="info-content">venezia@coopculture.it</div>
+                <div class="info-label">Info Secondarie</div><div class="info-content">torino@coopculture.it</div>
+                <a href="https://www.coopculture.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="caeb torino to tiziana remus">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">CaeB</h3>
+                <div class="info-label">Email</div><div class="info-content">caeb@caeb.it</div>
+                <div class="info-label">Personale</div><div class="info-content">Tiziana Remus</div>
+                <a href="https://www.caeb.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="culturalpe torino to favro">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">CULTURALPE</h3>
+                <div class="info-label">Email</div><div class="info-content">info@culturalpe.it</div>
+                <div class="info-label">Referente</div><div class="info-content">Favro</div>
+                <a href="https://www.culturalpe.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="biblion torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">BIBLION</h3>
+                <div class="info-label">Email</div><div class="info-content">info@e-biblion.it</div>
+                <a href="https://www.e-biblion.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="innovative multiservice torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">INNOVATIVE MULTISERVICE</h3>
+                <div class="info-label">Email</div><div class="info-content">personale@innovativemultiservice.com</div>
+                <a href="https://innovativemultiservice.com" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="mirafiori soc coop torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">MIRAFIORI SOC. COOP.</h3>
+                <div class="info-label">Email</div><div class="info-content">info@cooperativamirafiori.com</div>
+                <a href="https://www.cooperativamirafiori.com" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="arca alessandria al">
+                <span class="badge-prov">AL</span>
+                <h3 class="ente-nome">ARCA ALESSANDRIA</h3>
+                <div class="info-label">Email</div><div class="info-content">info@cooperativaarca.com</div>
+                <a href="https://www.cooperativaarca.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="orso soc coop torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">ORSO SOC. COOP</h3>
+                <div class="info-label">Email</div><div class="info-content">info@cooperativaorso.it</div>
+                <a href="https://www.cooperativaorso.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="itur cuneo cn">
+                <span class="badge-prov">CN</span>
+                <h3 class="ente-nome">ITUR</h3>
+                <div class="info-label">Email</div><div class="info-content">info@itur.it</div>
+                <a href="https://www.itur.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- SEZIONE FONDAZIONI -->
+    <section id="fondazioni">
+        <h2 class="section-title">Fondazioni</h2>
+        <div class="section-divider"></div>
+        <div class="grid-entities">
+            <article class="card fondazione" data-search="fondazione torino musei to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Torino Musei</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 4436801<br>segreteria@fondazionetorinomusei.it</div>
+                <a href="https://www.fondazionetorinomusei.it" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione accorsi ometto torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Accorsi - Ometto</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 837688<br>info@fondazioneaccorsi-ometto.it</div>
+                <a href="https://www.fondazioneaccorsi-ometto.it" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione merz torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Merz</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 19719437<br>info@fondazionemerz.org</div>
+                <a href="https://www.fondazionemerz.org" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione luigi einaudi torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Luigi Einaudi</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 835656<br>segreteria@fondazioneeinaudi.it</div>
+                <a href="https://www.fondazioneeinaudi.it" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione tancredi di barolo torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Tancredi di Barolo</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 19784944<br>info@fondazionetancredidibarolo.com</div>
+                <a href="https://www.fondazionetancredidibarolo.com" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione g colonnetti torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione G. Colonnetti</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 8126847<br>fondazione.colonnetti@gmail.com</div>
+                <a href="https://www.colonnetti.it" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+
+            <article class="card fondazione" data-search="fondazione gramsci torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Fondazione Gramsci</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 8395402<br>segreteria@gramscitorino.it</div>
+                <a href="https://www.gramscitorino.it" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+			
+			<article class="card fondazione" data-search="fondazione gramsci torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Cobis</h3>
+                <div class="info-label">INFO</div><div class="info-content">Per un'elenco completo delle fondazioni <br> andare sul sito 
+				della Cobis, biblioteche, dove è presente un elenco completo delle fondazioni</div>
+                <a href="https://cobis.to.it/biblioteche/" target="_blank" class="btn-site">Esplora →</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- SEZIONE ACCADEMIE -->
+    <section id="accademie">
+        <h2 class="section-title">Accademie</h2>
+        <div class="section-divider"></div>
+
+        <div class="accademia-item" data-search="accademia albertina belle arti torino to">
+            <div class="acc-letter">A</div>
+            <div class="acc-body">
+                <h3 class="ente-nome">Accademia Albertina di Belle Arti</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 889020 | protocollo@albertina.academy</div>
+                <a href="https://www.albertina.academy" target="_blank" class="btn-site">Sito Istituzionale →</a>
+            </div>
+        </div>
+
+        <div class="accademia-item" data-search="accademia delle scienze torino to">
+            <div class="acc-letter">S</div>
+            <div class="acc-body">
+                <h3 class="ente-nome">Accademia delle Scienze di Torino</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 5620047 | info@accademiadellescienze.it</div>
+                <a href="https://www.accademiadellescienze.it" target="_blank" class="btn-site">Sito Istituzionale →</a>
+            </div>
+        </div>
+
+        <div class="accademia-item" data-search="accademia di agricoltura torino to">
+            <div class="acc-letter">G</div>
+            <div class="acc-body">
+                <h3 class="ente-nome">Accademia di Agricoltura di Torino</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 8123286 | info@accademiadiagricoltura.it</div>
+                <a href="https://www.accademiadiagricoltura.it" target="_blank" class="btn-site">Sito Istituzionale →</a>
+            </div>
+        </div>
+
+        <div class="accademia-item" data-search="accademia di medicina torino to unito">
+            <div class="acc-letter">M</div>
+            <div class="acc-body">
+                <h3 class="ente-nome">Accademia di Medicina di Torino</h3>
+                <div class="info-label">Contatti</div><div class="info-content">011 8174811 | accademia.medicina@unito.it</div>
+                <a href="https://www.accademiadomedicina.unito.it" target="_blank" class="btn-site">Sito Istituzionale →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE ORIENTAMENTO -->
+    <section id="orientamento">
+        <h2 class="section-title">Orientamento e Formazione</h2>
+        <div class="section-divider"></div>
+        <div class="grid-entities">
+            <article class="card orient" data-search="città dei mestieri torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Città dei Mestieri</h3>
+                <div class="info-label">Email</div><div class="info-content">info@cittadeimestieri.it</div>
+                <a href="https://www.cittadeimestieri.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card orient" data-search="casa di carità torino to brin">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Casa di Carità</h3>
+                <div class="info-label">Sede</div><div class="info-content">Corso Benedetto Brin 26, Torino</div>
+                <div class="info-label">Email</div><div class="info-content">info@casadicarita.org</div>
+                <a href="https://www.casadicarita.org" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card orient" data-search="immaginazione e lavoro torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Immaginazione e Lavoro</h3>
+                <div class="info-label">Email</div><div class="info-content">performa@immaginazioneelavoro.it</div>
+                <a href="https://www.immaginazioneelavoro.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card orient" data-search="enaip piemonte torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Enaip Piemonte</h3>
+                <div class="info-label">Email</div><div class="info-content">info@enaip.piemonte.it</div>
+                <a href="https://www.enaip.piemonte.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card orient" data-search="casa del lavoro torino to">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">Casa del Lavoro</h3>
+                <div class="info-label">Email</div><div class="info-content">info@casadellavoro.it</div>
+                <a href="https://www.casadellavoro.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card orient" data-search="gigroup torino to agenzia">
+                <span class="badge-prov">TO</span>
+                <h3 class="ente-nome">GIGROUP</h3>
+                <div class="info-label">Settore</div><div class="info-content">Agenzia per il lavoro</div>
+                <a href="https://www.gigroup.it" target="_blank" class="btn-site">Sito Ufficiale →</a>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer style="padding: 60px 0; text-align: center; color: #999; font-size: 0.8rem; background: var(--bg-soft);">
+    <p>Database Enti Piemonte &copy; 2026[cite: 2]</p>
+    <p>Per segnalazioni: <a href="mailto:gabriel.corcodel04@gmail.com" style="color:var(--fond-color)">Invia Email</a>[cite: 1]</p>
+</footer>
+
+<script>
+    function filterData() {
+        const input = document.getElementById('hero-search').value.toLowerCase();
+        const items = document.querySelectorAll('.card, .accademia-item');
+        
+        items.forEach(item => {
+            const searchData = item.getAttribute('data-search');
+            if (searchData.includes(input)) {
+                item.style.display = item.classList.contains('accademia-item') ? 'flex' : 'flex';
+                item.style.opacity = '1';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('section').forEach(section => {
+            const hasVisible = Array.from(section.querySelectorAll('.card, .accademia-item'))
+                                   .some(i => i.style.display !== 'none');
+            section.style.display = hasVisible ? 'block' : 'none';
+        });
+    }
+</script>
+
+</body>
+</html>
