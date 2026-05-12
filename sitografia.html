@@ -17,7 +17,7 @@
         nav a { color: #94a3b8; }
         nav a:hover { color: #0f172a; }
 
-        /* HEADER (Dallo Screenshot) */
+        /* HEADER */
         header { padding: 80px 0 60px 0; text-align: center; }
         h1 { font-size: 3.5rem; font-weight: 400; color: #0f172a; margin-bottom: 24px; letter-spacing: -0.03em; }
         h1 b { font-weight: 800; border-bottom: 4px solid #fb923c; padding-bottom: 2px; }
@@ -25,8 +25,10 @@
 
         .path-line { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); }
 
-        /* SEZIONI GENERALI */
+        /* SEZIONI */
         section { padding: 80px 0; }
+        .bg-subtle { background-color: #fcfcfc; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+
         .section-label-container { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
         .num-label { background: #eff6ff; color: #2563eb; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; }
         .num-label.orange { background: #fff7ed; color: #ea580c; }
@@ -36,8 +38,9 @@
         /* GRIGLIE */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; }
+        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        /* CARDS (Stile Screenshot) */
+        /* CARDS */
         .card { border: 1px solid #f1f5f9; border-radius: 24px; padding: 40px; background: #fff; display: flex; flex-direction: column; }
         .card:hover { border-color: #cbd5e1; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
         
@@ -51,20 +54,21 @@
         .card-desc { font-size: 0.95rem; color: #64748b; line-height: 1.6; margin-bottom: 32px; flex-grow: 1; }
         .card-link { font-size: 13px; font-weight: 700; color: #2563eb; text-transform: uppercase; }
 
-        /* PREPARAZIONE TEST */
+        /* BOTTONI HUB */
+        .btn-link { background: #fff; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; text-align: center; font-size: 0.85rem; font-weight: 700; color: #334155; }
+        .btn-link:hover { border-color: #fb923c; background: #fff7ed; }
+
+        .btn-hub { background: #f1f5f9; padding: 18px; border-radius: 12px; text-align: center; font-weight: 700; color: #475569; font-size: 0.9rem; }
+        .btn-hub:hover { background: #334155; color: #fff; }
+
+        /* TEST RECAP */
         .test-card { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 24px; padding: 40px; }
         .test-header { font-size: 12px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; }
         .test-links { display: flex; flex-direction: column; gap: 20px; }
         .test-links a { font-size: 15px; font-weight: 700; color: #1e293b; }
         .test-links a.italic { font-style: italic; font-weight: 600; color: #475569; }
 
-        /* NETWORK E HUB GRID */
-        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn-link { background: #fff; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; text-align: center; font-size: 0.85rem; font-weight: 700; color: #334155; }
-        .btn-link:hover { border-color: #fb923c; background: #fff7ed; }
-
-        .btn-hub { background: #f1f5f9; padding: 18px; border-radius: 12px; text-align: center; font-weight: 700; color: #475569; }
-        .btn-hub:hover { background: #334155; color: #fff; }
+        .cat-group-title { font-size: 0.85rem; color: #94a3b8; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
@@ -90,13 +94,13 @@
 
     <div class="path-line"></div>
 
+    <!-- 01. CONCORSI PUBBLICI -->
     <section>
         <div class="container">
             <div class="section-label-container">
                 <span class="num-label">01</span>
                 <h2 class="section-title">Concorsi Pubblici e Reclutamento</h2>
             </div>
-
             <div class="grid-3">
                 <div class="card">
                     <div class="card-header">
@@ -106,7 +110,6 @@
                     <p class="card-desc">Piattaforma ufficiale per la PA. Canale obbligatorio per i bandi di <b>Ales S.p.A.</b> e selezioni ministeriali in ambito museale.</p>
                     <a href="https://www.inpa.gov.it" target="_blank" class="card-link">Vai al portale →</a>
                 </div>
-
                 <div class="card">
                     <div class="card-header">
                         <span class="card-title">TorinoGiovani</span>
@@ -115,79 +118,107 @@
                     <p class="card-desc">Monitoraggio bandi locali, opportunità nelle cooperative e borse di studio in ambito culturale per l'area metropolitana.</p>
                     <a href="https://www.comune.torino.it/torinogiovani/lavoro" target="_blank" class="card-link">Esplora opportunità →</a>
                 </div>
-
                 <div class="test-card">
                     <h3 class="test-header">Preparazione Test</h3>
                     <div class="test-links">
-					 <a href="https://simulatore.obiettivopostofisso.com" target="_blank" class="italic">Simulatore Obiettivo Posto Fisso</a>
                         <a href="https://www.concorsando.it" target="_blank">Concorsando</a>
-                        <a href="https://www.concorsipubblici.it" target="_blank">Concorsipubblici</a>
-                       
+                        <a href="https://www.concorsipubblici.it" target="_blank">Concorsipubblici.it</a>
+                        <a href="#" target="_blank" class="italic">Simulatore Obiettivo Posto Fisso</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section style="background-color: #fcfcfc; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9;">
+    <!-- 02. NETWORK PROFESSIONALI -->
+    <section class="bg-subtle">
         <div class="container">
             <div class="section-label-container">
                 <span class="num-label orange">02</span>
                 <h2 class="section-title">Network Professionali</h2>
             </div>
-
             <div class="grid-2">
                 <a href="https://www.culturmedia.legacoop.it" target="_blank" class="card" style="border-left: 4px solid #fb923c;">
                     <h3 class="card-title" style="margin-bottom:10px">Legacoop Culturmedia</h3>
                     <p class="card-desc">Il network principale per le cooperative culturali, creative e dell'informazione, con particolare focus sul Piemonte.</p>
                     <span class="card-link" style="color:#ea580c">Visita Network →</span>
                 </a>
-
                 <div class="mini-grid">
                     <a href="https://www.aib.it" target="_blank" class="btn-link">AIB (Biblioteche)</a>
                     <a href="https://www.anai.org" target="_blank" class="btn-link">ANAI (Archivi)</a>
                     <a href="https://www.icom-italia.org" target="_blank" class="btn-link">ICOM (Musei)</a>
-                    <a href="https://www.retedellereti.it" target="_blank" class="btn-link">Rete delle Reti (Biblioteche)</a>
-                    <a href="https://www.stelline.it" target="_blank" class="btn-link">Convegno delle Stelline</a>
-                    <a href="https://www.anmli.it" target="_blank" class="btn-link">ANMLI (Musei locali)</a>
+                    <a href="https://www.retedellereti.it" target="_blank" class="btn-link">Rete delle Reti</a>
+                    <a href="https://www.stelline.it" target="_blank" class="btn-link">Stelline</a>
+                    <a href="https://www.anmli.it" target="_blank" class="btn-link">ANMLI</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 03. FORMAZIONE -->
     <section>
         <div class="container">
+            <div class="section-label-container">
+                <span class="num-label green">03</span>
+                <h2 class="section-title">Formazione</h2>
+            </div>
             <div class="grid-2">
+                <a href="https://www.fondazionescuolapatrimonio.it" target="_blank" class="card" style="padding: 30px; border-color: #dcfce7;">
+                    <strong style="display: block; font-size: 1.1rem; color:#0f172a;">Scuola Nazionale Patrimonio</strong>
+                    <span style="font-size: 0.85rem; color: #64748b; margin-top: 8px; display: block;">Alta formazione MiC per professionisti del settore.</span>
+                </a>
+                <a href="https://www.dicolab.it" target="_blank" class="card" style="padding: 30px; border-color: #dcfce7;">
+                    <strong style="display: block; font-size: 1.1rem; color:#0f172a;">Dicolab</strong>
+                    <span style="font-size: 0.85rem; color: #64748b; margin-top: 8px; display: block;">Cultura Digitale e percorsi di innovazione.</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. HUB E CATALOGHI AGGIORNATI -->
+    <section class="bg-subtle">
+        <div class="container">
+            <div class="section-label-container">
+                <span class="num-label">04</span>
+                <h2 class="section-title">Hub e Cataloghi</h2>
+            </div>
+            
+            <div class="grid-2">
+                <!-- Gruppo 1: Antico e Archivi -->
                 <div>
-                    <div class="section-label-container">
-                        <span class="num-label green">03</span>
-                        <h2 class="section-title">Formazione</h2>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 16px;">
-                        <a href="https://www.fondazionescuolapatrimonio.it" target="_blank" class="card" style="padding: 30px; border-color: #dcfce7;">
-                            <strong style="display: block; font-size: 1.1rem;">Scuola Nazionale Patrimonio</strong>
-                            <span style="font-size: 0.8rem; color: #64748b; margin-top: 5px; display: block;">Alta formazione MiC per professionisti del settore.</span>
-                        </a>
-                        <a href="https://www.dicolab.it" target="_blank" class="card" style="padding: 30px; border-color: #dcfce7;">
-                            <strong style="display: block; font-size: 1.1rem;">Dicolab</strong>
-                            <span style="font-size: 0.8rem; color: #64748b; margin-top: 5px; display: block;">Cultura Digitale e percorsi di innovazione.</span>
-                        </a>
+                    <h3 class="cat-group-title">Fondi Antichi e Archivi</h3>
+                    <div class="mini-grid">
+                        <a href="https://manus.iccu.sbn.it" target="_blank" class="btn-hub">Manus Online</a>
+                        <a href="https://edit16.iccu.sbn.it" target="_blank" class="btn-hub">EDIT16</a>
+                        <a href="https://san.beniculturali.it" target="_blank" class="btn-hub">SAN (Archivi)</a>
+                        <a href="https://beweb.chiesacattolica.it" target="_blank" class="btn-hub">BeWeB</a>
                     </div>
                 </div>
 
+                <!-- Gruppo 2: Biblioteche e Riviste -->
                 <div>
-                    <div class="section-label-container">
-                        <span class="num-label">04</span>
-                        <h2 class="section-title">Hub e Cataloghi</h2>
+                    <h3 class="cat-group-title">Ricerca e Periodici</h3>
+                    <div class="mini-grid">
+                        <a href="https://opac.sbn.it" target="_blank" class="btn-hub">OPAC SBN</a>
+                        <a href="https://acnpsearch.unibo.it" target="_blank" class="btn-hub">ACNP (Riviste)</a>
+                        <a href="https://www.essper.it" target="_blank" class="btn-hub">ESSPER</a>
+                        <a href="#" target="_blank" class="btn-hub">Emeroteche Dig.</a>
                     </div>
-                    <div class="mini-grid" style="grid-template-columns: 1fr 1fr; gap: 16px;">
+                </div>
+
+                <!-- Gruppo 3: Atenei e Torino -->
+                <div style="grid-column: 1 / -1; margin-top: 20px;">
+                    <h3 class="cat-group-title">Atenei e Risorse Locali</h3>
+                    <div class="mini-grid" style="grid-template-columns: repeat(4, 1fr);">
                         <a href="https://www.polodel900.it" target="_blank" class="btn-hub">Polo '900</a>
                         <a href="https://www.bi-to.it" target="_blank" class="btn-hub">Bi-to.it</a>
                         <a href="https://www.biblio.polito.it" target="_blank" class="btn-hub">PoliTo</a>
                         <a href="https://www.sba.unito.it" target="_blank" class="btn-hub">SBA UniTo</a>
                     </div>
                 </div>
-            </div> </div> </section>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
