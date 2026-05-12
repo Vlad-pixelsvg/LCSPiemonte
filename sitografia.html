@@ -28,38 +28,42 @@
         /* SEZIONI */
         section { padding: 80px 0; }
         .bg-subtle { background-color: #fcfcfc; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+        .bg-hub { background-color: #f1f5f9; border-top: 1px solid #e2e8f0; }
 
         .section-label-container { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
         .num-label { background: #eff6ff; color: #2563eb; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; }
         .num-label.orange { background: #fff7ed; color: #ea580c; }
         .num-label.green { background: #f0fdf4; color: #16a34a; }
+        .num-label.slate { background: #e2e8f0; color: #475569; }
+
         .section-title { font-size: 1.75rem; font-weight: 800; color: #0f172a; }
 
         /* GRIGLIE */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; }
-        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         /* CARDS */
         .card { border: 1px solid #f1f5f9; border-radius: 24px; padding: 40px; background: #fff; display: flex; flex-direction: column; }
         .card:hover { border-color: #cbd5e1; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
         
-        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
         .card-title { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
         
         .badge { font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
         .badge-nazionale { background: #eff6ff; color: #2563eb; }
         .badge-torino { background: #f0f4ff; color: #4338ca; }
 
-        .card-desc { font-size: 0.95rem; color: #64748b; line-height: 1.6; margin-bottom: 32px; flex-grow: 1; }
+        .card-desc { font-size: 0.95rem; color: #64748b; line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
         .card-link { font-size: 13px; font-weight: 700; color: #2563eb; text-transform: uppercase; }
 
-        /* BOTTONI HUB */
-        .btn-link { background: #fff; border: 1px solid #e2e8f0; padding: 14px; border-radius: 12px; text-align: center; font-size: 0.85rem; font-weight: 700; color: #334155; }
-        .btn-link:hover { border-color: #fb923c; background: #fff7ed; }
-
-        .btn-hub { background: #f1f5f9; padding: 18px; border-radius: 12px; text-align: center; font-weight: 700; color: #475569; font-size: 0.9rem; }
-        .btn-hub:hover { background: #334155; color: #fff; }
+        /* HUB STYLING */
+        .hub-info-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; }
+        .hub-info-title { font-size: 1.1rem; font-weight: 700; color: #334155; margin-bottom: 8px; }
+        .hub-info-sub { font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px; font-weight: 500; }
+        
+        .hub-link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .hub-btn { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; text-align: center; font-size: 0.85rem; font-weight: 700; color: #475569; }
+        .hub-btn:hover { background: #334155; color: #fff; border-color: #334155; }
 
         /* TEST RECAP */
         .test-card { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 24px; padding: 40px; }
@@ -68,11 +72,9 @@
         .test-links a { font-size: 15px; font-weight: 700; color: #1e293b; }
         .test-links a.italic { font-style: italic; font-weight: 600; color: #475569; }
 
-        .cat-group-title { font-size: 0.85rem; color: #94a3b8; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
-
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .grid-2 { grid-template-columns: 1fr; }
+            .grid-2, .hub-link-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -94,7 +96,7 @@
 
     <div class="path-line"></div>
 
-    <!-- 01. CONCORSI PUBBLICI -->
+    <!-- 01. CONCORSI -->
     <section>
         <div class="container">
             <div class="section-label-container">
@@ -130,7 +132,7 @@
         </div>
     </section>
 
-    <!-- 02. NETWORK PROFESSIONALI -->
+    <!-- 02. NETWORK -->
     <section class="bg-subtle">
         <div class="container">
             <div class="section-label-container">
@@ -143,13 +145,13 @@
                     <p class="card-desc">Il network principale per le cooperative culturali, creative e dell'informazione, con particolare focus sul Piemonte.</p>
                     <span class="card-link" style="color:#ea580c">Visita Network →</span>
                 </a>
-                <div class="mini-grid">
-                    <a href="https://www.aib.it" target="_blank" class="btn-link">AIB (Biblioteche)</a>
-                    <a href="https://www.anai.org" target="_blank" class="btn-link">ANAI (Archivi)</a>
-                    <a href="https://www.icom-italia.org" target="_blank" class="btn-link">ICOM (Musei)</a>
-                    <a href="https://www.retedellereti.it" target="_blank" class="btn-link">Rete delle Reti</a>
-                    <a href="https://www.stelline.it" target="_blank" class="btn-link">Stelline</a>
-                    <a href="https://www.anmli.it" target="_blank" class="btn-link">ANMLI</a>
+                <div class="hub-link-grid">
+                    <a href="https://www.aib.it" target="_blank" class="hub-btn">AIB (Biblioteche)</a>
+                    <a href="https://www.anai.org" target="_blank" class="hub-btn">ANAI (Archivi)</a>
+                    <a href="https://www.icom-italia.org" target="_blank" class="hub-btn">ICOM (Musei)</a>
+                    <a href="https://www.retedellereti.it" target="_blank" class="hub-btn">Rete delle Reti</a>
+                    <a href="https://www.stelline.it" target="_blank" class="hub-btn">Stelline</a>
+                    <a href="https://www.anmli.it" target="_blank" class="hub-btn">ANMLI</a>
                 </div>
             </div>
         </div>
@@ -175,45 +177,48 @@
         </div>
     </section>
 
-    <!-- 04. HUB E CATALOGHI AGGIORNATI -->
-    <section class="bg-subtle">
+    <!-- 04. HUB E CATALOGHI (NUOVA GRAFICA) -->
+    <section class="bg-hub">
         <div class="container">
             <div class="section-label-container">
-                <span class="num-label">04</span>
+                <span class="num-label slate">04</span>
                 <h2 class="section-title">Hub e Cataloghi</h2>
             </div>
             
-            <div class="grid-2">
-                <!-- Gruppo 1: Antico e Archivi -->
-                <div>
-                    <h3 class="cat-group-title">Fondi Antichi e Archivi</h3>
-                    <div class="mini-grid">
-                        <a href="https://manus.iccu.sbn.it" target="_blank" class="btn-hub">Manus Online</a>
-                        <a href="https://edit16.iccu.sbn.it" target="_blank" class="btn-hub">EDIT16</a>
-                        <a href="https://san.beniculturali.it" target="_blank" class="btn-hub">SAN (Archivi)</a>
-                        <a href="https://beweb.chiesacattolica.it" target="_blank" class="btn-hub">BeWeB</a>
+            <div class="grid-3">
+                <!-- Card Antico -->
+                <div class="hub-info-card">
+                    <h3 class="hub-info-title">Fondi Antichi</h3>
+                    <p class="hub-info-sub">Manoscritti, incunaboli e archivi storici nazionali.</p>
+                    <div class="hub-link-grid">
+                        <a href="https://manus.iccu.sbn.it" target="_blank" class="hub-btn">Manus</a>
+                        <a href="https://edit16.iccu.sbn.it" target="_blank" class="hub-btn">EDIT16</a>
+                        <a href="https://san.beniculturali.it" target="_blank" class="hub-btn">Archivi SAN</a>
+                        <a href="https://beweb.chiesacattolica.it" target="_blank" class="hub-btn">BeWeb</a>
                     </div>
                 </div>
 
-                <!-- Gruppo 2: Biblioteche e Riviste -->
-                <div>
-                    <h3 class="cat-group-title">Ricerca e Periodici</h3>
-                    <div class="mini-grid">
-                        <a href="https://opac.sbn.it" target="_blank" class="btn-hub">OPAC SBN</a>
-                        <a href="https://acnpsearch.unibo.it" target="_blank" class="btn-hub">ACNP (Riviste)</a>
-                        <a href="https://www.essper.it" target="_blank" class="btn-hub">ESSPER</a>
-                        <a href="#" target="_blank" class="btn-hub">Emeroteche Dig.</a>
+                <!-- Card Ricerca -->
+                <div class="hub-info-card">
+                    <h3 class="hub-info-title">Ricerca e SBN</h3>
+                    <p class="hub-info-sub">Cataloghi collettivi, riviste e spogli bibliografici.</p>
+                    <div class="hub-link-grid">
+                        <a href="https://opac.sbn.it" target="_blank" class="hub-btn">OPAC SBN</a>
+                        <a href="https://acnpsearch.unibo.it" target="_blank" class="hub-btn">ACNP</a>
+                        <a href="https://www.essper.it" target="_blank" class="hub-btn">ESSPER</a>
+                        <a href="#" target="_blank" class="hub-btn">Emeroteche</a>
                     </div>
                 </div>
 
-                <!-- Gruppo 3: Atenei e Torino -->
-                <div style="grid-column: 1 / -1; margin-top: 20px;">
-                    <h3 class="cat-group-title">Atenei e Risorse Locali</h3>
-                    <div class="mini-grid" style="grid-template-columns: repeat(4, 1fr);">
-                        <a href="https://www.polodel900.it" target="_blank" class="btn-hub">Polo '900</a>
-                        <a href="https://www.bi-to.it" target="_blank" class="btn-hub">Bi-to.it</a>
-                        <a href="https://www.biblio.polito.it" target="_blank" class="btn-hub">PoliTo</a>
-                        <a href="https://www.sba.unito.it" target="_blank" class="btn-hub">SBA UniTo</a>
+                <!-- Card Territorio -->
+                <div class="hub-info-card">
+                    <h3 class="hub-info-title">Atenei e Torino</h3>
+                    <p class="hub-info-sub">Risorse bibliotecarie dell'area metropolitana piemontese.</p>
+                    <div class="hub-link-grid">
+                        <a href="https://www.polodel900.it" target="_blank" class="hub-btn">Polo '900</a>
+                        <a href="https://www.bi-to.it" target="_blank" class="hub-btn">Bi-to.it</a>
+                        <a href="https://www.biblio.polito.it" target="_blank" class="hub-btn">PoliTo</a>
+                        <a href="https://www.sba.unito.it" target="_blank" class="hub-btn">SBA UniTo</a>
                     </div>
                 </div>
             </div>
