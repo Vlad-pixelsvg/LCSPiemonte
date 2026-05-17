@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vlad-pixelsvg.github.io/LCSPiemonte/sitemap.xml
