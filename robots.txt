@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vlad-pixelsvg.github.io/LCSPiemonte/sitemap.xml
+Sitemap: https://vlad-pixelsvg.github.io/lcspiemonte/sitemap.xml
