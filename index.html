@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCS Piemonte - Guida MAB</title>
 
-    <!-- Preload intelligente: precarichiamo solo l'immagine visibile al centro per non intasare la rete -->
+    <!-- FIX: tutte e tre le immagini hero sono visibili subito (M, A, B occupano
+         l'intero viewport al load), quindi vanno precaricate tutte e tre, non solo una.
+         fetchpriority="high" sull'<img> stessa (vedi sotto) rende ridondante il preload
+         duplicato, ma lo lasciamo per i browser che non supportano ancora fetchpriority. -->
+    <link rel="preload" as="image" href="foto/museo.webp" type="image/webp">
     <link rel="preload" as="image" href="foto/archivio.webp" type="image/webp">
+    <link rel="preload" as="image" href="foto/biblioteca.webp" type="image/webp">
 
-    <style> 
+    <style>
 /* Reset & Impostazioni generali */
 * {
     margin: 0;
@@ -74,9 +79,11 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    /* FIX: contiene layout/paint dentro l'hero, il browser non deve valutare
+       l'impatto delle animazioni sul resto della pagina */
+    contain: layout paint style;
 }
 
-/* Titolo Sovrapposto */
 .mab-title-overlay {
     position: absolute;
     top: 18%;
@@ -107,29 +114,22 @@ body {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* Griglia CSS Grid: layout hardware-accelerated dove possibile */
+/* FIX PRINCIPALE #1: da CSS grid + :has() a flexbox + attributo dati impostato via JS.
+   flex-grow è più leggero da ricalcolare rispetto a grid-template-columns, e l'attributo
+   dati evita il costo di invalidazione tipico di :has() sull'intero sottoalbero. */
 .mab-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     width: 100%;
     height: 100%;
-    transition: grid-template-columns 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Cambiamo la larghezza delle colonne al passaggio del mouse in modo efficiente */
-.mab-grid:has(.mab-card:nth-child(1):hover) {
-    grid-template-columns: 1.3fr 0.85fr 0.85fr;
-}
-
-.mab-grid:has(.mab-card:nth-child(2):hover) {
-    grid-template-columns: 0.85fr 1.3fr 0.85fr;
-}
-
-.mab-grid:has(.mab-card:nth-child(3):hover) {
-    grid-template-columns: 0.85fr 0.85fr 1.3fr;
 }
 
 .mab-card {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    transition: flex-grow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: flex-grow;
+
     position: relative;
     height: 100%;
     text-decoration: none;
@@ -137,24 +137,42 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; /* necessario per il fix immagini sotto */
     border-right: 1px solid rgba(255, 255, 255, 0.1);
+    contain: layout paint style;
 }
 
 .mab-card:last-child {
     border-right: none;
 }
 
-/* Immagini di Sfondo e Overlay */
+.mab-grid[data-hover="0"] .mab-card:nth-child(1) { flex-grow: 1.3; }
+.mab-grid[data-hover="0"] .mab-card:nth-child(2),
+.mab-grid[data-hover="0"] .mab-card:nth-child(3) { flex-grow: 0.85; }
+
+.mab-grid[data-hover="1"] .mab-card:nth-child(2) { flex-grow: 1.3; }
+.mab-grid[data-hover="1"] .mab-card:nth-child(1),
+.mab-grid[data-hover="1"] .mab-card:nth-child(3) { flex-grow: 0.85; }
+
+.mab-grid[data-hover="2"] .mab-card:nth-child(3) { flex-grow: 1.3; }
+.mab-grid[data-hover="2"] .mab-card:nth-child(1),
+.mab-grid[data-hover="2"] .mab-card:nth-child(2) { flex-grow: 0.85; }
+
+/* FIX PRINCIPALE #2: l'immagine NON è più ancorata in larghezza al contenitore
+   (che cambia dimensione durante l'hover). Ha altezza fissa pari al 100% della card
+   (che non cambia mai, resta sempre 100vh) e larghezza automatica: le sue dimensioni
+   reali in pixel restano quindi costanti per tutta l'animazione. Il browser deve solo
+   ritagliare di più o di meno (overflow:hidden sul genitore), un'operazione quasi gratuita
+   per la GPU, invece di ricampionare l'immagine ad ogni frame. */
 .mab-card .bg-image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 50%;
+    left: 50%;
     height: 100%;
+    width: auto;
+    min-width: 100%;
     object-fit: cover;
-    transform: scale(1);
-    /* Transizione fluida gestita solo via GPU (transform) */
+    transform: translate(-50%, -50%) scale(1);
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
 }
@@ -166,7 +184,6 @@ body {
     transition: background-color 0.35s ease;
 }
 
-/* Contenuto Testo */
 .mab-card .content {
     position: relative;
     z-index: 10;
@@ -206,9 +223,9 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* EFFETTI HOVER OTTIMIZZATI */
+/* EFFETTI HOVER (solo transform/opacity: sempre compositor-only, mai layout) */
 .mab-card:hover .bg-image {
-    transform: scale(1.05);
+    transform: translate(-50%, -50%) scale(1.05);
 }
 
 .mab-card:hover .overlay {
@@ -231,7 +248,6 @@ body {
     transform: translateY(0);
 }
 
-/* Indicatore Scroll */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -262,7 +278,6 @@ body {
     60% { transform: translateY(3px); }
 }
 
-/* Sezione Informativa */
 .info-section {
     padding: 100px 20px;
     background-color: #0d1117;
@@ -287,12 +302,12 @@ body {
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-    .mab-grid,
-    .mab-grid:has(.mab-card:nth-child(1):hover),
-    .mab-grid:has(.mab-card:nth-child(2):hover),
-    .mab-grid:has(.mab-card:nth-child(3):hover) {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 1fr);
+    .mab-grid {
+        flex-direction: column;
+    }
+
+    .mab-grid[data-hover] .mab-card {
+        flex-grow: 1 !important; /* niente effetto espansione su mobile: niente hover reale */
     }
 
     .mab-card {
@@ -317,7 +332,6 @@ body {
 </head>
 <body>
 
-    <!-- Header trasparente -->
     <header class="main-header">
         <div class="logo">LCS <span>Piemonte</span></div>
         <nav>
@@ -326,19 +340,18 @@ body {
         </nav>
     </header>
 
-    <!-- Hero Section 100vh MAB -->
     <main class="mab-hero">
-        
-        <!-- Titolo Principale Sovrapposto -->
+
         <div class="mab-title-overlay">
             <h1>Come lavorare in:</h1>
             <p>Tre patrimoni. Un'unica mappa per la tua carriera.</p>
         </div>
 
-        <div class="mab-grid">
+        <div class="mab-grid" id="mabGrid">
             <!-- M - Museo -->
             <a href="museo.html" class="mab-card">
-                <img src="foto/museo.webp" alt="Museo" class="bg-image" decoding="async">
+                <img src="foto/museo.webp" alt="Museo" class="bg-image"
+                     width="1200" height="1600" fetchpriority="high" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">M</span>
@@ -349,7 +362,8 @@ body {
 
             <!-- A - Archivio -->
             <a href="archivio.html" class="mab-card">
-                <img src="foto/archivio.webp" alt="Archivio" class="bg-image" fetchpriority="high" decoding="async">
+                <img src="foto/archivio.webp" alt="Archivio" class="bg-image"
+                     width="1200" height="1600" fetchpriority="high" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">A</span>
@@ -360,7 +374,8 @@ body {
 
             <!-- B - Biblioteca -->
             <a href="biblioteca.html" class="mab-card">
-                <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image" decoding="async">
+                <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image"
+                     width="1200" height="1600" fetchpriority="high" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">B</span>
@@ -370,7 +385,6 @@ body {
             </a>
         </div>
 
-        <!-- Indicatore di scorrimento -->
         <div class="scroll-indicator">
             <span>Esplora la guida</span>
             <div class="arrow">↓</div>
@@ -378,13 +392,31 @@ body {
 
     </main>
 
-    <!-- Sezione Informativa -->
     <section class="info-section" id="esplora">
         <div class="container">
             <h2>Inquadramento professionale in Piemonte</h2>
             <p>Il settore MAB è un ecosistema diviso tra pubblico, privato e fondazioni. Questa guida mappa le strade d'accesso per il tuo percorso professionale.</p>
         </div>
     </section>
+
+    <script>
+    // FIX: sostituisce il selettore CSS :has(...hover) con un attributo dati
+    // impostato via JS. Più leggero da invalidare per il motore di stile,
+    // e funziona in modo identico su tutti i browser.
+    (function () {
+        const grid = document.getElementById('mabGrid');
+        const cards = grid.querySelectorAll('.mab-card');
+
+        cards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                grid.setAttribute('data-hover', String(index));
+            });
+            card.addEventListener('mouseleave', () => {
+                grid.removeAttribute('data-hover');
+            });
+        });
+    })();
+    </script>
 
 </body>
 </html>
