@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCS Piemonte - Guida MAB</title>
 
-    <!-- Preload critico delle immagini WebP della Hero -->
-    <link rel="preload" as="image" href="foto/museo.webp" type="image/webp">
+    <!-- Preload intelligente: precarichiamo solo l'immagine visibile al centro per non intasare la rete -->
     <link rel="preload" as="image" href="foto/archivio.webp" type="image/webp">
-    <link rel="preload" as="image" href="foto/biblioteca.webp" type="image/webp">
 
-   <style> 
+    <style> 
 /* Reset & Impostazioni generali */
 * {
     margin: 0;
@@ -29,7 +27,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Header Trasparente (Ottimizzato: no backdrop-filter) */
+/* Header Trasparente */
 .main-header {
     position: fixed;
     top: 0;
@@ -63,7 +61,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.5px;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
 }
 
 .main-header nav a:hover {
@@ -73,7 +71,7 @@ body {
 /* Hero Section MAB */
 .mab-hero {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
 }
@@ -109,16 +107,30 @@ body {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* Griglia a 3 Colonne */
+/* Griglia CSS Grid: layout hardware-accelerated dove possibile */
 .mab-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
     height: 100%;
+    transition: grid-template-columns 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Cambiamo la larghezza delle colonne al passaggio del mouse in modo efficiente */
+.mab-grid:has(.mab-card:nth-child(1):hover) {
+    grid-template-columns: 1.3fr 0.85fr 0.85fr;
+}
+
+.mab-grid:has(.mab-card:nth-child(2):hover) {
+    grid-template-columns: 0.85fr 1.3fr 0.85fr;
+}
+
+.mab-grid:has(.mab-card:nth-child(3):hover) {
+    grid-template-columns: 0.85fr 0.85fr 1.3fr;
 }
 
 .mab-card {
     position: relative;
-    flex: 1;
     height: 100%;
     text-decoration: none;
     color: #ffffff;
@@ -127,15 +139,13 @@ body {
     align-items: center;
     overflow: hidden;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
-    transition: flex 0.4s ease;
-    will-change: flex;
 }
 
 .mab-card:last-child {
     border-right: none;
 }
 
-/* Immagini e Overlay (Prestazioni Ultra Veloci) */
+/* Immagini di Sfondo e Overlay */
 .mab-card .bg-image {
     position: absolute;
     top: 0;
@@ -144,16 +154,16 @@ body {
     height: 100%;
     object-fit: cover;
     transform: scale(1);
-    transition: transform 0.5s ease;
-    will-change: transform;
+    /* Transizione fluida gestita solo via GPU (transform) */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
 }
 
 .mab-card .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(13, 17, 23, 0.7); /* Scurisce l'immagine di base senza filtri */
-    transition: background 0.4s ease;
+    background: rgba(13, 17, 23, 0.7);
+    transition: background-color 0.35s ease;
 }
 
 /* Contenuto Testo */
@@ -173,7 +183,7 @@ body {
     line-height: 0.9;
     color: transparent;
     -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
-    transition: color 0.4s ease, -webkit-text-stroke 0.4s ease, transform 0.4s ease;
+    transition: color 0.35s ease, -webkit-text-stroke 0.35s ease, transform 0.35s ease;
 }
 
 .mab-card .label {
@@ -196,18 +206,13 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* --- EFFETTI HOVER OTTIMIZZATI --- */
-
-.mab-card:hover {
-    flex: 1.3;
-}
-
+/* EFFETTI HOVER OTTIMIZZATI */
 .mab-card:hover .bg-image {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 .mab-card:hover .overlay {
-    background: rgba(13, 17, 23, 0.25); /* Schiarisce all'hover */
+    background-color: rgba(13, 17, 23, 0.25);
 }
 
 .mab-card:hover .letter {
@@ -280,10 +285,14 @@ body {
     opacity: 0.8;
 }
 
-/* Mobile */
+/* Mobile responsive */
 @media (max-width: 768px) {
-    .mab-grid {
-        flex-direction: column;
+    .mab-grid,
+    .mab-grid:has(.mab-card:nth-child(1):hover),
+    .mab-grid:has(.mab-card:nth-child(2):hover),
+    .mab-grid:has(.mab-card:nth-child(3):hover) {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
     }
 
     .mab-card {
@@ -304,11 +313,11 @@ body {
         transform: translateY(0);
     }
 }
-</style>
+    </style>
 </head>
 <body>
 
-    <!-- Header trasparente sospeso -->
+    <!-- Header trasparente -->
     <header class="main-header">
         <div class="logo">LCS <span>Piemonte</span></div>
         <nav>
@@ -329,12 +338,12 @@ body {
         <div class="mab-grid">
             <!-- M - Museo -->
             <a href="museo.html" class="mab-card">
-                <img src="foto/museo.webp" alt="Museo" class="bg-image" fetchpriority="high" decoding="async">
+                <img src="foto/museo.webp" alt="Museo" class="bg-image" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">M</span>
                     <span class="label">MUSEI</span>
-                    <span class="sublabel">Esposizione & Valorizzazione</span>
+                    <span class="sublabel">Esposizione &amp; Valorizzazione</span>
                 </div>
             </a>
 
@@ -345,23 +354,23 @@ body {
                 <div class="content">
                     <span class="letter">A</span>
                     <span class="label">ARCHIVI</span>
-                    <span class="sublabel">Conservazione & Memoria</span>
+                    <span class="sublabel">Conservazione &amp; Memoria</span>
                 </div>
             </a>
 
             <!-- B - Biblioteca -->
             <a href="biblioteca.html" class="mab-card">
-                <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image" fetchpriority="high" decoding="async">
+                <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">B</span>
                     <span class="label">BIBLIOTECHE</span>
-                    <span class="sublabel">Accesso & Catalogazione</span>
+                    <span class="sublabel">Accesso &amp; Catalogazione</span>
                 </div>
             </a>
         </div>
 
-        <!-- Indicatore di scorrimento verso il basso -->
+        <!-- Indicatore di scorrimento -->
         <div class="scroll-indicator">
             <span>Esplora la guida</span>
             <div class="arrow">↓</div>
@@ -369,7 +378,7 @@ body {
 
     </main>
 
-    <!-- Sezione Informativa Sottostante -->
+    <!-- Sezione Informativa -->
     <section class="info-section" id="esplora">
         <div class="container">
             <h2>Inquadramento professionale in Piemonte</h2>
