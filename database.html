@@ -48,11 +48,11 @@ body {
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-/* HEADER & HERO - Più arioso */
+/* HEADER & HERO */
 header { padding: 100px 0 60px; text-align: center; }
 
 .hero-title { 
-    font-family: var(--font-sans); /* Passiamo al Sans per un look più moderno */
+    font-family: var(--font-sans);
     font-weight: 700;
     font-size: 3.5rem; 
     letter-spacing: -0.03em;
@@ -67,7 +67,7 @@ header { padding: 100px 0 60px; text-align: center; }
     margin-bottom: 50px; 
 }
 
-/* SEARCH BAR - Minimalista e fluttuante */
+/* SEARCH BAR */
 .search-wrapper { max-width: 500px; margin: 0 auto; }
 #hero-search { 
     width: 100%; 
@@ -86,7 +86,7 @@ header { padding: 100px 0 60px; text-align: center; }
     outline: none;
 }
 
-/* NAVBAR - Blur effetto vetro */
+/* NAVBAR */
 nav { 
     background: rgba(251, 251, 253, 0.8); 
     backdrop-filter: saturate(180%) blur(20px); 
@@ -107,7 +107,7 @@ nav a {
 }
 nav a:hover { opacity: 1; color: var(--accent); }
 
-/* GRID & CARDS - L'anima del redesign */
+/* GRID & CARDS */
 section { padding: 100px 0; }
 .section-title { 
     font-size: 2.2rem; 
@@ -132,6 +132,7 @@ section { padding: 100px 0; }
     flex-direction: column; 
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+    position: relative;
 }
 
 .card:hover { 
@@ -141,9 +142,6 @@ section { padding: 100px 0; }
     border-color: rgba(0,0,0,0.1);
 }
 
-/* Rimuoviamo il bordo colorato a sinistra per dare aria */
-.card::before { display: none; }
-
 .ente-nome { 
     font-size: 1.3rem; 
     font-weight: 600; 
@@ -151,24 +149,24 @@ section { padding: 100px 0; }
     line-height: 1.2;
 }
 
-/* PILLS - Colori pastello desaturati */
-.badge-container { display: flex; gap: 8px; margin-bottom: 20px; }
+/* PILLS */
+.badge-container { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .pill { 
     font-size: 0.7rem; 
     padding: 4px 12px; 
     border-radius: 8px; 
     font-weight: 600; 
     letter-spacing: 0.02em;
-    background: #F5F5F7; /* Sfondo neutro per tutte */
+    background: #F5F5F7;
     color: var(--text-muted);
 }
 
-/* Focus per le categorie specifiche con colori leggerissimi */
 .pill-museo { background: #E3F2FD; color: #1976D2; }
 .pill-arch { background: #FFF3E0; color: #E65100; }
 .pill-biblio { background: #F3E5F5; color: #7B1FA2; }
+.pill-ricerca { background: #E8F5E9; color: #2E7D32; }
 
-/* INFO SECTION - Metadati tecnici eleganti */
+/* INFO SECTION */
 .info-label { 
     font-size: 0.65rem; 
     text-transform: uppercase; 
@@ -188,10 +186,7 @@ section { padding: 100px 0; }
     font-size: 0.85rem; 
     color: var(--text-muted); 
     line-height: 1.6;
-    margin: 15px 0;
-    padding: 0;
-    border: none;
-    font-style: normal;
+    margin: 10px 0;
 }
 
 .btn-site { 
@@ -206,7 +201,6 @@ section { padding: 100px 0; }
 }
 .btn-site:hover { text-decoration: underline; }
 
-/* Badge provincia discreto */
 .badge-prov { 
     position: absolute; 
     top: 32px; 
@@ -218,10 +212,9 @@ section { padding: 100px 0; }
     padding: 4px 8px;
     border-radius: 6px;
 }
-/* --- SEZIONE ACCADEMIE (Layout Editoriale) --- */
-#accademie {
-    padding: 80px 0;
-}
+
+/* SEZIONE ACCADEMIE */
+#accademie { padding: 80px 0; }
 
 .accademia-item { 
     display: flex; 
@@ -241,7 +234,6 @@ section { padding: 100px 0; }
     border-color: rgba(0, 0, 0, 0.12);
 }
 
-/* La colonna con la lettera (Iniziale) */
 .acc-letter { 
     width: 120px; 
     background: #8D1919; 
@@ -249,13 +241,12 @@ section { padding: 100px 0; }
     align-items: center; 
     justify-content: center; 
     color: white; 
-    font-family: var(--font-serif); /* Mantengo il Serif per un tocco d'arte */
+    font-family: var(--font-serif);
     font-size: 3.5rem; 
     font-weight: 600;
     border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Il corpo del contenuto */
 .acc-body { 
     padding: 40px; 
     flex: 1; 
@@ -272,26 +263,8 @@ section { padding: 100px 0; }
     color: #1D1D1F;
 }
 
-/* Adattamento delle info interne per coerenza con le card */
-.acc-body .info-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #86868B;
-    margin-top: 15px;
-}
-
-.acc-body .info-content {
-    font-size: 1rem;
-    color: #424245;
-    margin-top: 2px;
-}
-
-/* Responsive per mobile: la lettera va sopra il testo */
 @media (max-width: 600px) {
-    .accademia-item {
-        flex-direction: column;
-    }
+    .accademia-item { flex-direction: column; }
     .acc-letter {
         width: 100%;
         height: 100px;
@@ -300,15 +273,11 @@ section { padding: 100px 0; }
     }
 }
 
-/* FOOTER */
 footer { padding: 80px 0; border-top: 1px solid #D2D2D7; background: #F5F5F7; }
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR6C2LK3"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
 <header>
     <div class="container">
         <div class="hero-content-wrapper">
@@ -325,8 +294,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav>
     <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="#cooperative">Cooperative</a></li>
-        <li><a href="#fondazioni">Fondazioni</a></li>
+        <li><a href="#cooperative">Cooperative & Società</a></li>
+        <li><a href="#fondazioni">Fondazioni & Archivi</a></li>
         <li><a href="#accademie">Accademie</a></li>
         <li><a href="#orientamento">Orientamento</a></li>
         <li><a href="sitografia.html">Sitografia</a></li>
@@ -336,10 +305,161 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main class="container">
 
     <section id="cooperative">
-        <h2 class="section-title">Cooperative Culturali</h2>
-        <div class="section-divider"></div>
+        <h2 class="section-title">Cooperative Culturali & Società di Servizi</h2>
         <div class="grid-entities">
-            <article class="card coop" data-search="solidarietà e lavoro torino to massaia schirripa">
+
+            <article class="card coop" data-search="acta progetti srl torino to archivi biblioteche">
+                <span class="badge-prov">TO</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-biblio">Biblioteca</span>
+                </div>
+                <h3 class="ente-nome">Acta Progetti S.r.l.</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Riordino, inventariazione, conservazione e gestione di archivi storici, correnti e biblioteche.</p>
+                <div class="info-label">Email</div><div class="info-content">info@actaprogetti.it</div>
+                <a href="http://www.actaprogetti.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="promemoria group torino to heritage archivissima">
+                <span class="badge-prov">TO</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-museo">Heritage</span>
+                </div>
+                <h3 class="ente-nome">Promemoria Group</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Valorizzazione dell'heritage aziendale, digitalizzazione e promozione culturale (ideatori di Archivissima).</p>
+                <div class="info-label">Email</div><div class="info-content">info@promemoriagroup.com</div>
+                <a href="https://www.promemoriagroup.com" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="alicubi srl torino to edutainment portali culturali">
+                <span class="badge-prov">TO</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-ricerca">Digital</span>
+                </div>
+                <h3 class="ente-nome">Alicubi S.r.l.</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Comunicazione, portali culturali, valorizzazione delle fonti storiche e ricerca umanistica.</p>
+                <div class="info-label">Email</div><div class="info-content">info@alicubi.it</div>
+                <a href="https://www.alicubi.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="cooperativa charta mantova mn piemonte archivi">
+                <span class="badge-prov">MN/PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-biblio">Biblioteca</span>
+                </div>
+                <h3 class="ente-nome">Cooperativa Charta</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Servizi archivistici, gestione di biblioteche civiche, attività didattiche e promozione della lettura.</p>
+                <div class="info-label">Email</div><div class="info-content">charta@cooperativacharta.it</div>
+                <a href="https://www.cooperativacharta.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="ab archivi e biblioteche torino to outsourcing">
+                <span class="badge-prov">TO</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-biblio">Biblioteca</span>
+                </div>
+                <h3 class="ente-nome">AB Archivi e Biblioteche</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Gestione operativa in outsourcing di servizi di catalogazione, riordino e sale studio per la PA.</p>
+                <div class="info-label">Email</div><div class="info-content">info@abarchiviebiblioteche.it</div>
+                <a href="https://www.abarchiviebiblioteche.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="italarchivi roma to piemonte conservazione documentale">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                </div>
+                <h3 class="ente-nome">Italarchivi</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Custodia fisica dei documenti, gestione archivi storici e di deposito, dematerializzazione massiva.</p>
+                <div class="info-label">Email</div><div class="info-content">info@italarchivi.it</div>
+                <a href="https://www.italarchivi.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="bucap spa roma to bpo dematerializzazione">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                </div>
+                <h3 class="ente-nome">Bucap S.p.a.</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Logistica documentale, digitalizzazione ad alta definizione di patrimoni storici e conservazione a norma.</p>
+                <div class="info-label">Email</div><div class="info-content">bucap@bucap.it</div>
+                <a href="https://www.bucap.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="omniadoc spa dematerializzazione archivi">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                </div>
+                <h3 class="ente-nome">Omniadoc S.p.a.</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Gestione dei flussi documentali, scansioni massive e infrastrutture per la consultazione digitale.</p>
+                <div class="info-label">Email</div><div class="info-content">info@omniadoc.it</div>
+                <a href="https://www.omniadoc.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="gap visio gap srl digitalizzazione beni culturali">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                    <span class="pill pill-museo">Beni Culturali</span>
+                </div>
+                <h3 class="ente-nome">G.A.P. Visio</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Digitalizzazione non invasiva con scanner planetari speciali per mappe, libri antichi e fondi storici.</p>
+                <div class="info-label">Email</div><div class="info-content">info@gapvisio.it</div>
+                <a href="https://www.gapvisio.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="archeogica archeologia scavi catalogazione">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-museo">Archeologia</span>
+                    <span class="pill pill-arch">Archivio</span>
+                </div>
+                <h3 class="ente-nome">Archeogica</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Servizi per l'archeologia, catalogazione dei reperti e documentazione stratigrafica di cantiere.</p>
+                <div class="info-label">Email</div><div class="info-content">info@archeogica.it</div>
+                <a href="https://www.archeogica.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="retriever ricerca dati archivi informatica">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Archivio</span>
+                </div>
+                <h3 class="ente-nome">Retriever</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Soluzioni per la ricerca dati, recupero di documenti complessi e software di catalogazione.</p>
+                <div class="info-label">Email</div><div class="info-content">info@retriever.it</div>
+                <a href="https://www.retriever.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="codes sviluppo software portali culturali">
+                <span class="badge-prov">PIE</span>
+                <div class="badge-container">
+                    <span class="pill pill-arch">Digital</span>
+                </div>
+                <h3 class="ente-nome">Codes</h3>
+                <div class="info-label">Focus</div>
+                <p class="focus-text">Sviluppo di piattaforme web e soluzioni software per la gestione e fruizione di banche dati culturali.</p>
+                <div class="info-label">Email</div><div class="info-content">info@codes.it</div>
+                <a href="https://www.codes.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
+            </article>
+
+            <article class="card coop" data-search="solidarietà e lavoro torino to">
                 <span class="badge-prov">TO</span>
                 <h3 class="ente-nome">Solidarietà e lavoro</h3>
                 <div class="info-label">Email</div><div class="info-content">info@solidarietaelavoro.it</div>
@@ -350,18 +470,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="badge-prov">TO/VE</span>
                 <h3 class="ente-nome">Coopculture</h3>
                 <div class="info-label">Email</div><div class="info-content">venezia@coopculture.it</div>
-                <div class="info-label">Info Secondarie</div><div class="info-content">torino@coopculture.it</div>
                 <a href="https://www.coopculture.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
 
-            <article class="card coop" data-search="caeb torino to tiziana remus">
+            <article class="card coop" data-search="caeb torino to">
                 <span class="badge-prov">TO</span>
                 <h3 class="ente-nome">CaeB</h3>
                 <div class="info-label">Email</div><div class="info-content">caeb@caeb.it</div>
                 <a href="https://www.caeb.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
 
-            <article class="card coop" data-search="culturalpe torino to favro">
+            <article class="card coop" data-search="culturalpe torino to">
                 <span class="badge-prov">TO</span>
                 <h3 class="ente-nome">CULTURALPE</h3>
                 <div class="info-label">Email</div><div class="info-content">info@culturalpe.it</div>
@@ -403,11 +522,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="https://www.itur.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
 
-             <article class="card coop" data-search="liberitutti torino to torino">
+             <article class="card coop" data-search="liberitutti torino to">
                 <span class="badge-prov">TO</span>
                 <h3 class="ente-nome">LiberiTutti</h3>
-                <div class="info-label">Email</div><div class="info-content">Solo tramite Google Form presente sul sito ufficiale.</div>
-                
+                <div class="info-label">Email</div><div class="info-content">Form presente sul sito ufficiale.</div>
                 <a href="https://www.coopliberitutti.it/lavora-con-noi/" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
 
@@ -418,7 +536,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="https://job.alcantara.com/candidatura-spontanea" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
             
-     <article class="card coop" data-search="la tarta volante pie">
+            <article class="card coop" data-search="la tarta volante pie">
                 <span class="badge-prov">PIE</span>
                 <h3 class="ente-nome">LA TARTA VOLANTE</h3>
                 <div class="info-label">Email</div><div class="info-content">info@latortavolante.org</div>
@@ -429,16 +547,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="badge-prov">TO</span>
                 <h3 class="ente-nome">ALE.MAR</h3>
                 <div class="info-label">Email</div><div class="info-content">info@alemaronlus.it</div>
-                 <div class="info-label">Note</div><div class="info-content">Cooperativa sociale incentrata su assistenza domiciliare, RSA, ecc. Gestisce appalti per alcune biblioteche sul territorio.</div>
                 <a href="https://alemarcoop.it" target="_blank" rel="noopener" class="btn-site">Sito Ufficiale →</a>
             </article>
         </div>
     </section>
 
     <section id="fondazioni">
-    <h2 class="section-title">Fondazioni Culturali</h2>
-    <div class="section-divider"></div>
+    <h2 class="section-title">Fondazioni & Archivi Storici</h2>
     <div class="grid-entities">
+
+        <article class="card fondazione" data-search="archivio storico italgas torino to heritage lab industria">
+            <span class="badge-prov">TO</span>
+            <div class="badge-container">
+                <span class="pill pill-arch">Archivio Storico</span>
+                <span class="pill pill-museo">Heritage</span>
+            </div>
+            <h3 class="ente-nome">Archivio Storico Italgas</h3>
+            <div class="info-label">Focus</div>
+            <p class="focus-text">Uno dei più importanti archivi aziendali d'Italia (gestito dall'Heritage Lab). Conserva dal 1837 la storia dell'innovazione e dello sviluppo urbano.</p>
+            <div class="info-label">Email</div><div class="info-content">heritagelab@italgas.it</div>
+            <a href="https://www.italgas.it/heritage-lab/" target="_blank" rel="noopener" class="btn-site">Esplora →</a>
+        </article>
 
         <article class="card fondazione" data-search="torino musei gam mao palazzo madama">
             <span class="badge-prov">TO</span>
@@ -459,7 +588,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="badge-container">
                 <span class="pill pill-museo">Museo</span>
                 <span class="pill pill-biblio">Biblioteca</span>
-                <span class="pill pill-arch">Archivio</span>
             </div>
             <h3 class="ente-nome">Fondazione Accorsi - Ometto</h3>
             <div class="info-label">Focus</div>
@@ -486,7 +614,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="badge-container">
                 <span class="pill pill-biblio">Biblioteca</span>
                 <span class="pill pill-arch">Archivio</span>
-                <span class="pill pill-ricerca">Ricerca</span>
             </div>
             <h3 class="ente-nome">Fondazione “Ariodante Fabretti”</h3>
             <div class="info-label">Focus</div>
@@ -538,7 +665,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="card fondazione" data-search="fitzcarraldo management culturale">
             <span class="badge-prov">TO</span>
             <div class="badge-container">
-                <span class="pill pill-doc">Centro Doc</span>
+                <span class="pill pill-ricerca">Centro Doc</span>
                 <span class="pill pill-biblio">Biblioteca</span>
             </div>
             <h3 class="ente-nome">Fondazione Fitzcarraldo</h3>
@@ -581,7 +708,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="badge-container">
                 <span class="pill pill-arch">Archivio</span>
                 <span class="pill pill-biblio">Biblioteca</span>
-                <span class="pill pill-ricerca">Ricerca</span>
             </div>
             <h3 class="ente-nome">Fondazione Ist. Piemontese “Antonio Gramsci”</h3>
             <div class="info-label">Focus</div>
@@ -595,7 +721,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="badge-container">
                 <span class="pill pill-biblio">Biblioteca</span>
                 <span class="pill pill-arch">Archivio</span>
-                <span class="pill pill-ricerca">Ricerca</span>
             </div>
             <h3 class="ente-nome">Fondazione “Luigi Einaudi” onlus</h3>
             <div class="info-label">Focus</div>
@@ -663,7 +788,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="badge-container">
                 <span class="pill pill-arch">Archivio</span>
                 <span class="pill pill-biblio">Biblioteca</span>
-                <span class="pill pill-ricerca">Ricerca</span>
             </div>
             <h3 class="ente-nome">ISTORETO - "Giorgio Agosti"</h3>
             <div class="info-label">Focus</div>
@@ -688,9 +812,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="card fondazione" data-search="ismel memoria lavoro impresa diritti sociali">
             <span class="badge-prov">TO</span>
             <div class="badge-container">
-                <span class="pill pill-doc">Centro Doc</span>
                 <span class="pill pill-arch">Archivio</span>
-                <span class="pill pill-ricerca">Ricerca</span>
             </div>
             <h3 class="ente-nome">ISMEL</h3>
             <div class="info-label">Focus</div>
@@ -714,10 +836,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </section>
 
-   
     <section id="accademie">
-        <h2 class="section-title">Accademie </h2>
-        <div class="section-divider"></div>
+        <h2 class="section-title">Accademie</h2>
 
         <article class="accademia-item" data-search="accademia albertina belle arti torino to">
             <div class="acc-letter" aria-hidden="true">A</div>
