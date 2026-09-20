@@ -342,40 +342,62 @@
 		
 		<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
 
-<!-- SEZIONE NEWSLETTER FORMSPREE -->
+<!-- SEZIONE CONTATTACI / NEWSLETTER FORMSPREE -->
 <section class="bg-slate-900 text-white py-12 border-t border-slate-800 mt-16">
-  <div class="max-w-4xl mx-auto px-6 text-center">
+  <div class="max-w-2xl mx-auto px-6">
     
-    <h2 class="text-2xl font-bold tracking-tight mb-2">
-      Rimani aggiornato sul settore MAB e Lavoro Culturale
-    </h2>
-    <p class="text-slate-400 text-sm mb-6">
-      Ricevi aggiornamenti su opportunità, concorsi e novità del settore culturale in Piemonte.
-    </p>
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold tracking-tight mb-2">
+        Rimani in contatto con noi
+      </h2>
+      <p class="text-slate-400 text-sm">
+        Iscriviti per ricevere aggiornamenti oppure inviaci una segnalazione o domanda sul settore MAB.
+      </p>
+    </div>
 
-    <!-- FORM NEWSLETTER -->
-    <form action="https://formspree.io/f/xaeneevl" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+    <!-- FORM FORMSPREE -->
+    <form action="https://formspree.io/f/xaeneevl" method="POST" class="flex flex-col gap-4">
       
-      <label for="newsletter-email" class="sr-only">Indirizzo Email</label>
-      <input 
-        type="email" 
-        id="newsletter-email" 
-        name="email" 
-        placeholder="Inserisci la tua email" 
-        required 
-        class="grow px-4 py-3 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-      >
-      
+      <!-- CAMPO EMAIL -->
+      <div>
+        <label for="newsletter-email" class="block text-xs font-medium text-slate-300 mb-1">
+          La tua email (per la newsletter e la risposta)
+        </label>
+        <input 
+          type="email" 
+          id="newsletter-email" 
+          name="email" 
+          placeholder="nome@esempio.it" 
+          required 
+          class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+        >
+      </div>
+
+      <!-- CAMPO DOMANDA / SEGNALAZIONE -->
+      <div>
+        <label for="newsletter-message" class="block text-xs font-medium text-slate-300 mb-1">
+          Se vuoi fare qualche domanda o segnalare qualcosa, scrivi qui:
+        </label>
+        <textarea 
+          id="newsletter-message" 
+          name="message" 
+          rows="3" 
+          placeholder="Scrivi qui il tuo messaggio o la tua segnalazione (opzionale)..." 
+          class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-y"
+        ></textarea>
+      </div>
+
+      <!-- PULSANTE INVIO -->
       <button 
         type="submit" 
-        class="bg-orange-600 hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg text-sm transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        class="w-full bg-orange-600 hover:bg-orange-500 text-white font-semibold py-3 rounded-lg text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 mt-2"
       >
-        Iscriviti
+        Invia
       </button>
 
     </form>
 
-    <p class="text-xs text-slate-500 mt-4">
+    <p class="text-xs text-slate-500 mt-4 text-center">
       Iscrivendoti accetti di ricevere aggiornamenti sul progetto. Puoi chiedere la cancellazione in qualsiasi momento.
     </p>
 
