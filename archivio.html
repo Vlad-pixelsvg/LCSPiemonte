@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Come Lavorare in Archivio: Guida Completa, Bandi e Concorsi | LCS Piemonte</title>
+
+    <link href="https://img.icons8.com/?size=32&amp;id=LaD94PUPPhFp&amp;format=png&amp;color=000000" rel="icon" type="image/png">
+    <link rel="canonical" href="https://vlad-pixelsvg.github.io/LCSPiemonte/archivio.html">
+
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigazione */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #161b22;
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #8b949e;
+        }
+
+        nav a {
+            color: #f0f6fc;
+            font-weight: 500;
+        }
+
+        /* Header Principale */
+        header {
+            max-width: 900px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.2;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        header h1 span {
+            color: #58a6ff;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #8b949e;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* Divisore */
+        div.divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #30363d, transparent);
+            margin: 40px 0;
+        }
+
+        /* Sezione Principale Griglia */
+        section {
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 30px;
+            color: #f0f6fc;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 10px;
+        }
+
+        section h2 span {
+            font-size: 1rem;
+            color: #8b949e;
+            font-weight: 400;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .category-block {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-block > span {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #58a6ff;
+            display: block;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 8px;
+        }
+
+        .card-item {
+            background-color: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .card-header span {
+            background-color: #21262d;
+            color: #58a6ff;
+            font-weight: 700;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.85rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.1rem;
+            color: #f0f6fc;
+            margin: 0;
+        }
+
+        .card-item p {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 12px;
+        }
+
+        .card-item strong {
+            color: #c9d1d9;
+        }
+
+        .card-item a {
+            display: inline-block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .callout-box {
+            background-color: rgba(56, 139, 253, 0.1);
+            border-left: 3px solid #58a6ff;
+            padding: 10px 14px;
+            border-radius: 0 4px 4px 0;
+            margin-top: 10px;
+        }
+
+        .callout-box p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+        }
+
+        /* Diagramma Esternalizzazione */
+        .diagram-section {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            margin: 60px auto;
+            max-width: 1100px;
+        }
+
+        .diagram-section h2 {
+            border-bottom: none;
+            margin-bottom: 24px;
+            padding-bottom: 0;
+        }
+
+        .diagram-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .diagram-step {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #f0f6fc;
+            font-size: 0.95rem;
+        }
+
+        .diagram-arrow {
+            color: #58a6ff;
+            font-weight: bold;
+        }
+
+        .diagram-quote {
+            font-style: italic;
+            color: #8b949e;
+            font-size: 1.05rem;
+            margin-top: 15px;
+        }
+
+        /* Footer e Glossario */
+        footer {
+            background-color: #161b22;
+            border-top: 1px solid #30363d;
+            padding: 50px 20px 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        footer h2 {
+            font-size: 1.3rem;
+            color: #f0f6fc;
+            margin-bottom: 15px;
+        }
+
+        footer ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        footer ul li {
+            color: #8b949e;
+            font-size: 0.92rem;
+        }
+
+        footer ul li span {
+            color: #f0f6fc;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #21262d;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .diagram-flow {
+                flex-direction: column;
+            }
+
+            .diagram-arrow {
+                transform: rotate(90deg);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <span>Guida Professionale / Archivi</span> 
+        <span><a href="sitografia.html" title="Consulta la sitografia ufficiale">Sitografia</a></span>
+    </nav>
+
+    <header>
+        <h1>
+            Non esiste <span>una sola via</span> per lavorare in archivio.
+        </h1>
+        <p>
+            Il settore archivistico in Piemonte è un ecosistema complesso suddiviso tra conservazione pubblica, servizi esternalizzati, archivi d'impresa e fondazioni. Questa guida mappa le strade d'accesso per trasformare un candidato disorientato in un professionista consapevole.
+        </p>
+    </header>
+
+    <div class="divider"></div>
+
+    <section>
+        <h2>
+            Inquadramento professionale <span>/ Concorsi, Cooperative, Società e Fondazioni</span>
+        </h2>
+
+        <div class="grid-container">
+            <!-- Colonna 1: Percorsi Pubblici -->
+            <div class="category-block">
+                <span>Percorsi Pubblici</span>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>1</span>
+                        <h3>Comuni ed Enti Locali</h3>
+                    </div>
+                    <p>
+                        Concorso Pubblico Locale per archivi storici e correnti. 
+                        <strong>Nota:</strong> Spesso si entra tramite concorsi amministrativi generici con successiva assegnazione alle risorse archivistiche o al protocollo.
+                    </p>
+                    <a href="https://www.torinogiovani.it/lavoro/ricerca-del-lavoro/come-partecipare-ai-concorsi" rel="noopener" target="_blank">Maggiori info concorsi →</a>
+                </div>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>2</span>
+                        <h3>Ministero della Cultura (MiC)</h3>
+                    </div>
+                    <p>
+                        Concorsi Nazionali per l'Archivio di Stato di Torino, gli Archivi di Stato provinciali e le Soprintendenze Archivistiche. Controllare regolarmente il portale <strong>inPA</strong> e la Scuola APD.
+                    </p>
+                </div>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>5</span>
+                        <h3>Università</h3>
+                    </div>
+                    <p>
+                        Bandi tecnici o amministrativi specifici per la gestione degli archivi storici e di deposito degli atenei (UniTo, PoliTo, UPO).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Colonna 2: Gestione Privata -->
+            <div class="category-block">
+                <span>Gestione Privata e Servizi</span>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>6</span>
+                        <h3>Cooperative e Società</h3>
+                    </div>
+                    <p>
+                        Invio CV a società specializzate e cooperative per progetti di riordino, inventariazione, scarto documentale e digitalizzazione.
+                    </p>
+                    <a href="database.html" title="Elenco Cooperative e Società">Vedi Elenco Cooperative e Società →</a>
+                    
+                    <div class="callout-box">
+                        <p>
+                            Gli enti pubblici e le aziende esternalizzano i progetti di riordino, gestione dei depositi e digitalizzazione a partner privati.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonna 3: Fondazioni e Imprese -->
+            <div class="category-block">
+                <span>Fondazioni e Imprese</span>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>3</span>
+                        <h3>Fondazioni e Heritage</h3>
+                    </div>
+                    <p>
+                        Realtà come l'Archivio Storico Intesa Sanpaolo, il Polo del '900 o l'Archivio Storico Italgas. Gestiscono patrimoni documentali di grande valore storico e industriale.
+                    </p>
+                    <a href="database.html" title="Elenco Fondazioni e Imprese">Vedi Fondazioni →</a>
+                </div>
+
+                <div class="card-item">
+                    <div class="card-header">
+                        <span>4</span>
+                        <h3>Istituti ed Enti Ecclesiastici</h3>
+                    </div>
+                    <p>
+                        Istituti per la storia della Resistenza, Archivi Diocesani e Capitolari. Richiedono consultazione diretta dei bandi o candidature spontanee.
+                    </p>
+                    <a href="database.html" title="Elenco Istituti">Elenco Istituti →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schema Esternalizzazione -->
+    <section class="diagram-section">
+        <h2>Capire l'esternalizzazione archivistica in un colpo d'occhio</h2>
+        <div class="diagram-flow">
+            <div class="diagram-step">Ente / Azienda</div>
+            <div class="diagram-arrow">————————▶</div>
+            <div class="diagram-step">Società / Cooperativa</div>
+            <div class="diagram-arrow">————————▶</div>
+            <div class="diagram-step">Tu (Archivista)</div>
+        </div>
+        <p class="diagram-quote">
+            "L'ente detiene il patrimonio documentale, la società/cooperativa vince l'appalto di riordino o gestione, tu applichi il metodo archivistico."
+        </p>
+    </section>
+
+    <!-- Footer con Glossario -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h2>Glossario Strategico</h2>
+                <ul>
+                    <li><span>Scuola APD:</span> Scuola di Archivistica, Paleografia e Diplomatica presso gli Archivi di Stato, titolo fondamentale per la professione e i concorsi MiC.</li>
+                    <li><span>Riordinamento e Inventariazione:</span> L'intervento scientifico di organizzazione del fondo e redazione dello strumento di ricerca (inventario).</li>
+                    <li><span>Appalto di Servizi Archivistici:</span> Il contratto con cui un ente affida la gestione dei depositi, del protocollo o della digitalizzazione a realtà private specializzate.</li>
+                </ul>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Progetto di Orientamento Professionale — Aggiornato 2026</p>
+                <div class="footer-links">
+                    <a href="https://www.iubenda.com/privacy-policy/49865545/cookie-policy" title="Cookie Policy">Cookie Policy</a>
+                    <span>|</span>
+                    <a href="https://www.iubenda.com/privacy-policy/49865545" title="Privacy Policy">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="#">Rivedi scelte cookie</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
