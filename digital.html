@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profili Digitali & Ciclo MAB — CulturaLavoro / LCSPiemonte</title>
+    <style>
+        /* RESET & BASE SYSTEM */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER & NAVIGATION */
+        .site-header {
+            background: #ffffff;
+            border-bottom: 1px solid #f3f4f6;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-logo strong {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #000000;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #4b5563;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding-bottom: 4px;
+            transition: all 0.2s;
+        }
+
+        .main-nav a.active {
+            color: #ea580c;
+            border-bottom: 2px solid #ea580c;
+        }
+
+        .main-nav a:hover {
+            color: #ea580c;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            padding: 70px 0 50px;
+            text-align: center;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            color: #000000;
+            margin-bottom: 24px;
+        }
+
+        .underline-highlight {
+            position: relative;
+            display: inline-block;
+        }
+
+        .underline-highlight::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            width: 100%;
+            height: 4px;
+            background-color: #ea580c;
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: #374151;
+            line-height: 1.7;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* SEZIONI DEDICATE A TUTTO SCHERMO PER MESTIERE */
+        .role-section {
+            padding: 80px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .role-section:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .role-grid.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .role-content h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #111827;
+            margin-top: 10px;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .role-lead {
+            font-size: 1.1rem;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .role-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 28px;
+        }
+
+        .role-features li {
+            font-size: 0.98rem;
+            color: #374151;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .role-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ea580c;
+            font-weight: bold;
+        }
+
+        /* PILLOLE E BADGE */
+        .role-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .pill-blue { background: #eff6ff; color: #1d4ed8; }
+        .pill-orange { background: #fff7ed; color: #c2410c; }
+        .pill-green { background: #f0fdf4; color: #15803d; }
+        .pill-purple { background: #faf5ff; color: #7e22ce; }
+
+        .num-badge-inline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .bg-blue { background-color: #1d4ed8; }
+        .bg-orange { background-color: #ea580c; }
+        .bg-green { background-color: #15803d; }
+        .bg-purple { background-color: #7e22ce; }
+
+        /* WIDGET INTERATTIVI / SIMULATORI */
+        .interactive-widget {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: #111827;
+            color: #f9fafb;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .widget-body {
+            padding: 24px;
+        }
+
+        /* WIDGET 1: SIMULATORE IIIF VIEWER */
+        .iiif-viewer {
+            background: #0f172a;
+            color: #ffffff;
+            height: 280px;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .iiif-manuscript {
+            width: 80%;
+            height: 80%;
+            background: #d97706;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .iiif-manuscript:hover {
+            transform: scale(1.3);
+        }
+
+        .iiif-controls {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .iiif-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* WIDGET 2: ALBERO ARCHIVISTICO */
+        .tree-node {
+            margin-left: 16px;
+            border-left: 2px solid #e5e7eb;
+            padding-left: 12px;
+            margin-top: 8px;
+        }
+
+        .tree-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1f2937;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .tree-label:hover {
+            background-color: #fff7ed;
+            color: #ea580c;
+        }
+
+        /* WIDGET 3: CODE SWITCHER METADATI */
+        .code-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .code-tab-btn {
+            background: #f3f4f6;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .code-tab-btn.active {
+            background: #15803d;
+            color: white;
+        }
+
+        .code-preview {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            height: 180px;
+            overflow-y: auto;
+        }
+
+        /* WIDGET 4: MAPPA STORYTELLING */
+        .storymap-box {
+            background: #e2e8f0;
+            height: 260px;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #7e22ce;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(126, 34, 206, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .map-pin:hover {
+            transform: scale(1.4);
+        }
+
+        .map-popover {
+            position: absolute;
+            bottom: 20px;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 0.85rem;
+            max-width: 220px;
+        }
+
+        /* SEZIONE CICLO DI VITA ARCHIVIO DIGITALE (NUOVA) */
+        .workflow-full-section {
+            padding: 90px 0;
+            background-color: #ffffff;
+            border-top: 2px solid #111827;
+        }
+
+        .workflow-header {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 60px;
+        }
+
+        .workflow-header-tag {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #ea580c;
+            background-color: #fff7ed;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .workflow-header h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #111827;
+            letter-spacing: -0.5px;
+            line-height: 1.25;
+            text-transform: uppercase;
+        }
+
+        .workflow-header p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        .workflow-timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .workflow-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 32px;
+            position: relative;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-4px);
+            border-color: #ea580c;
+        }
+
+        .workflow-step-badge {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ea580c;
+            line-height: 1;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .workflow-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .workflow-card p {
+            font-size: 0.95rem;
+            color: #374151;
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        .workflow-roles-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #6b7280;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+            .role-grid, .role-grid.reverse {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+            .workflow-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER NAVIGATION -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo">
+                <strong>CulturaLavoro</strong>
+                <span>GUIDA PROFESSIONALE</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="biblioteca.html">Biblioteca</a>
+                <a href="archivio.html">Archivio</a>
+                <a href="digital.html" class="active">Digital</a>
+                <a href="database.html">Database</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section container">
+            <h1 class="hero-title">I Mestieri dell'Umanesimo Digitale: <span class="underline-highlight">Spazio alle Competenze</span>.</h1>
+            <p class="hero-subtitle">
+                Ogni profilo culturale digitale possiede un'identità ben precisa, strumenti dedicati e un ruolo cruciale nella trasformazione del dato in conoscenza diffusa.
+            </p>
+        </section>
+
+        <!-- SEZIONE 1: BIBLIOTECARIO DIGITALE -->
+        <section class="role-section">
+            <div class="container role-grid">
+                <div class="role-content">
+                    <span class="role-pill pill-blue">Repository & Accesso Aperto</span>
+                    <h2><span class="num-badge-inline bg-blue">1</span> Bibliotecario Digitale</h2>
+                    <p class="role-lead">
+                        Gestisce e organizza le collezioni digitali, amministrando i repository ad accesso aperto e garantendo l'interoperabilità dei cataloghi su scala internazionale.
+                    </p>
+                    <ul class="role-features">
+                        <li><strong>Amministrazione Repository:</strong> Configurazione di piattaforme Open Source come DSpace, Omeka S e Islandora per la conservazione e la ricerca.</li>
+                        <li><strong>Protocollo IIIF (International Image Interoperability Framework):</strong> Configurazione di server immagini per permettere lo zoom fluido e la comparazione di manoscritti antichi da biblioteche di tutto il mondo.</li>
+                        <li><strong>Harvesting OAI-PMH:</strong> Distribuzione e scambio dei metadati bibliografici verso aggregatori come Internet Culturale ed Europeana.</li>
+                    </ul>
+                </div>
+
+                <!-- WIDGET SIMULATORE IIIF -->
+                <div class="interactive-widget">
+                    <div class="widget-header">
+                        <span>Simulatore Viewer IIIF v3.0</span>
+                        <span style="color:#38bdf8;">● Live Server</span>
+                    </div>
+                    <div class="widget-body">
+                        <p style="font-size:0.85rem; color:#6b7280; margin-bottom:12px;">Prova il principio del protocollo IIIF: passa sopra con il mouse per ingrandire i dettagli del manoscritto in tempo reale.</p>
+                        <div class="iiif-viewer">
+                            <div class="iiif-manuscript">
+                                <span style="color:white; font-family:serif; font-size:1.1rem; text-align:center;">📜 Manoscritto Storico<br><small style="font-size:0.7rem;">[Dettaglio Miniatura Foglio 12r]</small></span>
+                            </div>
+                            <div class="iiif-controls">
+                                <button class="iiif-btn">Zoom +</button>
+                                <button class="iiif-btn">IIIF Manifest XML</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 2: ARCHIVISTA DIGITALE -->
+        <section class="role-section">
+            <div class="container role-grid reverse">
+                
+                <!-- WIDGET ALBERO ARCHIVISTICO -->
+                <div class="interactive-widget">
+                    <div class="widget-header">
+                        <span>Navigatore del Vincolo Archivistico (EAD)</span>
+                        <span style="color:#f97316;">● Struttura Gerarchica</span>
+                    </div>
+                    <div class="widget-body">
+                        <p style="font-size:0.85rem; color:#6b7280; margin-bottom:12px;">Esplora le relazioni logiche tra complesso documentario, serie e singole unità archiviate:</p>
+                        
+                        <div style="background:#f9fafb; padding:16px; border-radius:8px; border:1px solid #e5e7eb;">
+                            <div class="tree-label">📁 Fondo Storico Piemonte (1848-1900)</div>
+                            <div class="tree-node">
+                                <div class="tree-label">📂 Serie I - Corrispondenza Ufficiale</div>
+                                <div class="tree-node">
+                                    <div class="tree-label">📄 Unità 1: Lettere Autografe (XML EAD)</div>
+                                    <div class="tree-label">📄 Unità 2: Registri di Protocollo</div>
+                                </div>
+                                <div class="tree-label">📂 Serie II - Mappe e Catasti Storici</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="role-content">
+                    <span class="role-pill pill-orange">Conservazione & Born Digital</span>
+                    <h2><span class="num-badge-inline bg-orange">2</span> Archivista Digitale</h2>
+                    <p class="role-lead">
+                        Tutela la memoria documentaria sia per i fondi storici digitalizzati, sia per i documenti nativi digitali (born digital), garantendo l'autenticità e il vincolo archivistico nel tempo.
+                    </p>
+                    <ul class="role-features">
+                        <li><strong>Modellazione XML EAD & EAC-CPF:</strong> Traduzione delle strutture complesse degli archivi storici e delle relazioni tra soggetti produttori e conservatori.</li>
+                        <li><strong>Conservazione a Norma:</strong> Applicazione delle regole tecniche AgID per i depositi digitali protetti, evitando l'obsolescenza dei formati.</li>
+                        <li><strong>Catena di Custodia e Checksum:</strong> Monitoraggio dell'integrità dei dati tramite impronte digitali uniche (MD5 / SHA-256) per prevenire alterazioni.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 3: METADATA SPECIALIST -->
+        <section class="role-section">
+            <div class="container role-grid">
+                <div class="role-content">
+                    <span class="role-pill pill-green">Data Governance & LOD</span>
+                    <h2><span class="num-badge-inline bg-green">3</span> Metadata Specialist</h2>
+                    <p class="role-lead">
+                        Progetta l'architettura dei metadati affinché ogni opera o documento sia descritto in modo uniforme, ricercabile sui motori di ricerca e interconnesso nel Web Semantico.
+                    </p>
+                    <ul class="role-features">
+                        <li><strong>Mapping tra Formati:</strong> Trasformazione fluida dei dati catalografici da UNIMARC e SBN verso schemi gestionali XML METS, MAG e Dublin Core.</li>
+                        <li><strong>Linked Open Data (LOD):</strong> Collegamento dei dati culturali a vocabolari aperti e ontologie internazionali per rendere il patrimonio interrogabile tramite SPARQL.</li>
+                        <li><strong>Principi FAIR:</strong> Garanzia che i dataset culturali siano Findable (Trovabili), Accessible (Accessibili), Interoperable (Interoperabili) e Reusable (Riusabili).</li>
+                    </ul>
+                </div>
+
+                <!-- WIDGET CODE SWITCHER METADATI -->
+                <div class="interactive-widget">
+                    <div class="widget-header">
+                        <span>Trasformatore di Metadati</span>
+                        <span style="color:#22c55e;">● Multi-Schema</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="code-tabs">
+                            <button class="code-tab-btn active" onclick="switchCode('mets', this)">XML METS</button>
+                            <button class="code-tab-btn" onclick="switchCode('unimarc', this)">UNIMARC</button>
+                            <button class="code-tab-btn" onclick="switchCode('jsonld', this)">JSON-LD (LOD)</button>
+                        </div>
+                        <pre class="code-preview" id="codeDisplay">&lt;mets:mets xmlns:mets="http://www.loc.gov/METS/"&gt;
+  &lt;mets:dmdSec ID="DMD1"&gt;
+    &lt;mets:mdWrap MDTYPE="DC"&gt;
+      &lt;dc:title&gt;Manoscritto Storico Piemontese&lt;/dc:title&gt;
+    &lt;/mets:mdWrap&gt;
+  &lt;/mets:dmdSec&gt;
+&lt;/mets:mets&gt;</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE 4: DIGITAL CULTURAL STORYTELLER -->
+        <section class="role-section">
+            <div class="container role-grid reverse">
+                
+                <!-- WIDGET STORYMAP INTERATTIVA -->
+                <div class="interactive-widget">
+                    <div class="widget-header">
+                        <span>Geo-Storytelling del Territorio</span>
+                        <span style="color:#a855f7;">● Mappa Interattiva</span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="storymap-box">
+                            <span style="font-weight:700; color:#64748b;">[Mappa Storica del Piemonte]</span>
+                            <div class="map-pin" style="top:40%; left:45%;"></div>
+                            <div class="map-popover">
+                                <strong>Torino - Archivio Storico</strong><br>
+                                <small>Mostra virtuale: "I bandi a stampa del 1848"</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="role-content">
+                    <span class="role-pill pill-purple">Valorizzazione & Engagement</span>
+                    <h2><span class="num-badge-inline bg-purple">4</span> Digital Cultural Storyteller</h2>
+                    <p class="role-lead">
+                        Cura la mediazione tra i dati digitali grezzi e il pubblico, trasformando archivi e collezioni in narrazioni coinvolgenti, mostre virtuali e percorsi partecipativi.
+                    </p>
+                    <ul class="role-features">
+                        <li><strong>Curatela di Mostre Virtuali:</strong> Allestimento di percorsi espositivi digitali su piattaforme come Movio, Omeka/Neatline ed Exhibit.so.</li>
+                        <li><strong>Cartografia Storica e GeoJSON:</strong> Contestualizzazione geografica di fotografie e documenti d'archivio su mappe interattive del territorio piemontese.</li>
+                        <li><strong>Crowdsourcing e HTR Partecipativo:</strong> Coinvolgimento di studenti e cittadini in campagne di trascrizione e indicizzazione condivisa del patrimonio.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CICLO DI VITA COMPLETO DELL'ARCHIVIO DIGITALE -->
+        <section class="workflow-full-section">
+            <div class="container">
+                
+                <div class="workflow-header">
+                    <span class="workflow-header-tag">Filiera della Cultura Digitale</span>
+                    <h2>OGNUNO HA UN SUO RUOLO E LAVORO ALL'INTERNO DI UN PERCORSO DI DIGITALIZZAZIONE</h2>
+                    <p>Dall'ingresso dell'oggetto fisico alla sua trasformazione in bene comune: le 7 fasi sequenziali che collegano tutte le professionalità MAB.</p>
+                </div>
+
+                <div class="workflow-timeline-grid">
+                    
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">01</span>
+                        <h3>Data Entry</h3>
+                        <p>L'immissione primaria dei dati sintetici, degli inventari o dei registri cartacei nei sistemi informativi. È la base da cui partono le ricerche.</p>
+                        <span class="workflow-roles-tag">Focus: Catalogatore / Assistente</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">02</span>
+                        <h3>Normalizzazione</h3>
+                        <p>La bonifica dei dati: controllo e pulizia delle difformità, eliminazione dei duplicati e applicazione di vocabolari controllati e authority file.</p>
+                        <span class="workflow-roles-tag">Focus: Catalogatore Senior</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">03</span>
+                        <h3>Digitalizzazione</h3>
+                        <p>Acquisizione ottica con scanner planetari o professionali secondo i parametri del PND (master TIFF uncompressed ad alta risoluzione).</p>
+                        <span class="workflow-roles-tag">Focus: Operatore di Scansione</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">04</span>
+                        <h3>Metadatazione</h3>
+                        <p>Legame indissolubile tra il file immagine e le schede descrittive, gestionali e strutturali tramite tracciati XML (METS, MAG, Dublin Core).</p>
+                        <span class="workflow-roles-tag">Focus: Metadata Specialist</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">05</span>
+                        <h3>Archiviazione & Preservation</h3>
+                        <p>Ingestione nei depositi digitali protetti, monitoraggio delle impronte checksum (MD5/SHA256) e piani di preservazione contro l'obsolescenza dei formati.</p>
+                        <span class="workflow-roles-tag">Focus: Archivista Digitale</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">06</span>
+                        <h3>Gestione al Pubblico</h3>
+                        <p>Messa online delle collezioni su repository istituzionali (DSpace, Omeka) tramite server IIIF, API aperte e protocolli di scambio OAI-PMH.</p>
+                        <span class="workflow-roles-tag">Focus: Bibliotecario Digitale</span>
+                    </div>
+
+                    <div class="workflow-card">
+                        <span class="workflow-step-badge">07</span>
+                        <h3>Narrazione e Valorizzazione</h3>
+                        <p>Il momento restitutivo: trasformazione dei dati in mostre virtuali, percorsi ad alta accessibilità, cartografia interattiva e crowdsourcing con la cittadinanza.</p>
+                        <span class="workflow-roles-tag">Focus: Digital Storyteller</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer container">
+        <p>© CulturaLavoro / LCSPiemonte — Guida per accedere alle professioni culturali e MAB in Piemonte.</p>
+    </footer>
+
+    <script>
+        function switchCode(type, btn) {
+            document.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const display = document.getElementById('codeDisplay');
+            
+            if(type === 'mets') {
+                display.textContent = `<mets:mets xmlns:mets="http://www.loc.gov/METS/">\n  <mets:dmdSec ID="DMD1">\n    <mets:mdWrap MDTYPE="DC">\n      <dc:title>Manoscritto Storico Piemontese</dc:title>\n    </mets:mdWrap>\n  </mets:dmdSec>\n</mets:mets>`;
+            } else if(type === 'unimarc') {
+                display.textContent = `200 1$aManoscritto Storico Piemontese$fBiblioteca Regionale\n700  1$aAutore Anonimo$4340\n856 4 $uhttps://lcspiemonte.it/viewer/iiif/manifest.json`;
+            } else if(type === 'jsonld') {
+                display.textContent = `{\n  "@context": "https://schema.org",\n  "@type": "Manuscript",\n  "name": "Manoscritto Storico Piemontese",\n  "license": "https://creativecommons.org/licenses/by/4.0/"\n}`;
+            }
+        }
+    </script>
+</body>
+</html>
