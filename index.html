@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCS Piemonte - Guida MAB</title>
 
+    <!-- Preload ottimizzato solo per la visualizzazione iniziale -->
     <link rel="preload" as="image" href="foto/museo.webp" type="image/webp">
-    <link rel="preload" as="image" href="foto/archivio.webp" type="image/webp">
-    <link rel="preload" as="image" href="foto/biblioteca.webp" type="image/webp">
 
     <style>
-/* Reset & Impostazioni generali */
-* {
+/* Reset & Impostazioni generali corretto */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -74,7 +73,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    height: 100dvh; /* Supporto altezza dinamica mobile (viewport reale) */
+    height: 100dvh;
     overflow: hidden;
     contain: layout paint style;
 }
@@ -153,13 +152,13 @@ body {
 
 .mab-card .bg-image {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    width: auto;
-    min-width: 100%;
     object-fit: cover;
-    transform: translate(-50%, -50%) scale(1);
+    object-position: center;
+    transform: scale(1);
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
 }
@@ -213,7 +212,7 @@ body {
 /* EFFETTI HOVER DESKTOP */
 @media (min-width: 769px) {
     .mab-card:hover .bg-image {
-        transform: translate(-50%, -50%) scale(1.05);
+        transform: scale(1.05);
     }
 
     .mab-card:hover .overlay {
@@ -311,17 +310,16 @@ body {
         font-size: 0.8rem;
     }
 
-    /* Griglia orizzontale divisa in 3 fasce ad altezza fissa */
     .mab-grid {
         flex-direction: column;
-        padding-top: 22dvh; /* Spazio per non coprire il titolo */
+        padding-top: 22dvh;
         height: 100dvh;
     }
 
     .mab-card {
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-        flex: 1; /* Dividono equamente lo schermo residuo */
+        flex: 1;
         align-items: center;
         justify-content: flex-start;
         padding: 0 24px;
@@ -331,7 +329,6 @@ body {
         border-bottom: none;
     }
 
-    /* Layout orizzontale interno per la card mobile (Lettera a sinistra, testo a destra) */
     .mab-card .content {
         flex-direction: row;
         align-items: center;
@@ -364,11 +361,11 @@ body {
     }
 
     .mab-card .overlay {
-        background: rgba(13, 17, 23, 0.55); /* Overlay più leggero per far vedere le foto */
+        background: rgba(13, 17, 23, 0.55);
     }
 
     .scroll-indicator {
-        display: none; /* Rimosso su mobile per non occupare spazio utile */
+        display: none;
     }
 }
     </style>
@@ -394,7 +391,7 @@ body {
             <!-- M - Museo -->
             <a href="museo.html" class="mab-card">
                 <img src="foto/museo.webp" alt="Museo" class="bg-image"
-                     width="1200" height="1600" fetchpriority="high" decoding="async">
+                     width="800" height="1067" fetchpriority="high" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">M</span>
@@ -408,7 +405,7 @@ body {
             <!-- A - Archivio -->
             <a href="archivio.html" class="mab-card">
                 <img src="foto/archivio.webp" alt="Archivio" class="bg-image"
-                     width="1200" height="1600" fetchpriority="high" decoding="async">
+                     width="800" height="1067" loading="lazy" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
                     <span class="letter">A</span>
@@ -422,10 +419,10 @@ body {
             <!-- B - Biblioteca -->
             <a href="biblioteca.html" class="mab-card">
                 <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image"
-                     width="1200" height="1600" fetchpriority="high" decoding="async">
+                     width="800" height="1067" loading="lazy" decoding="async">
                 <div class="overlay"></div>
                 <div class="content">
-                    <span class="letter">B</span>
+                    <span class="letter-b">B</span>
                     <div>
                         <div class="label">BIBLIOTECHE</div>
                         <div class="sublabel">Accesso &amp; Catalogazione</div>
@@ -453,7 +450,6 @@ body {
         const grid = document.getElementById('mabGrid');
         const cards = grid.querySelectorAll('.mab-card');
 
-        // L'effetto hover dinamico è attivo soltanto su schemi desktop (> 768px)
         if (window.innerWidth > 768) {
             cards.forEach((card, index) => {
                 card.addEventListener('mouseenter', () => {
