@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://vlad-pixelsvg.github.io/LCSPiemonte/index.html" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <meta property="og:title" content="Come Lavorare in Biblioteca: Guida Completa e Percorsi" />
     <meta property="og:description" content="La guida scientifico-professionale per orientarsi tra bandi, concorsi ed esternalizzazioni nel mondo delle biblioteche." />
@@ -52,565 +52,452 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-8FBFG1VPSY');
     </script>
     
     <style>
         body { font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
-        .path-line { height: 1px; background: linear-gradient(to right, transparent, #e5e7eb, transparent); }
-        
-        /* Regola Media Query nativa per responsive text */
         @media screen and (max-width: 768px) {
             body { -webkit-text-size-adjust: 100%; }
         }
     </style>
 </head>
-<body class="bg-white text-slate-900 leading-relaxed">
+<body class="bg-slate-100 text-slate-900 leading-relaxed">
 
-    <!-- 1. SKIP LINK PER ACCESSIBILITÀ DA TASTIERA -->
+    <!-- SKIP LINK -->
     <a href="#main-content" 
-       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-slate-900 focus:text-white focus:outline-none focus:ring-2 focus:ring-orange-400 rounded-md font-semibold text-sm">
+       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-slate-900 focus:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-md font-semibold text-sm">
        Vai al contenuto principale
     </a>
 
-    <!-- 2. HEADER E NAV BAR ACCESSIBILE -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-40">
+    <!-- HEADER / NAV BAR -->
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-sm">
       <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative" aria-label="Navigazione principale">
         
-        <!-- Brand / Logo -->
         <a href="index.html" class="text-slate-900 font-extrabold text-lg tracking-tight hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors shrink-0">
           CulturaLavoro <span class="text-xs font-semibold text-slate-600 block sm:inline sm:ml-2 uppercase tracking-widest">Guida Professionale</span>
         </a>
 
-        <!-- Pulsante Menu Mobile -->
         <button id="mobile-menu-btn" 
                 type="button"
-                class="md:hidden p-2 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                class="md:hidden p-2 text-slate-800 hover:text-orange-600 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 aria-expanded="false" 
                 aria-controls="mobile-menu"
                 aria-label="Apri menu di navigazione">
-          <!-- Icona Hamburger -->
           <svg id="icon-open" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
-          <!-- Icona Chiusura (X) -->
           <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
 
-        <!-- Menu Desktop -->
         <ul class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-slate-700 tracking-wide">
-          <li>
-            <a href="index.html" 
-               
-               class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-               Home
-            </a>
-          </li>
-          <li>
-            <a href="biblioteca.html" 
-				 aria-current="page"
-				 class="text-orange-600 border-b-2 border-orange-500 pb-1 font-bold focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-sm">
-              
-               Biblioteca
-            </a>
-          </li>
-          <li>
-            <a href="archivio.html" 
-               class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-               Archivio
-            </a>
-          </li>
-          <li>
-            <a href="museo.html" 
-               class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-               Museo
-            </a>
-          </li>
-			<li>
-              <a href="digital.html" 
-                 class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-                 Digital
-              </a>
-            </li>
-          <li>
-            <a href="database.html" 
-               class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-               Database
-            </a>
-          </li>
-          <li>
-            <a href="sitografia.html" 
-               class="hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors">
-               Sitografia
-            </a>
-          </li>
+          <li><a href="index.html" class="hover:text-orange-600 transition-colors">Home</a></li>
+          <li><a href="biblioteca.html" aria-current="page" class="text-orange-600 font-bold border-b-2 border-orange-500 pb-1">Biblioteca</a></li>
+          <li><a href="archivio.html" class="hover:text-orange-600 transition-colors">Archivio</a></li>
+          <li><a href="museo.html" class="hover:text-orange-600 transition-colors">Museo</a></li>
+          <li><a href="digital.html" class="hover:text-orange-600 transition-colors">Digital</a></li>
+          <li><a href="database.html" class="hover:text-orange-600 transition-colors">Database</a></li>
+          <li><a href="sitografia.html" class="hover:text-orange-600 transition-colors">Sitografia</a></li>
         </ul>
 
-        <!-- Menu Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg md:hidden">
-          <ul class="flex flex-col py-4 px-6 gap-1 text-base font-semibold text-slate-700">
-            <li>
-              <a href="index.html" 
-                 aria-current="page"
-                 class="block py-2 text-orange-600 font-bold border-l-4 border-orange-500 pl-3">
-                 Home
-              </a>
-            </li>
-            <li>
-              <a href="biblioteca.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Biblioteca
-              </a>
-            </li>
-            <li>
-              <a href="archivio.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Archivio
-              </a>
-            </li>
-            <li>
-              <a href="museo.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Museo
-              </a>
-            </li>
-			    <li>
-              <a href="digital.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Digital
-              </a>
-            </li>
-            <li>
-              <a href="database.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Database
-              </a>
-            </li>
-            <li>
-              <a href="sitografia.html" 
-                 class="block py-2 hover:bg-slate-50 pl-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500">
-                 Sitografia
-              </a>
-            </li>
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-xl md:hidden">
+          <ul class="flex flex-col py-4 px-6 gap-2 text-base font-semibold text-slate-800">
+            <li><a href="index.html" class="block py-2 hover:text-orange-600">Home</a></li>
+            <li><a href="biblioteca.html" class="block py-2 text-orange-600 font-bold pl-2 border-l-4 border-orange-500">Biblioteca</a></li>
+            <li><a href="archivio.html" class="block py-2 hover:text-orange-600">Archivio</a></li>
+            <li><a href="museo.html" class="block py-2 hover:text-orange-600">Museo</a></li>
+            <li><a href="digital.html" class="block py-2 hover:text-orange-600">Digital</a></li>
+            <li><a href="database.html" class="block py-2 hover:text-orange-600">Database</a></li>
+            <li><a href="sitografia.html" class="block py-2 hover:text-orange-600">Sitografia</a></li>
           </ul>
         </div>
-
       </nav>
     </header>
 
-    <!-- 3. CONTENUTO PRINCIPALE RACCHIUSO IN <main> CON TARGET PER LO SKIP LINK -->
     <main id="main-content" tabindex="-1" class="focus:outline-none">
         
-        <header class="py-20 px-6 max-w-4xl mx-auto">
-            <h1 class="text-5xl font-light text-slate-900 mb-6 leading-tight">
-                Non esiste <span class="font-bold border-b-4 border-orange-400">una sola via</span> per entrare in biblioteca.
+        <!-- HERO -->
+        <section class="py-16 md:py-20 px-6 max-w-5xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight tracking-tight">
+                Non esiste <span class="text-orange-600 underline decoration-orange-400 decoration-4">una sola via</span> per entrare in biblioteca.
             </h1>
-            <p class="text-xl text-slate-600 font-light leading-relaxed">
-                Il settore bibliotecario in Piemonte è un ecosistema diviso tra pubblico, privato e fondazioni. Questa guida mappa le strade d'accesso per trasformare un candidato disorientato in un professionista consapevole.
+            <p class="text-lg md:text-xl text-slate-700 max-w-3xl mx-auto font-normal leading-relaxed">
+                Il settore bibliotecario in Piemonte è un ecosistema diviso tra pubblico, privato e fondazioni. Questa guida mappa le 6 strade d'accesso per orientare la tua carriera.
             </p>
-        </header>
+        </section>
 
-        <div class="path-line"></div>
-
-        <section class="py-24 px-6 max-w-6xl mx-auto" aria-labelledby="inquadramento-heading">
-            <div class="mb-16 border-b border-slate-200 pb-4 max-w-5xl">
-                <h2 id="inquadramento-heading" class="text-2xl font-light text-slate-900 tracking-tight">
-                    Inquadramento professionale <span class="italic text-slate-600 font-light">/ Concorsi, Cooperative e Fondazioni</span>
+        <!-- SEZIONE 1: TUTTI E 6 I CANALI D'ACCESSO PROFESSIONALI -->
+        <section class="py-12 px-6 max-w-6xl mx-auto" aria-labelledby="inquadramento-heading">
+            <div class="mb-10 border-b border-slate-300 pb-4">
+                <h2 id="inquadramento-heading" class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                    Inquadramento professionale <span class="text-slate-600 font-normal">/ Concorsi, Cooperative e Fondazioni (I 6 Canali)</span>
                 </h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-20">
-                <div class="space-y-12">
-                    <span class="inline-block px-3 py-1 bg-blue-50 text-[10px] font-bold uppercase tracking-widest text-blue-700 rounded-full border border-blue-200">
-                        Percorsi Pubblici
-                    </span>
-                    <div class="group relative">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">1</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Comune (Civiche)</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. COMUNE -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider rounded-md">Percorsi Pubblici</span>
+                            <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm">1</span>
                         </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">
-                                Concorso Pubblico Locale. Ruoli come assistenti culturali (diplomati) o funzionari (laureati). 
-                                <strong class="block mt-2 text-slate-800">Nota:</strong> Spesso si entra tramite concorsi amministrativi generici che danno la possibilità, ma non la certezza, di lavorare in biblioteca.
-                            </p>
-                            <a href="https://www.torinogiovani.it/lavoro/ricerca-del-lavoro/come-partecipare-ai-concorsi" rel="noopener" target="_blank" class="inline-block mt-4 text-xs font-bold border-b-2 border-blue-200 text-blue-700 hover:border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all pb-1 uppercase tracking-wider">
-                                Maggiori info concorsi <span class="sr-only">(apre in una nuova scheda)</span> →
-                            </a>
-                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Comune (Civiche)</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                            Concorso Pubblico Locale. Ruoli come assistenti culturali (diplomati) o funzionari (laureati). 
+                            <strong class="block mt-2 text-slate-900">Nota:</strong> Spesso si entra tramite concorsi amministrativi generici che danno la possibilità, ma non la certezza, di lavorare in biblioteca.
+                        </p>
                     </div>
-                    <div class="group relative border-t border-slate-100 pt-8">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">2</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Ministero (MiC)</h3>
-                        </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">Concorsi Nazionali per Musei, Soprintendenze, Archivi di Stato e Biblioteche Nazionali. Controllare regolarmente il portale <strong>inPA</strong>.</p>
-                        </div>
-                    </div>
-                    <div class="group relative border-t border-slate-100 pt-8">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">5</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Università</h3>
-                        </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">Bandi tecnici o amministrativi specifici per UniTo, UPO o PoliTo.</p>
-                        </div>
-                    </div>
+                    <a href="https://www.torinogiovani.it/lavoro/ricerca-del-lavoro/come-partecipare-ai-concorsi" rel="noopener" target="_blank" class="inline-block text-xs font-bold text-blue-700 hover:underline uppercase tracking-wider mt-2">
+                        Maggiori info concorsi →
+                    </a>
                 </div>
 
-                <div class="space-y-12">
-                    <span class="inline-block px-3 py-1 bg-orange-50 text-[10px] font-bold uppercase tracking-widest text-orange-800 rounded-full border border-orange-200">
-                        Gestione Privata
-                    </span>
-                    <div class="group relative">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-bold shadow-sm">6</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors italic">Cooperative Culturali</h3>
+                <!-- 2. MINISTERO -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider rounded-md">Percorsi Pubblici</span>
+                            <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm">2</span>
                         </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">
-                                Invio CV per lavorare in biblioteche pubbliche dove il servizio è esternalizzato. È la strada più dinamica.
-                            </p>
-                            <a href="database.html" title="Elenco Cooperative Sociali e Culturali" class="inline-block mt-4 text-xs font-bold border-b-2 border-orange-200 text-orange-700 hover:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all pb-1 uppercase tracking-wider">Vedi Elenco Cooperative →</a>
-                            <div class="mt-8 p-5 bg-orange-50/60 rounded-2xl border-l-4 border-orange-300">
-                                <p class="text-sm text-slate-700 italic leading-snug">
-                                    Le biblioteche esternalizzano i servizi per affidare l'organizzazione o lo sportello a professionisti esterni.
-                                </p>
-                            </div>
-                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Ministero (MiC)</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed">
+                            Concorsi Nazionali per Musei, Soprintendenze, Archivi di Stato e Biblioteche Nazionali. Controllare regolarmente il portale <strong>inPA</strong>.
+                        </p>
                     </div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-4 block">Portale inPA</span>
                 </div>
 
-                <div class="space-y-12">
-                    <span class="inline-block px-3 py-1 bg-green-50 text-[10px] font-bold uppercase tracking-widest text-green-800 rounded-full border border-green-200">
-                        Fondazioni e Accademie
-                    </span>
-                    <div class="group relative">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-green-700 text-white text-sm font-bold shadow-sm">3</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-green-700 transition-colors">Fondazioni</h3>
+                <!-- 3. FONDAZIONI -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-900 text-xs font-bold uppercase tracking-wider rounded-md">Fondazioni</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">3</span>
                         </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">Realtà come il Polo del '900 o il Museo Egizio. Spesso gestiscono archivi e biblioteche specializzate.</p>
-                            <a href="database.html" title="Elenco Fondazioni" class="inline-block mt-4 text-xs font-bold border-b-2 border-green-200 text-green-700 hover:border-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all pb-1 uppercase tracking-wider">Vedi Fondazioni →</a>
-                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Fondazioni</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                            Realtà come il Polo del '900 o il Museo Egizio. Spesso gestiscono archivi e biblioteche specializzate.
+                        </p>
                     </div>
-                    <div class="group relative border-t border-slate-100 pt-8">
-                        <div class="flex items-center gap-4 mb-4">
-                            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-green-700 text-white text-sm font-bold shadow-sm">4</span>
-                            <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-green-700 transition-colors">Accademie</h3>
-                        </div>
-                        <div class="ml-12">
-                            <p class="text-[15px] text-slate-600 leading-relaxed">Istituzioni d'eccellenza per la conservazione. Richiedono consultazione diretta dei bandi sui rispettivi siti.</p>
-                            <a href="database.html" title="Elenco Accademie" class="inline-block mt-4 text-xs font-bold border-b-2 border-slate-200 text-slate-700 hover:border-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-all pb-1 uppercase tracking-wider">Elenco Accademie →</a>
-                        </div>
-                    </div>
+                    <a href="database.html" class="inline-block text-xs font-bold text-emerald-700 hover:underline uppercase tracking-wider mt-2">
+                        Vedi Fondazioni →
+                    </a>
                 </div>
+
+                <!-- 4. ACCADEMIE -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-900 text-xs font-bold uppercase tracking-wider rounded-md">Fondazioni e Accademie</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-700 text-white font-bold flex items-center justify-center text-sm">4</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Accademie</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                            Istituzioni d'eccellenza per la conservazione. Richiedono consultazione diretta dei bandi sui rispettivi siti.
+                        </p>
+                    </div>
+                    <a href="database.html" class="inline-block text-xs font-bold text-slate-800 hover:underline uppercase tracking-wider mt-2">
+                        Elenco Accademie →
+                    </a>
+                </div>
+
+                <!-- 5. UNIVERSITÀ -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-bold uppercase tracking-wider rounded-md">Percorsi Pubblici</span>
+                            <span class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm">5</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Università</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed">
+                            Bandi tecnici o amministrativi specifici per UniTo, UPO o PoliTo.
+                        </p>
+                    </div>
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-4 block">Bandi di Ateneo</span>
+                </div>
+
+                <!-- 6. COOPERATIVE -->
+                <div class="bg-white rounded-xl p-6 border-2 border-orange-500 shadow-md flex flex-col justify-between hover:shadow-lg transition-shadow bg-orange-50/20">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-orange-100 text-orange-900 text-xs font-bold uppercase tracking-wider rounded-md">Gestione Privata</span>
+                            <span class="w-8 h-8 rounded-lg bg-orange-600 text-white font-bold flex items-center justify-center text-sm">6</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Cooperative Culturali</h3>
+                        <p class="text-slate-700 text-sm leading-relaxed mb-4">
+                            Invio CV per lavorare in biblioteche pubbliche dove il servizio è esternalizzato. È la strada più dinamica.
+                        </p>
+                        <div class="p-3 bg-orange-100/60 rounded-lg border-l-4 border-orange-400 text-xs text-slate-800 italic">
+                            Le biblioteche esternalizzano i servizi per affidare l'organizzazione a professionisti esterni.
+                        </div>
+                    </div>
+                    <a href="database.html" class="inline-block text-xs font-bold text-orange-700 hover:underline uppercase tracking-wider mt-4">
+                        Vedi Elenco Cooperative →
+                    </a>
+                </div>
+
             </div>
         </section>
 
-        <section class="bg-slate-50 py-24 px-6 text-center" aria-labelledby="esternalizzazione-heading">
-            <div class="max-w-3xl mx-auto">
-                <h2 id="esternalizzazione-heading" class="text-3xl font-light mb-12">Capire l'esternalizzazione in un colpo d'occhio</h2>
-                <div class="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 text-sm uppercase tracking-widest font-bold">
-                    <div class="px-8 py-5 border-2 border-slate-300 bg-white rounded-lg shadow-sm">Ente Pubblico</div>
-                    <div class="text-slate-400 hidden md:block" aria-hidden="true">————————▶</div>
-                    <div class="px-8 py-5 border-2 border-orange-400 bg-white shadow-md rounded-lg">Cooperativa</div>
-                    <div class="text-slate-400 hidden md:block" aria-hidden="true">————————▶</div>
-                    <div class="px-8 py-5 bg-slate-900 text-white shadow-xl rounded-lg">Tu (Professionista)</div>
+        <!-- SEZIONE 2: DIAGRAMMA ESTERNALIZZAZIONE (RISOLTO E LEGGIBILE) -->
+        <section class="py-12 px-6 max-w-5xl mx-auto">
+            <div class="bg-white rounded-2xl p-8 border border-slate-300 shadow-sm text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">
+                    Capire l'esternalizzazione in un colpo d'occhio
+                </h2>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <div class="w-full md:w-1/3 p-5 bg-slate-100 rounded-xl border border-slate-300">
+                        <span class="text-xs font-bold uppercase text-slate-500 tracking-wider block mb-1">Proprietà</span>
+                        <h3 class="text-lg font-extrabold text-slate-900">Ente Pubblico</h3>
+                        <p class="text-xs text-slate-600 mt-2">Possiede l'edificio e i libri</p>
+                    </div>
+
+                    <div class="text-2xl text-orange-500 font-bold hidden md:block">➔</div>
+                    <div class="text-2xl text-orange-500 font-bold md:hidden">⬇</div>
+
+                    <div class="w-full md:w-1/3 p-5 bg-orange-50 rounded-xl border-2 border-orange-400 shadow-sm">
+                        <span class="text-xs font-bold uppercase text-orange-700 tracking-wider block mb-1">Gestione</span>
+                        <h3 class="text-lg font-extrabold text-slate-900">Cooperativa</h3>
+                        <p class="text-xs text-slate-700 mt-2">Vince l'appalto e organizza il personale</p>
+                    </div>
+
+                    <div class="text-2xl text-orange-500 font-bold hidden md:block">➔</div>
+                    <div class="text-2xl text-orange-500 font-bold md:hidden">⬇</div>
+
+                    <div class="w-full md:w-1/3 p-5 bg-slate-900 text-white rounded-xl shadow-md">
+                        <span class="text-xs font-bold uppercase text-orange-400 tracking-wider block mb-1">Ruolo</span>
+                        <h3 class="text-lg font-extrabold text-white">Tu (Professionista)</h3>
+                        <p class="text-xs text-slate-300 mt-2">Offri le tue competenze sul campo</p>
+                    </div>
                 </div>
-                <p class="mt-12 text-slate-600 max-w-xl mx-auto italic font-light text-lg">
+
+                <p class="mt-8 text-slate-700 italic font-medium text-base">
                     "Il comune possiede i libri, la cooperativa gestisce il personale, tu offri la tua competenza."
                 </p>
             </div>
         </section>
-		<section class="py-24 px-6 max-w-6xl mx-auto" aria-labelledby="inquadramento-heading">
-    <div class="mb-16 border-b border-slate-200 pb-4 max-w-5xl">
-        <h2 id="inquadramento-heading" class="text-2xl font-light text-slate-900 tracking-tight">
-            Inquadramento professionale e Tipologie <span class="italic text-slate-600 font-light">/ Istituzionale, Tecnico ed Emergente</span>
-        </h2>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-16 gap-y-20">
-        
-        <!-- COLONNA 1: AMBITO ISTITUZIONALE E TIPOLOGIA DI BIBLIOTECA -->
-        <div class="space-y-12">
-            <span class="inline-block px-3 py-1 bg-blue-50 text-[10px] font-bold uppercase tracking-widest text-blue-700 rounded-full border border-blue-200">
-                Ambito Istituzionale
-            </span>
+        <!-- SEZIONE 3: ELENCO DINAMICO COMPLETO DI TUTTI E 13 I PROFILI -->
+        <section class="py-12 px-6 max-w-6xl mx-auto" aria-labelledby="inquadramento-tipologie-heading">
             
-            <div class="group relative">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">1</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Biblioteca Pubblica (Civica)</h3>
+            <div class="mb-8 border-b border-slate-300 pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 id="inquadramento-tipologie-heading" class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+                        Inquadramento professionale e Tipologie <span class="text-slate-600 font-normal">/ Istituzionale, Tecnico ed Emergente</span>
+                    </h2>
+                    <p class="text-sm text-slate-600 mt-1">Usa la barra o i filtri per cercare al volo competenze, standard (es. UNIMARC) o ambiti.</p>
                 </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Servizi alla comunità locale, promozione della lettura, eventi culturali e gestione delle sezioni generali.
-                    </p>
+
+                <!-- BUSSOLA E RICERCA LIVE -->
+                <div class="w-full md:w-72">
+                    <input 
+                      type="text" 
+                      id="search-input" 
+                      onkeyup="searchRoles()" 
+                      placeholder="🔍 Cerca ruolo o parola chiave..." 
+                      class="w-full px-4 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
+                    >
                 </div>
             </div>
 
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">2</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Bibliotecario Scolastico</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Supporto alla didattica nelle scuole di ogni ordine e grado, alfabetizzazione informativa e promozione del pensiero critico.
-                    </p>
-                </div>
+            <!-- TAB FILTRI -->
+            <div class="flex flex-wrap gap-2 mb-8" role="tablist">
+                <button onclick="filterGroup('all')" id="tab-all" class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-slate-900 text-white shadow-sm">Tutti i 13 Profili</button>
+                <button onclick="filterGroup('istituzionale')" id="tab-istituzionale" class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-50">Ambito Istituzionale (4)</button>
+                <button onclick="filterGroup('tecnico')" id="tab-tecnico" class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-50">Funzione Tecnica (5)</button>
+                <button onclick="filterGroup('emergente')" id="tab-emergente" class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-50">Settori Emergenti (4)</button>
             </div>
 
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">3</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Accademico e Universitario</h3>
+            <!-- GRID COMPLETA DEI 13 RUOLI -->
+            <div id="roles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- COLONNA 1: ISTITUZIONALE -->
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="istituzionale">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-blue-100 text-blue-900 text-[10px] font-bold uppercase rounded">Istituzionale</span>
+                        <span class="text-xs font-bold text-slate-400">#1</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Biblioteca Pubblica (Civica)</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Servizi alla comunità locale, promozione della lettura, eventi culturali e gestione delle sezioni generali.</p>
                 </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Supporto alla ricerca e alla didattica universitaria, banche dati scientifiche e collezioni specialistiche di dipartimento.
-                    </p>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="istituzionale">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-blue-100 text-blue-900 text-[10px] font-bold uppercase rounded">Istituzionale</span>
+                        <span class="text-xs font-bold text-slate-400">#2</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Bibliotecario Scolastico</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Supporto alla didattica nelle scuole di ogni ordine e grado, alfabetizzazione informativa e promozione del pensiero critico.</p>
                 </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="istituzionale">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-blue-100 text-blue-900 text-[10px] font-bold uppercase rounded">Istituzionale</span>
+                        <span class="text-xs font-bold text-slate-400">#3</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Accademico e Universitario</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Supporto alla ricerca e alla didattica universitaria, banche dati scientifiche e collezioni specialistiche di dipartimento.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="istituzionale">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-blue-100 text-blue-900 text-[10px] font-bold uppercase rounded">Istituzionale</span>
+                        <span class="text-xs font-bold text-slate-400">#4</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Nazionale / Conservazione</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Deposito legale, tutela, catalogazione d'autorità e conservazione a lungo termine del patrimonio storico e nazionale.</p>
+                </div>
+
+                <!-- COLONNA 2: FUNZIONE TECNICA -->
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="tecnico">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 text-[10px] font-bold uppercase rounded">Funzione Tecnica</span>
+                        <span class="text-xs font-bold text-slate-400">#5</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Catalogatore</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Cataloging & Metadata Librarian: analisi dei documenti, punti d'accesso, soggetti, classificazioni e standard strutturati (UNIMARC, RDA).</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="tecnico">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 text-[10px] font-bold uppercase rounded">Funzione Tecnica</span>
+                        <span class="text-xs font-bold text-slate-400">#6</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Reference e Informazione</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Assistenza specializzata all'utente, orientamento nella ricerca complessa, uso di cataloghi online (OPAC) e corsi di Information Literacy.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="tecnico">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 text-[10px] font-bold uppercase rounded">Funzione Tecnica</span>
+                        <span class="text-xs font-bold text-slate-400">#7</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Collezioni e Acquisizioni</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Collection Development Librarian: gestione del budget, selezione di libri cartacei/digitali, rapporti con editori e revisione delle raccolte.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="tecnico">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 text-[10px] font-bold uppercase rounded">Funzione Tecnica</span>
+                        <span class="text-xs font-bold text-slate-400">#8</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Sviluppo Digitale e Sistemi</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Systems Librarian / Digital Librarian: gestione software gestionali (ILS/LMS), repository digitali (DSpace), OPAC e digitalizzazione.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="tecnico">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-purple-100 text-purple-900 text-[10px] font-bold uppercase rounded">Funzione Tecnica</span>
+                        <span class="text-xs font-bold text-slate-400">#9</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Libro Raro e Manoscritto</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Conservatore specializzato in codici medievali, incunaboli, cinquecentine, paleografia e tecniche di conservazione preventiva.</p>
+                </div>
+
+                <!-- COLONNA 3: SETTORI EMERGENTI -->
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="emergente">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-orange-100 text-orange-900 text-[10px] font-bold uppercase rounded">Settore Emergente</span>
+                        <span class="text-xs font-bold text-slate-400">#10</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Scienza Aperta e Archivi Digitali</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Open Science / Scholarly Communication Librarian: supporto all'Open Access e alla gestione dei dati di ricerca (FAIR data).</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="emergente">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-orange-100 text-orange-900 text-[10px] font-bold uppercase rounded">Settore Emergente</span>
+                        <span class="text-xs font-bold text-slate-400">#11</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Ragazzi / Per l'Infanzia</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Children's & Young Adult Librarian: letteratura per l'infanzia, progettazione spazi dedicati, lettura ad alta voce e servizi per famiglie.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="emergente">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-orange-100 text-orange-900 text-[10px] font-bold uppercase rounded">Settore Emergente</span>
+                        <span class="text-xs font-bold text-slate-400">#12</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Comunità e Outreach</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Portare i servizi bibliotecari fuori dalle mura fisiche (carceri, ospedali, quartieri periferici, bibliobus) verso fasce a bassa accessibilità.</p>
+                </div>
+
+                <div class="role-item bg-white p-6 rounded-xl border border-slate-200 shadow-sm" data-group="emergente">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 bg-orange-100 text-orange-900 text-[10px] font-bold uppercase rounded">Settore Emergente</span>
+                        <span class="text-xs font-bold text-slate-400">#13</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Data Librarian</h3>
+                    <p class="text-slate-700 text-sm leading-relaxed">Gestione, curatela, organizzazione e conservazione a lungo termine di dataset digitali a supporto delle scienze e delle Digital Humanities.</p>
+                </div>
+
             </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-sm">4</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Nazionale / Conservazione</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Deposito legale, tutela, catalogazione d'autorità e conservazione a lungo termine del patrimonio storico e nazionale.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- COLONNA 2: FUNZIONE TECNICA E PROCESSO ORGANIZZATIVO -->
-        <div class="space-y-12">
-            <span class="inline-block px-3 py-1 bg-purple-50 text-[10px] font-bold uppercase tracking-widest text-purple-800 rounded-full border border-purple-200">
-                Funzione Tecnica & Organizzativa
-            </span>
-
-            <div class="group relative">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-700 text-white text-sm font-bold shadow-sm">1</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">Catalogatore</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Cataloging & Metadata Librarian: analisi dei documenti, punti d'accesso, soggetti, classificazioni e standard strutturati (UNIMARC, RDA).
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-700 text-white text-sm font-bold shadow-sm">2</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">Reference e Informazione</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Assistenza specializzata all'utente, orientamento nella ricerca complessa, uso di cataloghi online (OPAC) e corsi di Information Literacy.
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-700 text-white text-sm font-bold shadow-sm">3</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">Collezioni e Acquisizioni</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Collection Development Librarian: gestione del budget, selezione di libri cartacei/digitali, rapporti con editori e revisione delle raccolte.
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-700 text-white text-sm font-bold shadow-sm">4</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">Sviluppo Digitale e Sistemi</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Systems Librarian / Digital Librarian: gestione software gestionali (ILS/LMS), repository digitali (DSpace), OPAC e digitalizzazione.
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-700 text-white text-sm font-bold shadow-sm">5</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-purple-700 transition-colors">Libro Raro e Manoscritto</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Conservatore specializzato in codici medievali, incunaboli, cinquecentine, paleografia e tecniche di conservazione preventiva.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- COLONNA 3: FIGURE E SETTORI EMERGENTI -->
-        <div class="space-y-12">
-            <span class="inline-block px-3 py-1 bg-orange-50 text-[10px] font-bold uppercase tracking-widest text-orange-800 rounded-full border border-orange-200">
-                Settori Emergenti
-            </span>
-
-            <div class="group relative">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-bold shadow-sm">1</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors">Scienza Aperta e Archivi Digitali</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Open Science / Scholarly Communication Librarian: supporto all'Open Access e alla gestione dei dati di ricerca (FAIR data).
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-bold shadow-sm">2</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors">Ragazzi / Per l'Infanzia</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Children's & Young Adult Librarian: letteratura per l'infanzia, progettazione spazi dedicati, lettura ad alta voce e servizi per famiglie.
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-bold shadow-sm">3</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors">Comunità e Outreach</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Portare i servizi bibliotecari fuori dalle mura fisiche (carceri, ospedali, quartieri periferici, bibliobus) verso fasce a bassa accessibilità.
-                    </p>
-                </div>
-            </div>
-
-            <div class="group relative border-t border-slate-100 pt-8">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500 text-white text-sm font-bold shadow-sm">4</span>
-                    <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-orange-600 transition-colors">Data Librarian</h3>
-                </div>
-                <div class="ml-12">
-                    <p class="text-[15px] text-slate-600 leading-relaxed">
-                        Gestione, curatela, organizzazione e conservazione a lungo termine di dataset digitali a supporto delle scienze e delle Digital Humanities.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
+        </section>
 
     </main>
 
-    <footer class="py-20 px-6 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-sm">
-        <div>
-            <h2 class="font-bold mb-6 uppercase tracking-widest border-b border-slate-200 pb-2 text-sm text-slate-900">Glossario Strategico</h2>
-            <ul class="space-y-6">
-                <li><span class="font-bold text-slate-900">Bando vs Concorso:</span> Il bando può essere privato e basato sul CV; il concorso è pubblico e richiede prove selettive.</li>
-                <li><span class="font-bold text-slate-900">Appalto:</span> Il contratto giuridico che lega una Biblioteca Civica a una Cooperativa per lo svolgimento dei servizi.</li>
-            </ul>
+    <!-- FOOTER E FORM -->
+    <footer class="py-16 px-6 max-w-5xl mx-auto border-t border-slate-300 mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-sm mb-12">
+            <div>
+                <h3 class="font-bold mb-4 uppercase tracking-widest text-slate-900 text-xs">Glossario Strategico</h3>
+                <ul class="space-y-4 text-slate-700">
+                    <li><strong class="text-slate-900">Bando vs Concorso:</strong> Il bando può essere privato e basato sul CV; il concorso è pubblico e richiede prove selettive.</li>
+                    <li><strong class="text-slate-900">Appalto:</strong> Il contratto giuridico che lega una Biblioteca Civica a una Cooperativa per lo svolgimento dei servizi.</li>
+                </ul>
+            </div>
+            
+            <div class="flex flex-col justify-between md:items-end text-left md:text-right">
+                <div>
+                    <p class="text-slate-900 font-bold">Progetto di Orientamento Professionale</p>
+                    <p class="text-slate-500 text-xs mt-1 uppercase tracking-wider italic">Aggiornato 2026 • LCSPiemonte</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="flex flex-col justify-end items-end text-right">
-            <p class="text-slate-600 font-medium">Progetto di Orientamento Professionale</p>
-            <p class="text-slate-500 text-xs mt-2 uppercase tracking-tighter italic">Aggiornato 2026</p>
+
+        <!-- FORM FORMSPREE -->
+        <section class="bg-slate-900 text-white p-8 md:p-10 rounded-2xl shadow-xl">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold tracking-tight mb-2 text-white">Rimani in contatto con noi</h2>
+                    <p class="text-slate-300 text-sm">Iscriviti per ricevere aggiornamenti o inviaci una segnalazione sul settore MAB.</p>
+                </div>
+
+                <form action="https://formspree.io/f/xaeneevl" method="POST" class="flex flex-col gap-4">
+                    <div>
+                        <label for="newsletter-email" class="block text-xs font-bold text-slate-300 mb-1">LA TUA EMAIL</label>
+                        <input type="email" id="newsletter-email" name="email" placeholder="nome@esempio.it" required class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:ring-2 focus:ring-orange-500">
+                    </div>
+
+                    <div>
+                        <label for="newsletter-message" class="block text-xs font-bold text-slate-300 mb-1">MESSAGGIO O DOMANDA (OPZIONALE)</label>
+                        <textarea id="newsletter-message" name="message" rows="3" placeholder="Scrivi qui il tuo messaggio..." class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:ring-2 focus:ring-orange-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 rounded-lg text-sm transition-colors mt-2">
+                        Invia
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <div class="flex flex-wrap gap-4 justify-center mt-10 text-xs text-slate-600 border-t border-slate-200 pt-6">
+            <a href="https://www.iubenda.com/privacy-policy/49865545/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed hover:text-slate-900" title="Cookie Policy">Cookie Policy</a>
+            <span>|</span>
+            <a href="https://www.iubenda.com/privacy-policy/49865545" class="iubenda-white iubenda-noiframe iubenda-embed hover:text-slate-900" title="Privacy Policy">Privacy Policy</a>
+            <span>|</span>
+            <a href="#" class="iubenda-cs-preferences-link hover:text-slate-900">Rivedi scelte cookie</a>
         </div>
-        
-        <div class="flex flex-wrap gap-4 col-span-1 md:col-span-2 justify-center mt-6 text-xs border-t border-slate-200 pt-6">
-            <a href="https://www.iubenda.com/privacy-policy/49865545/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1" title="Cookie Policy">Cookie Policy</a>
-            <span class="text-slate-400" aria-hidden="true">|</span>
-            <a href="https://www.iubenda.com/privacy-policy/49865545" class="iubenda-white iubenda-noiframe iubenda-embed text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1" title="Privacy Policy">Privacy Policy</a>
-            <span class="text-slate-400" aria-hidden="true">|</span>
-            <a href="#" class="iubenda-cs-preferences-link text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1">Rivedi scelte cookie</a>
-        </div>
-		
-		<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    </footer>
 
-<!-- SEZIONE CONTATTACI / NEWSLETTER FORMSPREE -->
-<section class="bg-slate-900 text-white py-12 border-t border-slate-800 mt-16">
-  <div class="max-w-2xl mx-auto px-6">
-    
-    <div class="text-center mb-8">
-      <h2 class="text-2xl font-bold tracking-tight mb-2">
-        Rimani in contatto con noi
-      </h2>
-      <p class="text-slate-400 text-sm">
-        Iscriviti per ricevere aggiornamenti oppure inviaci una segnalazione o domanda sul settore MAB.
-      </p>
-    </div>
-
-    <!-- FORM FORMSPREE -->
-    <form action="https://formspree.io/f/xaeneevl" method="POST" class="flex flex-col gap-4">
-      
-      <!-- CAMPO EMAIL -->
-      <div>
-        <label for="newsletter-email" class="block text-xs font-medium text-slate-300 mb-1">
-          La tua email (per la newsletter e la risposta)
-        </label>
-        <input 
-          type="email" 
-          id="newsletter-email" 
-          name="email" 
-          placeholder="nome@esempio.it" 
-          required 
-          class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-        >
-      </div>
-
-      <!-- CAMPO DOMANDA / SEGNALAZIONE -->
-      <div>
-        <label for="newsletter-message" class="block text-xs font-medium text-slate-300 mb-1">
-          Se vuoi fare qualche domanda o segnalare qualcosa, scrivi qui:
-        </label>
-        <textarea 
-          id="newsletter-message" 
-          name="message" 
-          rows="3" 
-          placeholder="Scrivi qui il tuo messaggio o la tua segnalazione (opzionale)..." 
-          class="w-full px-4 py-3 rounded-lg text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 resize-y"
-        ></textarea>
-      </div>
-
-      <!-- PULSANTE INVIO -->
-      <button 
-        type="submit" 
-        class="w-full bg-orange-600 hover:bg-orange-500 text-white font-semibold py-3 rounded-lg text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 mt-2"
-      >
-        Invia
-      </button>
-
-    </form>
-
-    <p class="text-xs text-slate-500 mt-4 text-center">
-      Iscrivendoti accetti di ricevere aggiornamenti sul progetto. Puoi chiedere la cancellazione in qualsiasi momento.
-    </p>
-
-  </div>
-</section>
-  
-
-  </div>
-</section>
-	</footer>
-
-    <!-- JS ACCESSIBILITÀ MENU MOBILE -->
+    <!-- SCRIPT FILTRI DINAMICI E RICERCA COMPLETA -->
     <script>
+      // Menu Mobile
       document.addEventListener('DOMContentLoaded', () => {
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -620,20 +507,12 @@
         if (menuBtn && mobileMenu) {
           menuBtn.addEventListener('click', () => {
             const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-            
-            // Toggle attributi aria
             menuBtn.setAttribute('aria-expanded', !isExpanded);
-            menuBtn.setAttribute('aria-label', isExpanded ? 'Apri menu di navigazione' : 'Chiudi menu di navigazione');
-            
-            // Toggle visibilità
             mobileMenu.classList.toggle('hidden');
-            
-            // Toggle icone SVG
             iconOpen.classList.toggle('hidden');
             iconClose.classList.toggle('hidden');
           });
 
-          // Chiusura automatica con il tasto ESC (Accessibilità da Tastiera)
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
               menuBtn.click();
@@ -642,7 +521,48 @@
           });
         }
       });
-    </script>
 
+      // Filtro Categoria
+      function filterGroup(group) {
+        const items = document.querySelectorAll('.role-item');
+        const buttons = document.querySelectorAll('[role="tab"]');
+
+        buttons.forEach(btn => {
+          btn.className = "px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-white text-slate-700 border border-slate-300 hover:bg-slate-50";
+        });
+
+        const activeTab = document.getElementById('tab-' + group);
+        if (activeTab) {
+          activeTab.className = "px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-slate-900 text-white shadow-sm";
+        }
+
+        // Reset campo ricerca se si clicca un tab
+        document.getElementById('search-input').value = '';
+
+        items.forEach(item => {
+          if (group === 'all' || item.getAttribute('data-group') === group) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      // Ricerca Istantanea Testuale
+      function searchRoles() {
+        const query = document.getElementById('search-input').value.toLowerCase();
+        const items = document.querySelectorAll('.role-item');
+
+        items.forEach(item => {
+          const text = item.innerText.toLowerCase();
+          if (text.includes(query)) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+    </script>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
 </body>
 </html>
