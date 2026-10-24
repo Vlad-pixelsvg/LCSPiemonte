@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCS Piemonte - Guida MAB</title>
 
-    <!-- Preload ottimizzato solo per la visualizzazione iniziale -->
+    <!-- Preload ottimizzato per tutte le immagini critiche dell'Hero -->
     <link rel="preload" as="image" href="foto/museo.webp" type="image/webp">
+    <link rel="preload" as="image" href="foto/archivio.webp" type="image/webp">
+    <link rel="preload" as="image" href="foto/biblioteca.webp" type="image/webp">
 
     <style>
 /* Reset & Impostazioni generali corretto */
@@ -64,8 +66,11 @@ body {
     transition: opacity 0.2s ease;
 }
 
-.main-header nav a:hover {
+.main-header nav a:hover,
+.main-header nav a:focus-visible {
     opacity: 1;
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
 }
 
 /* Hero Section MAB */
@@ -132,6 +137,12 @@ body {
     overflow: hidden;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     contain: layout paint style;
+}
+
+.mab-card:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: -3px;
+    z-index: 25;
 }
 
 .mab-card:last-child {
@@ -209,28 +220,33 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* EFFETTI HOVER DESKTOP */
+/* EFFETTI HOVER / FOCUS DESKTOP */
 @media (min-width: 769px) {
-    .mab-card:hover .bg-image {
+    .mab-card:hover .bg-image,
+    .mab-card:focus .bg-image {
         transform: scale(1.05);
     }
 
-    .mab-card:hover .overlay {
+    .mab-card:hover .overlay,
+    .mab-card:focus .overlay {
         background-color: rgba(13, 17, 23, 0.25);
     }
 
-    .mab-card:hover .letter {
+    .mab-card:hover .letter,
+    .mab-card:focus .letter {
         color: #ffffff;
         -webkit-text-stroke: 2px #ffffff;
         transform: translateY(-6px);
     }
 
-    .mab-card:hover .label {
+    .mab-card:hover .label,
+    .mab-card:focus .label {
         opacity: 1;
         transform: translateY(-3px);
     }
 
-    .mab-card:hover .sublabel {
+    .mab-card:hover .sublabel,
+    .mab-card:focus .sublabel {
         opacity: 1;
         transform: translateY(0);
     }
@@ -374,7 +390,7 @@ body {
 
     <header class="main-header">
         <div class="logo">LCS <span>Piemonte</span></div>
-        <nav>
+        <nav aria-label="Principale">
             <a href="sitografia.html">Sitografia</a>
             <a href="database.html">Database</a>
         </nav>
@@ -390,9 +406,9 @@ body {
         <div class="mab-grid" id="mabGrid">
             <!-- M - Museo -->
             <a href="museo.html" class="mab-card">
-                <img src="foto/museo.webp" alt="Museo" class="bg-image"
-                     width="800" height="1067" fetchpriority="high" decoding="async">
-                <div class="overlay"></div>
+                <img src="foto/museo.webp" alt="" class="bg-image"
+                     width="800" height="1067" fetchpriority="high" decoding="async" aria-hidden="true">
+                <div class="overlay" aria-hidden="true"></div>
                 <div class="content">
                     <span class="letter">M</span>
                     <div>
@@ -404,9 +420,9 @@ body {
 
             <!-- A - Archivio -->
             <a href="archivio.html" class="mab-card">
-                <img src="foto/archivio.webp" alt="Archivio" class="bg-image"
-                     width="800" height="1067" loading="lazy" decoding="async">
-                <div class="overlay"></div>
+                <img src="foto/archivio.webp" alt="" class="bg-image"
+                     width="800" height="1067" fetchpriority="high" decoding="async" aria-hidden="true">
+                <div class="overlay" aria-hidden="true"></div>
                 <div class="content">
                     <span class="letter">A</span>
                     <div>
@@ -418,11 +434,12 @@ body {
 
             <!-- B - Biblioteca -->
             <a href="biblioteca.html" class="mab-card">
-                <img src="foto/biblioteca.webp" alt="Biblioteca" class="bg-image"
-                     width="800" height="1067" loading="lazy" decoding="async">
-                <div class="overlay"></div>
+                <img src="foto/biblioteca.webp" alt="" class="bg-image"
+                     width="800" height="1067" fetchpriority="high" decoding="async" aria-hidden="true">
+                <div class="overlay" aria-hidden="true"></div>
                 <div class="content">
-                    <span class="letter-b">B</span>
+                    <!-- CORRETTO: Cambiato da letter-b a letter per ereditare correttamente lo stile -->
+                    <span class="letter">B</span>
                     <div>
                         <div class="label">BIBLIOTECHE</div>
                         <div class="sublabel">Accesso &amp; Catalogazione</div>
@@ -431,7 +448,7 @@ body {
             </a>
         </div>
 
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" aria-hidden="true">
             <span>Esplora la guida</span>
             <div class="arrow">↓</div>
         </div>
@@ -452,10 +469,19 @@ body {
 
         if (window.innerWidth > 768) {
             cards.forEach((card, index) => {
+                // Gestione Mouse Hover
                 card.addEventListener('mouseenter', () => {
                     grid.setAttribute('data-hover', String(index));
                 });
                 card.addEventListener('mouseleave', () => {
+                    grid.removeAttribute('data-hover');
+                });
+
+                // Gestione Focus da Tastiera (WCAG 2.1 AA)
+                card.addEventListener('focus', () => {
+                    grid.setAttribute('data-hover', String(index));
+                });
+                card.addEventListener('blur', () => {
                     grid.removeAttribute('data-hover');
                 });
             });
