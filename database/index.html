@@ -173,14 +173,19 @@
     </footer>
 
     <!-- SCRIPT DATI E LOGICA -->
+ <!-- SCRIPT DATI E LOGICA -->
     <script src="enti-data.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const paramRegione = (urlParams.get('regione') || 'piemonte').toLowerCase().trim();
         
-        // Funzione di utilità per normalizzare le stringhe (ignora spazi e trattini)
-        const normalizza = (str) => str.toLowerCase().trim().replace(/[\s-]+/g, '');
+        // Funzione di normalizzazione avanzata: rimuove spazi, trattini, apostrofi e accenti
+        const normalizza = (str) => {
+            return str.toLowerCase().trim()
+                      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Rimuove gli accenti
+                      .replace(/[''`\s-]+/g, ''); // Rimuove apostrofi, spazi e trattini
+        };
 
         const regioneNormalizzata = normalizza(paramRegione);
         const nomeRegioneFormattato = paramRegione.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
@@ -223,7 +228,7 @@
 
             let totalVisible = 0;
 
-            // Filtro centralizzato sicuro (ignora differenze di spazi/trattini)
+            // Filtro centralizzato ultra-robusto
             const entiFiltrati = databaseCulturale.filter(ente => {
                 const matchRegione = ente.regioni.some(r => normalizza(r) === regioneNormalizzata);
                 
