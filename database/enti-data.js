@@ -6,8 +6,8 @@ const databaseCulturale = [
         id: "solidarieta-lavoro",
         nome: "Solidarietà e lavoro",
         categoria: "cooperative",
-        regioni: ["piemonte"],
-        province: ["TO"],
+        regioni: ["piemonte", "liguria"],
+        province: ["TO", "GE"],
         email: "info@solidarietaelavoro.it",
         sito: "https://www.solidarietaelavoro.it"
     },
