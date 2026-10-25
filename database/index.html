@@ -8,7 +8,7 @@
     <meta name="description" content="Esplora il database completo degli enti culturali territoriali. Informazioni, contatti, email e siti ufficiali di cooperative, fondazioni e accademie d'arte.">
     <meta name="robots" content="index, follow">
     
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght=600;700&family=Inter:wght=400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
@@ -119,12 +119,12 @@
             <p id="hero-subtitle" class="hero-subtitle">Archivio completo degli enti culturali della Regione</p>
             
            <div class="flex flex-wrap justify-center gap-2 mb-8">
-    <a href="index.html?regione=piemonte" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="piemonte">Piemonte</a>
-    <a href="index.html?regione=lombardia" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lombardia">Lombardia</a>
-    <a href="index.html?regione=valle-d-aosta" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="valle-d-aosta">Valle d'Aosta</a>
-    <a href="index.html?regione=veneto" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="veneto">Veneto</a>
-    <a href="index.html?regione=lazio" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lazio">Lazio</a>
-    <a href="index.html?regione=liguria" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="liguria">Liguria</a>
+                <a href="index.html?regione=piemonte" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="piemonte">Piemonte</a>
+                <a href="index.html?regione=lombardia" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lombardia">Lombardia</a>
+                <a href="index.html?regione=valle-d-aosta" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="valle-d-aosta">Valle d'Aosta</a>
+                <a href="index.html?regione=veneto" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="veneto">Veneto</a>
+                <a href="index.html?regione=lazio" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lazio">Lazio</a>
+                <a href="index.html?regione=liguria" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="liguria">Liguria</a>
             </div>
 
             <div class="search-wrapper">
@@ -149,7 +149,7 @@
 
         <!-- SEZIONE 3: FONDAZIONI & ARCHIVI STORICI -->
         <section id="sec-fondazioni">
-            <h2 class="section-title">Fondazioni & Archivi Storici</h2>
+            <h2 class="section-title">Fondazioni & Archivi STORICI</h2>
             <div id="grid-fondazioni" class="grid-entities"></div>
         </section>
 
@@ -173,18 +173,17 @@
     </footer>
 
     <!-- SCRIPT DATI E LOGICA -->
- <!-- SCRIPT DATI E LOGICA -->
     <script src="enti-data.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
         const paramRegione = (urlParams.get('regione') || 'piemonte').toLowerCase().trim();
         
-        // Funzione di normalizzazione avanzata: rimuove spazi, trattini, apostrofi e accenti
+        // Funzione di normalizzazione avanzata: ignora spazi, trattini, apostrofi e maiuscole
         const normalizza = (str) => {
             return str.toLowerCase().trim()
-                      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Rimuove gli accenti
-                      .replace(/[''`\s-]+/g, ''); // Rimuove apostrofi, spazi e trattini
+                      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                      .replace(/[''`\s-]+/g, '');
         };
 
         const regioneNormalizzata = normalizza(paramRegione);
@@ -228,7 +227,7 @@
 
             let totalVisible = 0;
 
-            // Filtro centralizzato ultra-robusto
+            // Filtro centralizzato sicuro
             const entiFiltrati = databaseCulturale.filter(ente => {
                 const matchRegione = ente.regioni.some(r => normalizza(r) === regioneNormalizzata);
                 
