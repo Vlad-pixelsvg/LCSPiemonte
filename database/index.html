@@ -190,124 +190,129 @@
         }
     });
 
-    // Filtro nel database
-    const entiFiltrati = databaseCulturale.filter(ente => {
-        // Converte anche le regioni dell'array in minuscolo e con trattini per un match sicuro
-        const matchRegione = ente.regioni.some(r => r.toLowerCase().trim().replace(/\s+/g, '-') === regioneCorrente);
-        
-        const query = searchInput.value.toLowerCase().trim();
-        const matchQuery = query === '' || 
-                           ente.nome.toLowerCase().includes(query) || 
-                           (ente.focus && ente.focus.toLowerCase().includes(query)) ||
-                           ente.province.some(p => p.toLowerCase().includes(query)) ||
-                           (ente.email && ente.email.toLowerCase().includes(query));
-                           
-        return matchRegione && matchQuery;
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Legge la regione dall'URL e ripristina gli spazi (es. valle-d-aosta -> valle d'aosta)
+    const regioneCorrente = (urlParams.get('regione') || 'piemonte').toLowerCase().trim().replace(/-/g, ' ');
+    const nomeRegioneFormattato = regioneCorrente.replace(/\b\w/g, l => l.toUpperCase());
+
+    // Evidenzia il bottone attivo confrontando con il data-reg dell'HTML
+    document.querySelectorAll('.region-pill').forEach(pill => {
+        const regPill = pill.getAttribute('data-reg').toLowerCase().trim();
+        if (regPill === regioneCorrente.replace(/\s+/g, '-')) {
+            pill.classList.remove('bg-slate-100', 'text-slate-700');
+            pill.classList.add('bg-orange-600', 'text-white', 'shadow-md');
+        }
     });
 
-        // Imposta testi dinamici
-        document.getElementById('page-title').textContent = `Archivio Enti Culturali ${nomeRegioneFormattato} | Database CulturaLavoro`;
-        document.getElementById('hero-title').textContent = `CulturaLavoro ${nomeRegioneFormattato}`;
-        document.getElementById('hero-subtitle').textContent = `Archivio completo degli enti culturali della Regione ${nomeRegioneFormattato}`;
-        document.getElementById('regione-selettore-rapido').textContent = `Regione: ${nomeRegioneFormattato}`;
+    // Imposta i testi della pagina
+    document.getElementById('page-title').textContent = `Archivio Enti Culturali ${nomeRegioneFormattato} | Database CulturaLavoro`;
+    document.getElementById('hero-title').textContent = `CulturaLavoro ${nomeRegioneFormattato}`;
+    document.getElementById('hero-subtitle').textContent = `Archivio completo degli enti culturali della Regione ${nomeRegioneFormattato}`;
+    document.getElementById('regione-selettore-rapido').textContent = `Regione: ${nomeRegioneFormattato}`;
 
-        const searchInput = document.getElementById('hero-search');
-        const emptyState = document.getElementById('empty-state');
+    const searchInput = document.getElementById('hero-search');
+    const emptyState = document.getElementById('empty-state');
 
-        function renderizzatore() {
-            const query = searchInput.value.toLowerCase().trim();
+    function renderizzatore() {
+        const query = searchInput.value.toLowerCase().trim();
 
-            const containers = {
-                'cooperative': document.getElementById('grid-cooperative'),
-                'servizi': document.getElementById('grid-servizi'),
-                'fondazioni': document.getElementById('grid-fondazioni'),
-                'accademie': document.getElementById('container-accademie'),
-                'orientamento': document.getElementById('grid-orientamento')
-            };
+        const containers = {
+            'cooperative': document.getElementById('grid-cooperative'),
+            'servizi': document.getElementById('grid-servizi'),
+            'fondazioni': document.getElementById('grid-fondazioni'),
+            'accademie': document.getElementById('container-accademie'),
+            'orientamento': document.getElementById('grid-orientamento')
+        };
 
-            Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
+        Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
 
-            let totalVisible = 0;
+        let totalVisible = 0;
 
-            const entiFiltrati = databaseCulturale.filter(ente => {
-                const matchRegione = ente.regioni.includes(regioneCorrente.toLowerCase());
-                const matchQuery = query === '' || 
-                                   ente.nome.toLowerCase().includes(query) || 
-                                   (ente.focus && ente.focus.toLowerCase().includes(query)) ||
-                                   ente.province.some(p => p.toLowerCase().includes(query)) ||
-                                   (ente.email && ente.email.toLowerCase().includes(query));
-                return matchRegione && matchQuery;
-            });
+        // FILTRO NEL DATABASE CENTRALE
+        const entiFiltrati = databaseCulturale.filter(ente => {
+            // Controlla se la regione corrente è presente nell'array dell'ente (confronto sicuro in minuscolo)
+            const matchRegione = ente.regioni.some(r => r.toLowerCase().trim() === regioneCorrente);
+            
+            const matchQuery = query === '' || 
+                               ente.nome.toLowerCase().includes(query) || 
+                               (ente.focus && ente.focus.toLowerCase().includes(query)) ||
+                               ente.province.some(p => p.toLowerCase().includes(query)) ||
+                               (ente.email && ente.email.toLowerCase().includes(query));
+                               
+            return matchRegione && matchQuery;
+        });
 
-            const sezioniDOM = {
-                'cooperative': document.getElementById('sec-cooperative'),
-                'servizi': document.getElementById('sec-servizi'),
-                'fondazioni': document.getElementById('sec-fondazioni'),
-                'accademie': document.getElementById('sec-accademie'),
-                'orientamento': document.getElementById('sec-orientamento')
-            };
+        const sezioniDOM = {
+            'cooperative': document.getElementById('sec-cooperative'),
+            'servizi': document.getElementById('sec-servizi'),
+            'fondazioni': document.getElementById('sec-fondazioni'),
+            'accademie': document.getElementById('sec-accademie'),
+            'orientamento': document.getElementById('sec-orientamento')
+        };
 
-            let contatoriSezione = { cooperative: 0, servizi: 0, fondazioni: 0, accademie: 0, orientamento: 0 };
+        let contatoriSezione = { cooperative: 0, servizi: 0, fondazioni: 0, accademie: 0, orientamento: 0 };
 
-            entiFiltrati.forEach(ente => {
-                totalVisible++;
-                if (contatoriSezione[ente.categoria] !== undefined) {
-                    contatoriSezione[ente.categoria]++;
+        entiFiltrati.forEach(ente => {
+            totalVisible++;
+            if (contatoriSezione[ente.categoria] !== undefined) {
+                contatoriSezione[ente.categoria]++;
+            }
+
+            if (ente.categoria !== 'accademie') {
+                const card = document.createElement('article');
+                card.className = 'card';
+                
+                let pilloleHTML = '';
+                if (ente.pillole && ente.pillole.length > 0) {
+                    pilloleHTML = '<div class="badge-container">' + ente.pillole.map(p => `<span class="pill pill-${p.tipo}">${p.testo}</span>`).join('') + '</div>';
                 }
 
-                if (ente.categoria !== 'accademie') {
-                    const card = document.createElement('article');
-                    card.className = 'card';
-                    
-                    let pilloleHTML = '';
-                    if (ente.pillole && ente.pillole.length > 0) {
-                        pilloleHTML = '<div class="badge-container">' + ente.pillole.map(p => `<span class="pill pill-${p.tipo}">${p.testo}</span>`).join('') + '</div>';
-                    }
-
-                    card.innerHTML = `
-                        <span class="badge-prov">${ente.province.join('/')}</span>
-                        ${pilloleHTML}
+                card.innerHTML = `
+                    <span class="badge-prov">${ente.province.join('/')}</span>
+                    ${pilloleHTML}
+                    <h3 class="ente-nome">${ente.nome}</h3>
+                    ${ente.focus ? `<div class="info-label">Focus</div><p class="focus-text">${ente.focus}</p>` : ''}
+                    <div class="info-label">${ente.email && ente.email.includes('@') ? 'Email' : 'Contatti'}</div>
+                    <div class="info-content">${ente.email || ente.contatti}</div>
+                    <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">${ente.testoBtn || 'Sito Ufficiale'} →</a>
+                `;
+                if (containers[ente.categoria]) {
+                    containers[ente.categoria].appendChild(card);
+                }
+            } else {
+                const item = document.createElement('article');
+                item.className = 'accademia-item';
+                item.innerHTML = `
+                    <div class="acc-letter" aria-hidden="true">${ente.lettera || 'A'}</div>
+                    <div class="acc-body">
                         <h3 class="ente-nome">${ente.nome}</h3>
-                        ${ente.focus ? `<div class="info-label">Focus</div><p class="focus-text">${ente.focus}</p>` : ''}
-                        <div class="info-label">${ente.email && ente.email.includes('@') ? 'Email' : 'Contatti'}</div>
-                        <div class="info-content">${ente.email || ente.contatti}</div>
-                        <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">${ente.testoBtn || 'Sito Ufficiale'} →</a>
-                    `;
-                    if (containers[ente.categoria]) {
-                        containers[ente.categoria].appendChild(card);
-                    }
-                } else {
-                    const item = document.createElement('article');
-                    item.className = 'accademia-item';
-                    item.innerHTML = `
-                        <div class="acc-letter" aria-hidden="true">${ente.lettera || 'A'}</div>
-                        <div class="acc-body">
-                            <h3 class="ente-nome">${ente.nome}</h3>
-                            <div class="info-label">Contatti</div>
-                            <div class="info-content">${ente.contatti}</div>
-                            <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">Sito Istituzionale →</a>
-                        </div>
-                    `;
-                    if (containers['accademie']) {
-                        containers['accademie'].appendChild(item);
-                    }
+                        <div class="info-label">Contatti</div>
+                        <div class="info-content">${ente.contatti}</div>
+                        <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">Sito Istituzionale →</a>
+                    </div>
+                `;
+                if (containers['accademie']) {
+                    containers['accademie'].appendChild(item);
                 }
-            });
+            }
+        });
 
-            Object.keys(sezioniDOM).forEach(cat => {
-                if(sezioniDOM[cat]) {
-                    sezioniDOM[cat].style.display = contatoriSezione[cat] > 0 ? 'block' : 'none';
-                }
-            });
+        Object.keys(sezioniDOM).forEach(cat => {
+            if(sezioniDOM[cat]) {
+                sezioniDOM[cat].style.display = contatoriSezione[cat] > 0 ? 'block' : 'none';
+            }
+        });
 
-            emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
-        }
+        emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
+    }
 
-        if (searchInput) {
-            searchInput.addEventListener('input', renderizzatore);
-        }
-        renderizzatore();
-      });
+    if (searchInput) {
+        searchInput.addEventListener('input', renderizzatore);
+    }
+    renderizzatore();
+});
     </script>
 </body>
 </html>
