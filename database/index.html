@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title id="page-title">Archivio Enti Culturali Piemonte | Database CulturaLavoro</title>
+    <meta name="description" content="Esplora il database completo degli enti culturali della Regione. Informazioni, contatti, email e siti ufficiali di cooperative, fondazioni e accademie d'arte.">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght=600;700&family=Inter:wght=400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --bg-pure: #FBFBFD;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --text-main: #1D1D1F;
+            --text-muted: #555559;
+            --accent: #0071E3;
+            --radius: 18px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+
+        body { 
+            background-color: var(--bg-pure); 
+            font-family: var(--font-sans); 
+            color: var(--text-main); 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+        }
+
+        .container-custom { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* HERO & SEARCH */
+        .hero-section { padding: 60px 0 30px; text-align: center; }
+        .hero-title { font-size: 3rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 24px; }
+
+        .search-wrapper { max-width: 500px; margin: 0 auto; }
+        #hero-search { 
+            width: 100%; padding: 16px 24px; border-radius: 12px; border: 1px solid #C7C7CC; background: #FFFFFF; font-size: 1rem; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        #hero-search:focus {
+            border-color: var(--accent); box-shadow: 0 0 0 4px rgba(0,113,227,0.15); outline: none;
+        }
+
+        /* CARDS & GRID */
+        section { padding: 40px 0; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.02em; }
+        .grid-entities { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+        .card { 
+            background: var(--bg-card); border: 1px solid rgba(0, 0, 0, 0.08); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; position: relative;
+        }
+        .card:hover { transform: translateY(-4px); background: #FFFFFF; box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+        .ente-nome { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+
+        .badge-container { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+        .pill { font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; font-weight: 600; background: #F2F2F7; color: var(--text-muted); }
+        .pill-museo { background: #E3F2FD; color: #0D47A1; }
+        .pill-arch { background: #FFF3E0; color: #E65100; }
+        .pill-biblio { background: #F3E5F5; color: #4A148C; }
+        .pill-ricerca { background: #E8F5E9; color: #1B5E20; }
+
+        .info-label { font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: #6E6E73; margin-top: 12px; letter-spacing: 0.05em; }
+        .info-content { font-size: 0.9rem; color: var(--text-main); margin-top: 2px; }
+        .focus-text { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin: 6px 0; }
+
+        .btn-site { 
+            margin-top: auto; padding-top: 20px; color: var(--accent); font-weight: 600; font-size: 0.875rem; text-decoration: none; display: inline-flex; align-items: center;
+        }
+        .btn-site:hover { text-decoration: underline; }
+
+        .badge-prov { 
+            position: absolute; top: 28px; right: 28px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); background: #E5E5EA; padding: 4px 8px; border-radius: 6px;
+        }
+
+        /* ACCADEMIE ITEM */
+        .accademia-item { 
+            display: flex; align-items: stretch; background: #FFFFFF; border-radius: 16px; margin-bottom: 20px; border: 1px solid rgba(0, 0, 0, 0.08); overflow: hidden; transition: transform 0.2s ease;
+        }
+        .accademia-item:hover { transform: translateY(-3px); }
+        .acc-letter { width: 100px; background: #8D1919; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-serif); font-size: 3rem; font-weight: 700; }
+        .acc-body { padding: 24px; flex: 1; }
+
+        @media (max-width: 600px) {
+            .accademia-item { flex-direction: column; }
+            .acc-letter { width: 100%; height: 80px; }
+        }
+
+        #empty-state { display: none; text-align: center; padding: 60px 0; color: var(--text-muted); font-size: 1.1rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-40">
+      <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative" aria-label="Navigazione principale">
+        <a href="../index.html" class="text-slate-900 font-extrabold text-lg tracking-tight">
+          CulturaLavoro <span class="text-xs font-semibold text-slate-600 block sm:inline sm:ml-2 uppercase tracking-widest">Database</span>
+        </a>
+        <div id="regione-selettore-rapido" class="text-sm font-semibold text-orange-600"></div>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="container-custom">
+
+        <div class="hero-section">
+            <h1 id="hero-title" class="hero-title">CulturaLavoro Piemonte</h1>
+            <p id="hero-subtitle" class="hero-subtitle">Archivio completo degli enti culturali della Regione</p>
+            
+            <!-- BARRA BOTTONI REGIONI (OPZIONE B) -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <a href="index.html?regione=piemonte" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="piemonte">Piemonte</a>
+                <a href="index.html?regione=lombardia" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lombardia">Lombardia</a>
+                <a href="index.html?regione=veneto" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="veneto">Veneto</a>
+                <a href="index.html?regione=lazio" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lazio">Lazio</a>
+                <a href="index.html?regione=toscana" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="toscana">Toscana</a>
+            </div>
+
+            <div class="search-wrapper">
+                <label for="hero-search" class="sr-only">Cerca enti culturali, email o province</label>
+                <input type="search" id="hero-search" placeholder="Cerca enti, email o province..." aria-label="Cerca nel database">
+            </div>
+        </div>
+
+        <div id="empty-state">Nessun ente corrisponde alla ricerca inserita.</div>
+
+        <!-- SEZIONE 1: COOPERATIVE CULTURALI -->
+        <section id="sec-cooperative">
+            <h2 class="section-title">Cooperative Culturali</h2>
+            <div id="grid-cooperative" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 2: SOCIETÀ DI SERVIZI E DIGITALIZZAZIONE -->
+        <section id="sec-servizi">
+            <h2 class="section-title">Società di Servizi & Digitalizzazione</h2>
+            <div id="grid-servizi" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 3: FONDAZIONI & ARCHIVI STORICI -->
+        <section id="sec-fondazioni">
+            <h2 class="section-title">Fondazioni & Archivi Storici</h2>
+            <div id="grid-fondazioni" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 4: ACCADEMIE -->
+        <section id="sec-accademie">
+            <h2 class="section-title">Accademie</h2>
+            <div id="container-accademie"></div>
+        </section>
+
+        <!-- SEZIONE 5: CENTRI DI ORIENTAMENTO -->
+        <section id="sec-orientamento">
+            <h2 class="section-title">Centri di Orientamento e Formazione</h2>
+            <div id="grid-orientamento" class="grid-entities"></div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 bg-white text-center text-xs text-slate-500 mt-20">
+        <p id="footer-text">Database Enti &copy; 2026</p>
+        <p class="mt-2">Per segnalazioni: <a href="mailto:gabriel.corcodel04@gmail.com" class="text-blue-600 hover:underline">Invia Email</a></p>
+    </footer>
+
+    <!-- IMPORTANTE: Importiamo il database centrale -->
+    <script src="enti-data.js"></script>
+
+    <!-- SCRIPT DINAMICO DI SMISTAMENTO -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const regioneCorrente = urlParams.get('regione') || 'piemonte';
+        const nomeRegioneFormattato = regioneCorrente.charAt(0).toUpperCase() + regioneCorrente.slice(1);
+
+        // Evidenzia il bottone regione attivo
+        document.querySelectorAll('.region-pill').forEach(pill => {
+            if(pill.getAttribute('data-reg') === regioneCorrente) {
+                pill.classList.remove('bg-slate-100', 'text-slate-700');
+                pill.classList.add('bg-orange-600', 'text-white', 'shadow-md');
+            }
+        });
+
+        // Imposta testi dinamici
+        document.getElementById('page-title').textContent = `Archivio Enti Culturali ${nomeRegioneFormattato} | Database CulturaLavoro`;
+        document.getElementById('hero-title').textContent = `CulturaLavoro ${nomeRegioneFormattato}`;
+        document.getElementById('hero-subtitle').textContent = `Archivio completo degli enti culturali della Regione ${nomeRegioneFormattato}`;
+        document.getElementById('regione-selettore-rapido').textContent = `Regione: ${nomeRegioneFormattato}`;
+
+        const searchInput = document.getElementById('hero-search');
+        const emptyState = document.getElementById('empty-state');
+
+        function renderizzatore() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            // Mappatura delle sezioni nel DOM
+            const containers = {
+                'cooperative': document.getElementById('grid-cooperative'),
+                'servizi': document.getElementById('grid-servizi'),
+                'fondazioni': document.getElementById('grid-fondazioni'),
+                'accademie': document.getElementById('container-accademie'),
+                'orientamento': document.getElementById('grid-orientamento')
+            };
+
+            // Svuota tutto
+            Object.values(containers).forEach(c => c.innerHTML = '');
+
+            let totalVisible = 0;
+
+            // Filtra gli enti dal file enti-data.js
+            const entiFiltrati = databaseCulturale.filter(ente => {
+                const matchRegione = ente.regioni.includes(regioneCorrente.toLowerCase());
+                const matchQuery = query === '' || 
+                                   ente.nome.toLowerCase().includes(query) || 
+                                   (ente.focus && ente.focus.toLowerCase().includes(query)) ||
+                                   ente.province.some(p => p.toLowerCase().includes(query)) ||
+                                   (ente.email && ente.email.toLowerCase().includes(query));
+                return matchRegione && matchQuery;
+            });
+
+            // Mostra o nasconde le sezioni
+            const sezioniDOM = {
+                'cooperative': document.getElementById('sec-cooperative'),
+                'servizi': document.getElementById('sec-servizi'),
+                'fondazioni': document.getElementById('sec-fondazioni'),
+                'accademie': document.getElementById('sec-accademie'),
+                'orientamento': document.getElementById('sec-orientamento')
+            };
+
+            let contatoriSezione = { cooperative: 0, servizi: 0, fondazioni: 0, accademie: 0, orientamento: 0 };
+
+            entiFiltrati.forEach(ente => {
+                totalVisible++;
+                contatoriSezione[ente.categoria]++;
+
+                if (ente.categoria !== 'accademie') {
+                    // Genera card standard (cooperative, servizi, fondazioni, orientamento)
+                    const card = document.createElement('article');
+                    card.className = 'card';
+                    
+                    let pilloleHTML = '';
+                    if (ente.pillole && ente.pillole.length > 0) {
+                        pilloleHTML = '<div class="badge-container">' + ente.pillole.map(p => `<span class="pill pill-${p.tipo}">${p.testo}</span>`).join('') + '</div>';
+                    }
+
+                    card.innerHTML = `
+                        <span class="badge-prov">${ente.province.join('/')}</span>
+                        ${pilloleHTML}
+                        <h3 class="ente-nome">${ente.nome}</h3>
+                        ${ente.focus ? `<div class="info-label">Focus</div><p class="focus-text">${ente.focus}</p>` : ''}
+                        <div class="info-label">${ente.email.includes('@') ? 'Email' : 'Contatti'}</div>
+                        <div class="info-content">${ente.email}</div>
+                        <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">${ente.testoBtn || 'Sito Ufficiale'} →</a>
+                    `;
+                    containers[ente.categoria].appendChild(card);
+                } else {
+                    // Genera elemento Accademia (stile a blocchi con lettera iniziale)
+                    const item = document.createElement('article');
+                    item.className = 'accademia-item';
+                    item.innerHTML = `
+                        <div class="acc-letter" aria-hidden="true">${ente.lettera || 'A'}</div>
+                        <div class="acc-body">
+                            <h3 class="ente-nome">${ente.nome}</h3>
+                            <div class="info-label">Contatti</div>
+                            <div class="info-content">${ente.contatti}</div>
+                            <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">Sito Istituzionale →</a>
+                        </div>
+                    `;
+                    containers['accademie'].appendChild(item);
+                }
+            });
+
+            // Mostra o nasconde i blocchi di intere sezioni se non hanno elementi visibili
+            Object.keys(sezioniDOM.id || sezioniDOM).forEach(cat => {
+                if(sezioniDOM[cat]) {
+                    sezioniDOM[cat].style.display = contatoriSezione[cat] > 0 ? 'block' : 'none';
+                }
+            });
+
+            emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', renderizzatore);
+        renderizzatore();
+      });
+    </script>
+</body>
+</html>
