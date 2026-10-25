@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title id="page-title">Archivio Enti Culturali Piemonte | Database CulturaLavoro</title>
-    <meta name="description" content="Esplora il database completo degli enti culturali della Regione. Informazioni, contatti, email e siti ufficiali di cooperative, fondazioni e accademie d'arte.">
+    <title id="page-title">Archivio Enti Culturali | Database CulturaLavoro</title>
+    <meta name="description" content="Esplora il database completo degli enti culturali territoriali. Informazioni, contatti, email e siti ufficiali di cooperative, fondazioni e accademie d'arte.">
     <meta name="robots" content="index, follow">
     
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght=600;700&family=Inter:wght=400;500;700&display=swap" rel="stylesheet">
@@ -122,9 +122,9 @@
             <div class="flex flex-wrap justify-center gap-2 mb-8">
                 <a href="index.html?regione=piemonte" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="piemonte">Piemonte</a>
                 <a href="index.html?regione=lombardia" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lombardia">Lombardia</a>
+                <a href="index.html?regione=valle d'aosta" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="valle d'aosta">Valle d'Aosta</a>
                 <a href="index.html?regione=veneto" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="veneto">Veneto</a>
                 <a href="index.html?regione=lazio" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="lazio">Lazio</a>
-                <a href="index.html?regione=toscana" class="region-pill px-4 py-2 rounded-full text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-orange-600 hover:text-white transition-colors shadow-sm" data-reg="toscana">Toscana</a>
             </div>
 
             <div class="search-wrapper">
@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <div id="empty-state">Nessun ente corrisponde alla ricerca inserita.</div>
+        <div id="empty-state">Nessun ente corrisponde alla ricerca inserita per questa regione.</div>
 
         <!-- SEZIONE 1: COOPERATIVE CULTURALI -->
         <section id="sec-cooperative">
@@ -172,10 +172,8 @@
         <p class="mt-2">Per segnalazioni: <a href="mailto:gabriel.corcodel04@gmail.com" class="text-blue-600 hover:underline">Invia Email</a></p>
     </footer>
 
-    <!-- IMPORTANTE: Importiamo il database centrale -->
+    <!-- SCRIPT DATI E LOGICA -->
     <script src="enti-data.js"></script>
-
-    <!-- SCRIPT DINAMICO DI SMISTAMENTO -->
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -184,7 +182,7 @@
 
         // Evidenzia il bottone regione attivo
         document.querySelectorAll('.region-pill').forEach(pill => {
-            if(pill.getAttribute('data-reg') === regioneCorrente) {
+            if(pill.getAttribute('data-reg') === regioneCorrente.toLowerCase()) {
                 pill.classList.remove('bg-slate-100', 'text-slate-700');
                 pill.classList.add('bg-orange-600', 'text-white', 'shadow-md');
             }
@@ -202,7 +200,6 @@
         function renderizzatore() {
             const query = searchInput.value.toLowerCase().trim();
 
-            // Mappatura delle sezioni nel DOM
             const containers = {
                 'cooperative': document.getElementById('grid-cooperative'),
                 'servizi': document.getElementById('grid-servizi'),
@@ -211,12 +208,10 @@
                 'orientamento': document.getElementById('grid-orientamento')
             };
 
-            // Svuota tutto
-            Object.values(containers).forEach(c => c.innerHTML = '');
+            Object.values(containers).forEach(c => { if(c) c.innerHTML = ''; });
 
             let totalVisible = 0;
 
-            // Filtra gli enti dal file enti-data.js
             const entiFiltrati = databaseCulturale.filter(ente => {
                 const matchRegione = ente.regioni.includes(regioneCorrente.toLowerCase());
                 const matchQuery = query === '' || 
@@ -227,7 +222,6 @@
                 return matchRegione && matchQuery;
             });
 
-            // Mostra o nasconde le sezioni
             const sezioniDOM = {
                 'cooperative': document.getElementById('sec-cooperative'),
                 'servizi': document.getElementById('sec-servizi'),
@@ -240,10 +234,11 @@
 
             entiFiltrati.forEach(ente => {
                 totalVisible++;
-                contatoriSezione[ente.categoria]++;
+                if (contatoriSezione[ente.categoria] !== undefined) {
+                    contatoriSezione[ente.categoria]++;
+                }
 
                 if (ente.categoria !== 'accademie') {
-                    // Genera card standard (cooperative, servizi, fondazioni, orientamento)
                     const card = document.createElement('article');
                     card.className = 'card';
                     
@@ -257,13 +252,14 @@
                         ${pilloleHTML}
                         <h3 class="ente-nome">${ente.nome}</h3>
                         ${ente.focus ? `<div class="info-label">Focus</div><p class="focus-text">${ente.focus}</p>` : ''}
-                        <div class="info-label">${ente.email.includes('@') ? 'Email' : 'Contatti'}</div>
-                        <div class="info-content">${ente.email}</div>
+                        <div class="info-label">${ente.email && ente.email.includes('@') ? 'Email' : 'Contatti'}</div>
+                        <div class="info-content">${ente.email || ente.contatti}</div>
                         <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">${ente.testoBtn || 'Sito Ufficiale'} →</a>
                     `;
-                    containers[ente.categoria].appendChild(card);
+                    if (containers[ente.categoria]) {
+                        containers[ente.categoria].appendChild(card);
+                    }
                 } else {
-                    // Genera elemento Accademia (stile a blocchi con lettera iniziale)
                     const item = document.createElement('article');
                     item.className = 'accademia-item';
                     item.innerHTML = `
@@ -275,12 +271,13 @@
                             <a href="${ente.sito}" target="_blank" rel="noopener" class="btn-site">Sito Istituzionale →</a>
                         </div>
                     `;
-                    containers['accademie'].appendChild(item);
+                    if (containers['accademie']) {
+                        containers['accademie'].appendChild(item);
+                    }
                 }
             });
 
-            // Mostra o nasconde i blocchi di intere sezioni se non hanno elementi visibili
-            Object.keys(sezioniDOM.id || sezioniDOM).forEach(cat => {
+            Object.keys(sezioniDOM).forEach(cat => {
                 if(sezioniDOM[cat]) {
                     sezioniDOM[cat].style.display = contatoriSezione[cat] > 0 ? 'block' : 'none';
                 }
@@ -289,7 +286,9 @@
             emptyState.style.display = totalVisible === 0 ? 'block' : 'none';
         }
 
-        searchInput.addEventListener('input', renderizzatore);
+        if (searchInput) {
+            searchInput.addEventListener('input', renderizzatore);
+        }
         renderizzatore();
       });
     </script>
