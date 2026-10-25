@@ -175,18 +175,35 @@
     <!-- SCRIPT DATI E LOGICA -->
     <script src="enti-data.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const regioneCorrente = urlParams.get('regione') || 'piemonte';
-        const nomeRegioneFormattato = regioneCorrente.charAt(0).toUpperCase() + regioneCorrente.slice(1);
+     document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Converte eventuali spazi in trattini e rende tutto minuscolo
+    const regioneCorrente = (urlParams.get('regione') || 'piemonte').toLowerCase().trim().replace(/\s+/g, '-');
+    const nomeRegioneFormattato = regioneCorrente.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-        // Evidenzia il bottone regione attivo
-        document.querySelectorAll('.region-pill').forEach(pill => {
-            if(pill.getAttribute('data-reg') === regioneCorrente.toLowerCase()) {
-                pill.classList.remove('bg-slate-100', 'text-slate-700');
-                pill.classList.add('bg-orange-600', 'text-white', 'shadow-md');
-            }
-        });
+    // Evidenzia il bottone regione attivo correttamente
+    document.querySelectorAll('.region-pill').forEach(pill => {
+        const regPill = pill.getAttribute('data-reg').toLowerCase().trim();
+        if (regPill === regioneCorrente) {
+            pill.classList.remove('bg-slate-100', 'text-slate-700');
+            pill.classList.add('bg-orange-600', 'text-white', 'shadow-md');
+        }
+    });
+
+    // Filtro nel database
+    const entiFiltrati = databaseCulturale.filter(ente => {
+        // Converte anche le regioni dell'array in minuscolo e con trattini per un match sicuro
+        const matchRegione = ente.regioni.some(r => r.toLowerCase().trim().replace(/\s+/g, '-') === regioneCorrente);
+        
+        const query = searchInput.value.toLowerCase().trim();
+        const matchQuery = query === '' || 
+                           ente.nome.toLowerCase().includes(query) || 
+                           (ente.focus && ente.focus.toLowerCase().includes(query)) ||
+                           ente.province.some(p => p.toLowerCase().includes(query)) ||
+                           (ente.email && ente.email.toLowerCase().includes(query));
+                           
+        return matchRegione && matchQuery;
+    });
 
         // Imposta testi dinamici
         document.getElementById('page-title').textContent = `Archivio Enti Culturali ${nomeRegioneFormattato} | Database CulturaLavoro`;
