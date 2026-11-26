@@ -1,213 +1,491 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <title>Enti d'Istruzione e Formazione MAB | LCSPiemonte</title>
-  <meta name="description" content="Dove formarsi in Piemonte e online per distinguersi nei settori Musei, Biblioteche, Archivi e Cultura Digitale.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Skip Link per accessibilità da tastiera -->
-  <a href="#main-content" class="skip-link">Vai direttamente all'elenco degli enti</a>
+    <title id="page-title">Enti d'Istruzione e Formazione | CulturaLavoro</title>
+    <meta name="description" content="Enti d'istruzione e formazione nei settori Musei, Biblioteche, Archivi e Digital per distinguersi nel settore culturale.">
+    <meta name="robots" content="index, follow">
 
-  <header class="site-header">
-    <div class="container">
-      <nav aria-label="Navigazione principale" class="main-nav">
-        <a href="index.html" class="brand">LCSPiemonte</a>
-        <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="cooperative.html">Cooperative</a></li>
-          <li><a href="sitografia.html">Sitografia</a></li>
-          <li><a href="enti-istruzione.html" aria-current="page">Enti d'Istruzione</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <main id="main-content" class="container">
-    <section class="page-intro">
-      <h1>Enti d'Istruzione e Formazione</h1>
-      <p>
-        Come formarsi per distinguersi nel settore culturale? Una guida ragionata a università, scuole ministeriali, 
-        corsi regionali e piattaforme digitali per acquisire competenze tecniche e specialistiche nei settori 
-        <strong>Musei</strong>, <strong>Biblioteche</strong>, <strong>Archivi</strong> e <strong>Digital</strong>.
-      </p>
-    </section>
-
-    <!-- Sezione Controlli e Filtri -->
-    <section aria-labelledby="filtri-heading" class="filter-section">
-      <h2 id="filtri-heading" class="sr-only">Filtra gli enti di formazione</h2>
-      
-      <div class="filter-controls">
-        <!-- Filtri per Settore MAB + Digital -->
-        <div class="filter-group" role="group" aria-label="Filtra per ambito disciplinare">
-          <button type="button" class="filter-btn active" data-filter="tutti" aria-pressed="true">Tutti gli ambiti</button>
-          <button type="button" class="filter-btn" data-filter="musei" aria-pressed="false">Musei</button>
-          <button type="button" class="filter-btn" data-filter="biblioteche" aria-pressed="false">Biblioteche</button>
-          <button type="button" class="filter-btn" data-filter="archivi" aria-pressed="false">Archivi</button>
-          <button type="button" class="filter-btn filter-btn-digital" data-filter="digital" aria-pressed="false">Digital</button>
-        </div>
-
-        <!-- Ricerca testuale accessibile -->
-        <div class="search-group">
-          <label for="search-input" class="search-label">Cerca ente, corso o competenza:</label>
-          <input 
-            type="search" 
-            id="search-input" 
-            class="search-input" 
-            placeholder="Es. Paleografia, UNIMARC, UniTo, Digitalizzazione..."
-            autocomplete="off"
-          >
-        </div>
-      </div>
-
-      <!-- Contatore accessibile live -->
-      <div id="results-status" class="results-status" aria-live="polite" role="status">
-        Caricamento enti in corso...
-      </div>
-    </section>
-
-    <!-- Griglia Risultati -->
-    <section aria-label="Elenco enti di formazione">
-      <div id="enti-grid" class="cards-grid">
-        <!-- Popolato dinamicamente via JavaScript -->
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>LCSPiemonte &mdash; Risorse, lavoro e formazione per i professionist* dei Beni Culturali in Piemonte.</p>
-    </div>
-  </footer>
-
-  <!-- Caricamento Database e Logica UI -->
-  <script src="db-istruzione.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const grid = document.getElementById("enti-grid");
-      const statusEl = document.getElementById("results-status");
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      const searchInput = document.getElementById("search-input");
-
-      let currentFilter = "tutti";
-      let currentSearch = "";
-
-      const labelsSettori = {
-        musei: "Musei",
-        biblioteche: "Biblioteche",
-        archivi: "Archivi",
-        digital: "Digital"
-      };
-
-      function renderCards() {
-        const query = currentSearch.trim().toLowerCase();
-
-        const filtered = dbIstruzione.filter(ente => {
-          const matchSettore = currentFilter === "tutti" || ente.settori.includes(currentFilter);
-          
-          const matchTesto = !query || 
-            ente.nome.toLowerCase().includes(query) ||
-            ente.sottotitolo.toLowerCase().includes(query) ||
-            ente.descrizione.toLowerCase().includes(query) ||
-            ente.tipologia.toLowerCase().includes(query) ||
-            ente.competenze.some(comp => comp.toLowerCase().includes(query));
-
-          return matchSettore && matchTesto;
-        });
-
-        // Aggiornamento stato per screen reader e utenti visivi
-        if (filtered.length === 0) {
-          statusEl.textContent = "Nessun ente trovato con i criteri selezionati. Prova a modificare i filtri o la ricerca.";
-          grid.innerHTML = "";
-          return;
+    <style>
+        :root {
+            --bg-pure: #FBFBFD;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --text-main: #1D1D1F;
+            --text-muted: #555559;
+            --accent: #0071E3;
+            --accent-orange: #EA580C;
+            --radius: 18px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
         }
 
-        statusEl.textContent = filtered.length === 1 
-          ? "Trovato 1 ente di formazione." 
-          : `Trovati ${filtered.length} enti di formazione.`;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
-        // Generazione card accessibili
-        grid.innerHTML = filtered.map(ente => {
-          const badgeSettoriHtml = ente.settori.map(s => 
-            `<span class="badge badge-${s}">${labelsSettori[s] || s}</span>`
-          ).join("");
+        body {
+            background-color: var(--bg-pure);
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
 
-          const competenzeHtml = ente.competenze.map(c => 
-            `<li class="skill-tag">${c}</li>`
-          ).join("");
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
 
-          return `
-            <article class="ente-card">
-              <div class="card-header">
-                <div class="card-badges" aria-label="Ambiti disciplinari">
-                  ${badgeSettoriHtml}
-                </div>
-                <span class="card-type">${ente.tipologia}</span>
-              </div>
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-              <h3 class="card-title">${ente.nome}</h3>
-              <p class="card-subtitle">${ente.sottotitolo}</p>
+        /* HERO & SEARCH */
+        .hero-section {
+            padding: 56px 0 28px;
+            text-align: center;
+        }
 
-              <p class="card-desc">${ente.descrizione}</p>
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
 
-              <dl class="card-meta">
-                <div>
-                  <dt>Livello:</dt>
-                  <dd>${ente.livello}</dd>
-                </div>
-                <div>
-                  <dt>Modalità:</dt>
-                  <dd>${ente.modalita}</dd>
-                </div>
-              </dl>
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
 
-              <div class="card-skills">
-                <span class="skills-label">Competenze chiave:</span>
-                <ul class="skills-list">
-                  ${competenzeHtml}
-                </ul>
-              </div>
+        .search-wrapper {
+            max-width: 520px;
+            margin: 0 auto;
+        }
 
-              <div class="card-footer">
-                <a href="${ente.url}" class="card-link" target="_blank" rel="noopener noreferrer">
-                  Visita il sito ufficiale
-                  <span class="sr-only">di ${ente.nome} (si apre in una nuova scheda)</span>
-                  <span aria-hidden="true"> &rarr;</span>
-                </a>
-              </div>
-            </article>
+        #hero-search {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid #C7C7CC;
+            background: #FFFFFF;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        #hero-search:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.15);
+            outline: none;
+        }
+
+        /* FILTRI SETTORIALI */
+        .sector-filter-btn {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background-color: #F1F5F9;
+            color: #334155;
+            border: 1px solid #CBD5E1;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+
+        .sector-filter-btn:hover {
+            background-color: #E2E8F0;
+            color: #0F172A;
+        }
+
+        .sector-filter-btn.is-active {
+            background-color: #EA580C;
+            color: #FFFFFF;
+            border-color: #EA580C;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.2);
+        }
+
+        /* CARDS & GRID */
+        section.sector-block {
+            padding: 36px 0;
+        }
+
+        .section-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .grid-entities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--radius);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background: #FFFFFF;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .ente-nome {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            padding-right: 48px;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            background: #F2F2F7;
+            color: var(--text-muted);
+        }
+
+        .pill-museo { background: #E3F2FD; color: #0D47A1; }
+        .pill-arch { background: #FFF3E0; color: #E65100; }
+        .pill-biblio { background: #F3E5F5; color: #4A148C; }
+        .pill-digital { background: #E0F2FE; color: #0369A1; }
+        .pill-ricerca { background: #E8F5E9; color: #1B5E20; }
+
+        .info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #6E6E73;
+            margin-top: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .info-content {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-top: 2px;
+            word-break: break-word;
+        }
+
+        .focus-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 4px 0 6px;
+        }
+
+        .btn-site {
+            margin-top: auto;
+            padding-top: 18px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-site:hover {
+            text-decoration: underline;
+        }
+
+        .badge-prov {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: #E5E5EA;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        #empty-state {
+            display: none;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        :focus-visible {
+            outline: 3px solid #EA580C;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- HEADER / NAV BAR -->
+    <header class="border-b border-slate-200 bg-white sticky top-0 z-40 shadow-sm">
+      <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative" aria-label="Navigazione principale">
+
+        <a href="index.html" class="text-slate-900 font-extrabold text-lg tracking-tight hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded px-1 py-0.5 transition-colors shrink-0">
+          CulturaLavoro <span class="text-xs font-semibold text-slate-600 block sm:inline sm:ml-2 uppercase tracking-widest">Guida Professionale</span>
+        </a>
+
+        <button id="mobile-menu-btn"
+                type="button"
+                class="md:hidden p-2 text-slate-800 hover:text-orange-600 hover:bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                aria-label="Apri menu di navigazione">
+          <svg id="icon-open" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <ul class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-semibold text-slate-700 tracking-wide">
+          <li><a href="index.html" class="hover:text-orange-600 transition-colors">Home</a></li>
+          <li><a href="biblioteca.html" aria-current="page" class="text-orange-600 font-bold border-b-2 border-orange-500 pb-1">Biblioteca</a></li>
+          <li><a href="archivio.html" class="hover:text-orange-600 transition-colors">Archivio</a></li>
+          <li><a href="museo.html" class="hover:text-orange-600 transition-colors">Museo</a></li>
+          <li><a href="digital.html" class="hover:text-orange-600 transition-colors">Digital</a></li>
+          <li><a href="database/index.html" class="hover:text-orange-600 transition-colors">Database</a></li>
+          <li><a href="sitografia.html" class="hover:text-orange-600 transition-colors">Sitografia</a></li>
+        </ul>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-xl md:hidden">
+          <ul class="flex flex-col py-4 px-6 gap-2 text-base font-semibold text-slate-800">
+            <li><a href="index.html" class="block py-2 hover:text-orange-600">Home</a></li>
+            <li><a href="biblioteca.html" class="block py-2 text-orange-600 font-bold pl-2 border-l-4 border-orange-500">Biblioteca</a></li>
+            <li><a href="archivio.html" class="block py-2 hover:text-orange-600">Archivio</a></li>
+            <li><a href="museo.html" class="block py-2 hover:text-orange-600">Museo</a></li>
+            <li><a href="digital.html" class="block py-2 hover:text-orange-600">Digital</a></li>
+            <li><a href="database/index.html" class="block py-2 hover:text-orange-600">Database</a></li>
+            <li><a href="sitografia.html" class="block py-2 hover:text-orange-600">Sitografia</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="container-custom">
+
+        <div class="hero-section">
+            <h1 id="hero-title" class="hero-title">Enti d'Istruzione e Formazione</h1>
+            <p id="hero-subtitle" class="hero-subtitle">Percorsi, atenei, scuole e piattaforme per formarsi e distinguersi nel settore culturale</p>
+
+            <!-- Filtri per Settore: Musei, Biblioteche, Archivi, Digital -->
+            <div class="flex flex-wrap justify-center gap-2 mb-5" role="group" aria-label="Filtra per settore">
+                <button type="button" class="sector-filter-btn is-active" data-sector="tutti" aria-pressed="true">Tutti</button>
+                <button type="button" class="sector-filter-btn" data-sector="musei" aria-pressed="false">Musei</button>
+                <button type="button" class="sector-filter-btn" data-sector="biblioteche" aria-pressed="false">Biblioteche</button>
+                <button type="button" class="sector-filter-btn" data-sector="archivi" aria-pressed="false">Archivi</button>
+                <button type="button" class="sector-filter-btn" data-sector="digital" aria-pressed="false">Digital</button>
+            </div>
+
+            <div class="search-wrapper">
+                <label for="hero-search" class="sr-only">Cerca enti di formazione, competenze, email o province</label>
+                <input type="search" id="hero-search" placeholder="Cerca enti, competenze, email o province..." aria-label="Cerca nel database istruzione">
+            </div>
+
+            <p id="results-count" class="mt-4 text-sm font-medium text-slate-600" aria-live="polite" role="status"></p>
+        </div>
+
+        <div id="empty-state">Nessun ente di istruzione corrisponde ai filtri o alla ricerca inserita.</div>
+
+        <!-- SEZIONE 1: MUSEI -->
+        <section id="sec-musei" class="sector-block">
+            <h2 class="section-title">Musei</h2>
+            <div id="grid-musei" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 2: BIBLIOTECHE -->
+        <section id="sec-biblioteche" class="sector-block">
+            <h2 class="section-title">Biblioteche</h2>
+            <div id="grid-biblioteche" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 3: ARCHIVI -->
+        <section id="sec-archivi" class="sector-block">
+            <h2 class="section-title">Archivi</h2>
+            <div id="grid-archivi" class="grid-entities"></div>
+        </section>
+
+        <!-- SEZIONE 4: DIGITAL -->
+        <section id="sec-digital" class="sector-block">
+            <h2 class="section-title">Digital</h2>
+            <div id="grid-digital" class="grid-entities"></div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-200 bg-white text-center text-xs text-slate-500 mt-20">
+        <p id="footer-text">Database Enti d'Istruzione &copy; 2026</p>
+        <p class="mt-2">Per segnalazioni: <a href="mailto:gabriel.corcodel04@gmail.com" class="text-blue-600 hover:underline">Invia Email</a></p>
+    </footer>
+
+    <script src="istruzione-data.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Menu mobile
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('icon-open');
+        const iconClose = document.getElementById('icon-close');
+
+        if (mobileBtn && mobileMenu) {
+          mobileBtn.addEventListener('click', () => {
+            const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+            mobileBtn.setAttribute('aria-expanded', String(!isExpanded));
+            mobileMenu.classList.toggle('hidden');
+            if (iconOpen) iconOpen.classList.toggle('hidden');
+            if (iconClose) iconClose.classList.toggle('hidden');
+          });
+        }
+
+        const searchInput = document.getElementById('hero-search');
+        const emptyState = document.getElementById('empty-state');
+        const resultsCount = document.getElementById('results-count');
+        const sectorButtons = document.querySelectorAll('.sector-filter-btn');
+
+        const settoriOrdinati = ['musei', 'biblioteche', 'archivi', 'digital'];
+        let settoreAttivo = 'tutti';
+
+        function creaCard(ente) {
+          const card = document.createElement('article');
+          card.className = 'card';
+
+          let pilloleHTML = '';
+          if (ente.pillole && ente.pillole.length > 0) {
+            pilloleHTML = '<div class="badge-container">' +
+              ente.pillole.map(p => `<span class="pill pill-${p.tipo}">${p.testo}</span>`).join('') +
+              '</div>';
+          }
+
+          const contattoValore = ente.email || ente.contatti || '';
+          const etichettaContatto = contattoValore.includes('@') ? 'Email' : 'Contatti';
+
+          card.innerHTML = `
+            <span class="badge-prov">${(ente.province || []).join('/')}</span>
+            ${pilloleHTML}
+            <h3 class="ente-nome">${ente.nome}</h3>
+            ${ente.tipologia ? `<div class="info-label">Tipologia</div><div class="info-content">${ente.tipologia}</div>` : ''}
+            ${ente.focus ? `<div class="info-label">Focus</div><p class="focus-text">${ente.focus}</p>` : ''}
+            ${contattoValore ? `<div class="info-label">${etichettaContatto}</div><div class="info-content">${contattoValore}</div>` : ''}
+            <a href="${ente.sito}" target="_blank" rel="noopener noreferrer" class="btn-site">${ente.testoBtn || 'Sito Ufficiale'} →</a>
           `;
-        }).join("");
-      }
+          return card;
+        }
 
-      // Gestione click sui pulsanti filtro
-      filterButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          filterButtons.forEach(b => {
-            b.classList.remove("active");
-            b.setAttribute("aria-pressed", "false");
+        function renderizzatore() {
+          const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+          const dati = Array.isArray(window.databaseIstruzione) ? databaseIstruzione : [];
+
+          const entiFiltrati = dati.filter(ente => {
+            const settoriEnte = (ente.settori || []).map(s => s.toLowerCase());
+            const matchSettore = settoreAttivo === 'tutti' || settoriEnte.includes(settoreAttivo);
+
+            const matchQuery = query === '' ||
+              (ente.nome && ente.nome.toLowerCase().includes(query)) ||
+              (ente.tipologia && ente.tipologia.toLowerCase().includes(query)) ||
+              (ente.focus && ente.focus.toLowerCase().includes(query)) ||
+              (ente.province && ente.province.some(p => p.toLowerCase().includes(query))) ||
+              (ente.email && ente.email.toLowerCase().includes(query)) ||
+              (ente.contatti && ente.contatti.toLowerCase().includes(query));
+
+            return matchSettore && matchQuery;
           });
 
-          btn.classList.add("active");
-          btn.setAttribute("aria-pressed", "true");
-          currentFilter = btn.dataset.filter;
-          renderCards();
+          let cardTotaliRenderizzate = 0;
+
+          settoriOrdinati.forEach(settore => {
+            const sezione = document.getElementById(`sec-${settore}`);
+            const griglia = document.getElementById(`grid-${settore}`);
+            if (!sezione || !griglia) return;
+
+            const mostraSezione = settoreAttivo === 'tutti' || settoreAttivo === settore;
+            if (!mostraSezione) {
+              sezione.style.display = 'none';
+              griglia.innerHTML = '';
+              return;
+            }
+
+            const entiDelSettore = entiFiltrati.filter(ente =>
+              (ente.settori || []).map(s => s.toLowerCase()).includes(settore)
+            );
+
+            griglia.innerHTML = '';
+            if (entiDelSettore.length > 0) {
+              sezione.style.display = 'block';
+              entiDelSettore.forEach(ente => {
+                griglia.appendChild(creaCard(ente));
+                cardTotaliRenderizzate++;
+              });
+            } else {
+              sezione.style.display = 'none';
+            }
+          });
+
+          if (resultsCount) {
+            resultsCount.textContent = `${entiFiltrati.length} ${entiFiltrati.length === 1 ? 'ente trovato' : 'enti trovati'}`;
+          }
+
+          if (emptyState) {
+            emptyState.style.display = cardTotaliRenderizzate === 0 ? 'block' : 'none';
+          }
+        }
+
+        sectorButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            settoreAttivo = btn.getAttribute('data-sector') || 'tutti';
+            sectorButtons.forEach(b => {
+              const attivo = b === btn;
+              b.classList.toggle('is-active', attivo);
+              b.setAttribute('aria-pressed', String(attivo));
+            });
+            renderizzatore();
+          });
         });
-      });
 
-      // Gestione ricerca in tempo reale
-      searchInput.addEventListener("input", (e) => {
-        currentSearch = e.target.value;
-        renderCards();
-      });
+        if (searchInput) {
+          searchInput.addEventListener('input', renderizzatore);
+        }
 
-      // Render iniziale
-      renderCards();
-    });
-  </script>
+        renderizzatore();
+      });
+    </script>
 </body>
 </html>
